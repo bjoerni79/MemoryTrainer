@@ -51,16 +51,28 @@ namespace MemoryTrainer
 
         public IPage CreatePage(PageSelection element, string pageId)
         {
-            var page = new Help(pageId);
+            object page;
+            switch(element)
+            {
+                case PageSelection.CardGame:
+                    page = new CardGame(pageId);
+                    break;
+                case PageSelection.ShowHelp:
+                    page = new Help(pageId);
+                    break;
+                default:
+                    throw new Exception("Unknown page selection detected");
+            }
 
             // Create a new page {element
             var tabItem = new TabItem() { Header = "test" };
             tabItem.Content = page;
             tabItem.Name = pageId;
+            tabItem.HeaderTemplate = FindResource("tabItemTemplate") as DataTemplate;
 
             tabControl.Items.Add(tabItem);
 
-            return page;
+            return page as IPage;
         }
 
         public void Close(string pageId)

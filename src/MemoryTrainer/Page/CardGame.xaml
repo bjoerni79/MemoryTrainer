@@ -4,9 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MemoryTrainer.Page"
+             xmlns:misc="clr-namespace:MemoryTrainer.Misc"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    
+    <UserControl.Resources>
+        <Style x:Key="cardImage" TargetType="Image">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="100" />
+
+        </Style>
+
+        <misc:CardValueConverter x:Key="cardValueConverter" />
+
+    </UserControl.Resources> 
+   
+    <Grid Background="LightGreen">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Column="0" Style="{StaticResource cardImage}" Source="{Binding Path=TestCard,Converter={StaticResource cardValueConverter}}" >
             
+        </Image>
+
+        <Image Grid.Column="1" Style="{StaticResource cardImage}">
+
+        </Image>
+
+        <Image Grid.Column="2" Style="{StaticResource cardImage}">
+
+        </Image>
+
     </Grid>
 </UserControl>

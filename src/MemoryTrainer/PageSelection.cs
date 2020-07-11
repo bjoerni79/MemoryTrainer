@@ -6,6 +6,7 @@ namespace MemoryTrainer
 {
     public enum PageSelection
     {
-        ShowHelp
+        ShowHelp,
+        CardGame
     }
 }

@@ -18,13 +18,28 @@ namespace MemoryTrainer.ViewModel
             CurrentState = "Hello MVVM";
 
             ShowHelp = new DefaultCommand(OnShowHelp);
+            OpenCardGame = new DefaultCommand(OnOpenCardGame);
         }
 
         public ICommand ShowHelp { get; private set; }
 
+        public ICommand OpenCardGame { get; private set; }
+
         public string CurrentState { get; private set; }
 
+        private void OnOpenCardGame()
+        {
+            var viewModel = new CardGameViewModel();
+            OpenPage(viewModel, PageSelection.CardGame);
+        }
+
         private void OnShowHelp()
+        {
+            var viewModel = new HelpViewModel();
+            OpenPage(viewModel, PageSelection.ShowHelp);
+        }
+
+        private void OpenPage(ViewModelBase viewModel, PageSelection pageSelection)
         {
             var helper = new ContainerFacade();
             var uiService = helper.Get<IUiService>();
@@ -34,11 +49,10 @@ namespace MemoryTrainer.ViewModel
                 var newId = name_prefix + nextId;
 
                 // Step one: Creata a new view model
-                var viewModel = new HelpViewModel();
                 helper.Add(viewModel, newId);
 
                 // Step two : Create a new UI Element
-                var page = uiService.CreatePage(PageSelection.ShowHelp, newId);
+                var page = uiService.CreatePage(pageSelection, newId);
 
                 // Step three:  Add a link between them
                 viewModel.Init(page);

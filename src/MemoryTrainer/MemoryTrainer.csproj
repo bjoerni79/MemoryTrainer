@@ -152,4 +152,12 @@
     <Resource Include="Misc\Images\red_joker.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MemoryTrainer.Lib\MemoryTrainer.Lib.csproj" />
+  </ItemGroup>
+
 </Project>
