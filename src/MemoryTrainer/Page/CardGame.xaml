@@ -10,8 +10,8 @@
     
     <UserControl.Resources>
         <Style x:Key="cardImage" TargetType="Image">
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Height" Value="100" />
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="120" />
 
         </Style>
 

@@ -9,6 +9,7 @@ namespace MemoryTrainer.Lib
     /// </summary>
     public enum PlayingCard
     {
+        Deck,
         Blank,
         Covered,
         RedJoker,
