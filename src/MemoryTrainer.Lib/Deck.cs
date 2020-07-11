@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MemoryTrainer.Lib
@@ -7,6 +8,7 @@ namespace MemoryTrainer.Lib
     public class Deck
     {
         private List<PlayingCard> cardList;
+        private int currentIndex;
 
         public Deck()
         {
@@ -49,7 +51,7 @@ namespace MemoryTrainer.Lib
                 PlayingCard.Club_Jack,
                 PlayingCard.Club_Queen,
                 PlayingCard.Club_King,
-                PlayingCard.Club_Jack,
+                PlayingCard.Club_Ace,
                 PlayingCard.Spade_2,
                 PlayingCard.Spade_3,
                 PlayingCard.Spade_4,
@@ -63,9 +65,9 @@ namespace MemoryTrainer.Lib
                 PlayingCard.Spade_Queen,
                 PlayingCard.Spade_King,
                 PlayingCard.Spade_Ace
-            
             };
 
+            currentIndex = 0;
         }
 
         public void Shuffle()
@@ -86,6 +88,23 @@ namespace MemoryTrainer.Lib
             }
         }
 
+        public PlayingCard GetNext()
+        {
+            PlayingCard next;
 
+            if (currentIndex >= cardList.Count)
+            {
+                next = PlayingCard.Blank;
+            }
+            else
+            {
+                next = cardList.ElementAt(currentIndex);
+                currentIndex++;
+            }
+
+
+
+            return next;
+        }
     }
 }
