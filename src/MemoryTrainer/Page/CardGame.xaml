@@ -15,34 +15,40 @@
 
         </Style>
 
+        <Style x:Key="CommandButton" TargetType="Button">
+            <Setter Property="Margin" Value="5 0 5 0"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
+
         <misc:CardValueConverter x:Key="cardValueConverter" />
 
     </UserControl.Resources>
 
     <DockPanel Background="LightGreen" LastChildFill="True">
 
-        <ToolBar Background="WhiteSmoke" DockPanel.Dock="Top">
+        <ToolBar Margin="5" Background="WhiteSmoke" DockPanel.Dock="Top">
 
-            <Button>New Game</Button>
-            
-            <Button Command="{Binding Path=NextCards}">Next Cards</Button>
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=New}">New Game</Button>
 
-            <Button Command="{Binding Path=Reset}">Reset Game</Button>
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=NextCards}">Next Cards</Button>
+
         </ToolBar>
 
-        <StackPanel DockPanel.Dock="Bottom">
-            <ProgressBar Maximum="100" Minimum="0" Height="20" Value="25"></ProgressBar>
+        <StackPanel Margin="5" DockPanel.Dock="Bottom">
+            <ProgressBar Maximum="{Binding Path=MaxNumberOfCards,Mode=OneWay}" Value="{Binding Path=CurrentNumberOfCards,Mode=OneWay}" Minimum="0" Height="20" ></ProgressBar>
         </StackPanel>
 
-        <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+        <StackPanel Margin="5" Orientation="Vertical" DockPanel.Dock="Top">
             <Label FontSize="14" FontWeight="DemiBold">Instruction :</Label>
-            <Label FontSize="14">Always listen to your parents!</Label>
+            <Label FontSize="14" Content="{Binding Path=InstructionText,Mode=OneWay}"></Label>
         </StackPanel>
 
-        <StackPanel Orientation="Vertical" Width="150" DockPanel.Dock="Right">
-            <Label>Recent:</Label>
-            <ListBox Height="200"></ListBox>
-        </StackPanel>
+
+        <ListBox DockPanel.Dock="Right" Background="AntiqueWhite" Width="200" ItemsSource="{Binding Path=RecentCards,Mode=OneWay}" Margin="5"></ListBox>
+
         
         <Grid>
             <Grid.RowDefinitions>

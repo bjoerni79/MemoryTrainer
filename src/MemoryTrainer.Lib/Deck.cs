@@ -88,11 +88,21 @@ namespace MemoryTrainer.Lib
             }
         }
 
+        public void ResetIndex()
+        {
+            currentIndex = 0;
+        }
+
+        public bool IsEndOfDeck()
+        {
+            return (currentIndex >= cardList.Count);
+        }
+
         public PlayingCard GetNext()
         {
             PlayingCard next;
 
-            if (currentIndex >= cardList.Count)
+            if (IsEndOfDeck())
             {
                 next = PlayingCard.Blank;
             }
