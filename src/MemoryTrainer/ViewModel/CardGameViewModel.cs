@@ -1,4 +1,4 @@
-﻿using MemoryTrainer.Lib;
+﻿using MemoryTrainer.Misc;
 using MemoryTrainer.MMVM;
 using MemoryTrainer.MVVM;
 using System;
@@ -18,6 +18,7 @@ namespace MemoryTrainer.ViewModel
         {
             NextCards = new DefaultCommand(OnNextCards);
             New = new DefaultCommand(OnNew);
+            Close = new DefaultCommand(OnClose);
 
             OnNew();
         }
@@ -28,7 +29,7 @@ namespace MemoryTrainer.ViewModel
 
         public int CurrentNumberOfCards { get; private set; }
 
-        public ObservableCollection<string> RecentCards { get; private set; }
+        public ObservableCollection<PAOItem> RecentCards { get; private set; }
 
         public PlayingCard PersonCard { get; private set; }
 
@@ -40,6 +41,7 @@ namespace MemoryTrainer.ViewModel
 
         public ICommand New { get; private set; }
 
+        public ICommand Close { get; private set; }
 
         private void OnNextCards()
         {
@@ -96,13 +98,13 @@ namespace MemoryTrainer.ViewModel
                     RaisePropertyChange("CurrentNumberOfCards");
 
                     // Add the latest on top
-                    var newRecentList = new List<string>();
-                    newRecentList.Add(PersonCard.ToString());
-                    newRecentList.Add(ActionCard.ToString());
-                    newRecentList.Add(ObjectCard.ToString());
+                    var newRecentList = new List<PAOItem>();
+                    var paoItem = new PAOItem() { Person = PersonCard, Action = ActionCard, Object = ObjectCard };
+                    newRecentList.Add(paoItem);
+
                     newRecentList.AddRange(RecentCards);
 
-                    RecentCards = new ObservableCollection<string>(newRecentList);
+                    RecentCards = new ObservableCollection<PAOItem>(newRecentList);
                     RaisePropertyChange("RecentCards");
                 }
             }
@@ -119,7 +121,7 @@ namespace MemoryTrainer.ViewModel
             InstructionText = "Prepare yourself and store the following cards with the help of your choosen strategy.";
             MaxNumberOfCards = 52;
             CurrentNumberOfCards = 0;
-            RecentCards = new ObservableCollection<string>();
+            RecentCards = new ObservableCollection<PAOItem>();
 
             RaisePropertyChange("InstructionText");
             RaisePropertyChange("MaxNumberOfCards");
@@ -127,6 +129,11 @@ namespace MemoryTrainer.ViewModel
             RaisePropertyChange("RecentCards");
 
             OnNextCards();
+        }
+
+        private void OnClose()
+        {
+            InternalClose();
         }
     }
 }

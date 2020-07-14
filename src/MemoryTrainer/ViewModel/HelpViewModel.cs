@@ -20,15 +20,7 @@ namespace MemoryTrainer.ViewModel
 
         private void OnClose()
         {
-            var id = page.GetId();
-
-            var helper = new ContainerFacade();
-            var uiService = helper.Get<IUiService>();
-
-            if (uiService != null)
-            {
-                uiService.Close(id);
-            }
+            InternalClose();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MemoryTrainer.MVVM;
+using MemoryTrainer.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +24,19 @@ namespace MemoryTrainer.MMVM
         public void Init(IPage page)
         {
             this.page = page;
+        }
+
+        protected void InternalClose()
+        {
+            var id = page.GetId();
+
+            var helper = new ContainerFacade();
+            var uiService = helper.Get<IUiService>();
+
+            if (uiService != null)
+            {
+                uiService.Close(id);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -156,8 +156,4 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MemoryTrainer.Lib\MemoryTrainer.Lib.csproj" />
-  </ItemGroup>
-
 </Project>

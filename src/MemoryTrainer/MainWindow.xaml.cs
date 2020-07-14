@@ -52,12 +52,16 @@ namespace MemoryTrainer
         public IPage CreatePage(PageSelection element, string pageId)
         {
             object page;
+            string headerName = "Unknown";
+
             switch(element)
             {
                 case PageSelection.CardGame:
                     page = new CardGame(pageId);
+                    headerName = "PAO Card Game";
                     break;
                 case PageSelection.ShowHelp:
+                    headerName = "Help";
                     page = new Help(pageId);
                     break;
                 default:
@@ -65,12 +69,13 @@ namespace MemoryTrainer
             }
 
             // Create a new page {element
-            var tabItem = new TabItem() { Header = "test" };
+            var tabItem = new TabItem() { Header = headerName };
             tabItem.Content = page;
             tabItem.Name = pageId;
             tabItem.HeaderTemplate = FindResource("tabItemTemplate") as DataTemplate;
 
             tabControl.Items.Add(tabItem);
+            tabItem.Focus();
 
             return page as IPage;
         }
