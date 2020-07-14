@@ -19,6 +19,15 @@
             <Setter Property="FontWeight" Value="DemiBold"/>
         </Style>
 
+        <Style x:Key="SystemCommandButton" TargetType="Button">
+            <Setter Property="Margin" Value="5 2 5 2"/>
+            <Setter Property="Background" Value="AntiqueWhite"/>
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
         <DataTemplate x:Key="tabItemTemplate">
             <Grid>
                 <Rectangle Fill="LightSkyBlue"/>
@@ -40,6 +49,7 @@
             <Button Style="{StaticResource CommandButton}" Command="{Binding Path=ShowHelp}">Show Help</Button>
             <Button Style="{StaticResource CommandButton}" Command="{Binding Path=OpenCardGame}">Create Card Game</Button>
             <Button Style="{StaticResource CommandButton}"> Create Number Generator </Button>
+            <!--<Button Style="{StaticResource SystemCommandButton}">Settings</Button>-->
         </ToolBar>
 
 

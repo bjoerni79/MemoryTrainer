@@ -17,33 +17,58 @@
 
         <misc:CardValueConverter x:Key="cardValueConverter" />
 
-    </UserControl.Resources> 
-   
-    <Grid Background="LightGreen">
+    </UserControl.Resources>
 
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+    <DockPanel Background="LightGreen" LastChildFill="True">
+
+        <ToolBar Background="WhiteSmoke" DockPanel.Dock="Top">
+
+            <Button>New Game</Button>
+            
+            <Button Command="{Binding Path=NextCards}">Next Cards</Button>
+
+            <Button Command="{Binding Path=Reset}">Reset Game</Button>
+        </ToolBar>
+
+        <StackPanel DockPanel.Dock="Bottom">
+            <ProgressBar Maximum="100" Minimum="0" Height="20" Value="25"></ProgressBar>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+            <Label FontSize="14" FontWeight="DemiBold">Instruction :</Label>
+            <Label FontSize="14">Always listen to your parents!</Label>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Width="150" DockPanel.Dock="Right">
+            <Label>Recent:</Label>
+            <ListBox Height="200"></ListBox>
+        </StackPanel>
         
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <Image Grid.Column="0" Style="{StaticResource cardImage}" Source="{Binding Path=PersonCard,Converter={StaticResource cardValueConverter}}" >
-        </Image>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <Image Grid.Column="1" Style="{StaticResource cardImage}" Source="{Binding Path=ActionCard,Converter={StaticResource cardValueConverter}}">
-        </Image>
 
-        <Image Grid.Column="2" Style="{StaticResource cardImage}" Source="{Binding Path=ObjectCard,Converter={StaticResource cardValueConverter}}">
-        </Image>
+            
+            
+            <Image Grid.Row="0" Grid.Column="0" Style="{StaticResource cardImage}" Source="{Binding Path=PersonCard,Converter={StaticResource cardValueConverter}}" >
+            </Image>
 
-        <Button Grid.Row="1" Grid.Column="0" Command="{Binding Path=NextCards}">Next Cards</Button>
+            <Image Grid.Row="0" Grid.Column="1" Style="{StaticResource cardImage}" Source="{Binding Path=ActionCard,Converter={StaticResource cardValueConverter}}">
+            </Image>
 
-        <Button Grid.Row="1" Grid.Column="1" Command="{Binding Path=Reset}">Reset</Button>
+            <Image Grid.Row="0" Grid.Column="2" Style="{StaticResource cardImage}" Source="{Binding Path=ObjectCard,Converter={StaticResource cardValueConverter}}">
+            </Image>
 
-    </Grid>
+        </Grid>
+    </DockPanel>
+    
+
 </UserControl>
