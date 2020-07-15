@@ -22,6 +22,14 @@ namespace MemoryTrainer.ViewModel
             New = new DefaultCommand(OnNew);
             Close = new DefaultCommand(OnClose);
 
+            // Init the decks
+            var facade = new ContainerFacade();
+            var settings = facade.Get<GameSetting>("SETTINGS") as GameSetting;
+
+            AvailableDecks = new ObservableCollection<DeckConfiguration>(settings.AvailableDecks);
+            CurrentDeck = AvailableDecks.First();
+
+            // Start the game
             OnNew();
         }
 
@@ -32,6 +40,10 @@ namespace MemoryTrainer.ViewModel
         public int CurrentNumberOfCards { get; private set; }
 
         public ObservableCollection<PAOItem> RecentCards { get; private set; }
+
+        public ObservableCollection<DeckConfiguration> AvailableDecks { get; private set; }
+
+        public DeckConfiguration CurrentDeck { get; set; }
 
         public PlayingCard PersonCard { get; private set; }
 
@@ -114,29 +126,26 @@ namespace MemoryTrainer.ViewModel
 
         private void OnNew()
         {
-            var facade = new ContainerFacade();
-            var settings = facade.Get<GameSetting>("SETTINGS") as GameSetting;
-
-            // Create a new deck and shuffle it.
-            var cards = settings.AvailableDecks.First().Cards;
-            deck = new Deck(cards);
-            deck.Shuffle();
-            cardsLeft = true;
-            cardCount = cards.Count();
-
-
-
-
-            // Update the UI
             InstructionText = "Prepare yourself and store the following cards with the help of your choosen strategy.";
             MaxNumberOfCards = cardCount;
             CurrentNumberOfCards = 0;
             RecentCards = new ObservableCollection<PAOItem>();
 
+            // Create a new deck and shuffle it.
+            var cards = CurrentDeck.Cards;
+            cardCount = CurrentDeck.Cards.Count();
+
+            deck = new Deck(cards);
+            deck.Shuffle();
+            cardsLeft = true;
+
+            // Update the UI
             RaisePropertyChange("InstructionText");
             RaisePropertyChange("MaxNumberOfCards");
             RaisePropertyChange("CurrentNumberOfCards");
             RaisePropertyChange("RecentCards");
+            RaisePropertyChange("AvailableDecks");
+            RaisePropertyChange("CurrentDeck");
 
             OnNextCards();
         }

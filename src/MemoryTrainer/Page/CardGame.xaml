@@ -37,6 +37,18 @@
 
             <Button Style="{StaticResource CommandButton}" Command="{Binding Path=Close}" Background="AntiqueWhite">Close</Button>
 
+            <Label VerticalContentAlignment="Center" FontSize="12" FontWeight="DemiBold" >Selected Deck:</Label>
+
+            <ComboBox ItemsSource="{Binding Path=AvailableDecks}" SelectedItem="{Binding Path=CurrentDeck,Mode=TwoWay,NotifyOnSourceUpdated=True}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Label Content="{Binding Path=Title}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
         </ToolBar>
 
         <StackPanel Margin="5" DockPanel.Dock="Bottom">
