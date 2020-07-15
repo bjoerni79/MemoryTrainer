@@ -71,13 +71,14 @@ namespace MemoryTrainer.MVVM
         private object GetItem (Type t)
         {
             var item = itemList.FirstOrDefault(curItem => curItem.ItemType == t);
-            return item.ItemInstance;
+            
+            return item?.ItemInstance;
         }
 
         private object GetItem(string id)
         {
             var item = itemList.FirstOrDefault(curItem => curItem.ItemId != null && curItem.ItemId.Equals(id));
-            return item.ItemInstance;
+            return item?.ItemInstance;
         }
 
         private ContainerItem GetContainerItem (string id)

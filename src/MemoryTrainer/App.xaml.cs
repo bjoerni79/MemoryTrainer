@@ -13,6 +13,14 @@ namespace MemoryTrainer
     /// </summary>
     public partial class App : Application
     {
-
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            // Call the Bootstrapper code 
+            var bootstrap = FindResource("ViewModelLocator") as Bootstrap;
+            if (bootstrap != null)
+            {
+                bootstrap.InitSettings();
+            }
+        }
     }
 }

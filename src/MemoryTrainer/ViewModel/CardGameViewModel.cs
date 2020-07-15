@@ -4,6 +4,7 @@ using MemoryTrainer.MVVM;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
@@ -12,6 +13,7 @@ namespace MemoryTrainer.ViewModel
     public class CardGameViewModel : ViewModelBase
     {
         private bool cardsLeft;
+        private int cardCount;
         private Deck deck = new Deck();
 
         public CardGameViewModel()
@@ -78,7 +80,7 @@ namespace MemoryTrainer.ViewModel
                 if (deck.IsEndOfDeck())
                 {
                     InstructionText = "That's it. Click New for a new round.";
-                    CurrentNumberOfCards = 52;
+                    CurrentNumberOfCards = cardCount;
 
                     RaisePropertyChange("InstructionText");
                     RaisePropertyChange("CurrentNumberOfCards");
@@ -112,14 +114,22 @@ namespace MemoryTrainer.ViewModel
 
         private void OnNew()
         {
+            var facade = new ContainerFacade();
+            var settings = facade.Get<GameSetting>("SETTINGS") as GameSetting;
+
             // Create a new deck and shuffle it.
-            deck = new Deck();
+            var cards = settings.AvailableDecks.First().Cards;
+            deck = new Deck(cards);
             deck.Shuffle();
             cardsLeft = true;
+            cardCount = cards.Count();
+
+
+
 
             // Update the UI
             InstructionText = "Prepare yourself and store the following cards with the help of your choosen strategy.";
-            MaxNumberOfCards = 52;
+            MaxNumberOfCards = cardCount;
             CurrentNumberOfCards = 0;
             RecentCards = new ObservableCollection<PAOItem>();
 

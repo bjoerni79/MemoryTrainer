@@ -83,6 +83,17 @@ namespace MemoryTrainer.MVVM
             Container.Add(typeof(ViewModelBase), vm, pageId);
         }
 
+        public void AddUnique<T>(T instance,string id)
+        {
+            var available = Container.IsAvailable((typeof(T)));
+            if (available)
+            {
+                throw new ContainerException("Unique instance already exists");
+            }
+
+            Container.Add(typeof(T), instance, id);
+        }
+
         public void Remove(string pageId)
         {
             var container = Container;

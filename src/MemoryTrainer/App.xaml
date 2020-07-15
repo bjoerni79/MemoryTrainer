@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MemoryTrainer"
              xmlns:mvvm="clr-namespace:MemoryTrainer.MVVM"
-             StartupUri="MainWindow.xaml">
+             StartupUri="MainWindow.xaml"
+             Startup="Application_Startup">
     <Application.Resources>
         <local:Bootstrap x:Key="ViewModelLocator"/>
         <mvvm:Container x:Key="Container"/>

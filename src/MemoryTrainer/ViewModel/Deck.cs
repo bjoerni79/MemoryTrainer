@@ -10,6 +10,23 @@ namespace MemoryTrainer.ViewModel
         private List<PlayingCard> cardList;
         private int currentIndex;
 
+        public Deck(IEnumerable<PlayingCard> cards)
+        {
+            if (cards == null)
+            {
+                throw new ArgumentNullException("cards");
+            }
+
+            if (!cards.Any())
+            {
+                throw new ArgumentException("Empty card collection", "cards");
+            }
+
+            cardList = new List<PlayingCard>(cards);
+
+            currentIndex = 0;
+        }
+
         public Deck()
         {
             cardList = new List<PlayingCard>() {
