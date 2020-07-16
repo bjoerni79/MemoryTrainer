@@ -13,7 +13,7 @@ namespace MemoryTrainer.ViewModel
     public class CardGameViewModel : ViewModelBase
     {
         private bool cardsLeft;
-        private int cardCount;
+        private bool showEndOfDeck;
         private Deck deck = new Deck();
 
         public CardGameViewModel()
@@ -92,52 +92,62 @@ namespace MemoryTrainer.ViewModel
                 if (deck.IsEndOfDeck())
                 {
                     InstructionText = "That's it. Click New for a new round.";
-                    CurrentNumberOfCards = cardCount;
+                    CurrentNumberOfCards = CurrentDeck.Cards.Count();
 
                     RaisePropertyChange("InstructionText");
                     RaisePropertyChange("CurrentNumberOfCards");
                 }
                 else
                 {
-                    // Recall Mode
-                    PersonCard = deck.GetNext();
-                    ActionCard = deck.GetNext();
-                    ObjectCard = deck.GetNext();
+                    if (showEndOfDeck)
+                    {
+                        PersonCard = PlayingCard.Blank;
+                        ActionCard = PlayingCard.Blank;
+                        ObjectCard = PlayingCard.Blank;
 
-                    RaisePropertyChange("PersonCard");
-                    RaisePropertyChange("ActionCard");
-                    RaisePropertyChange("ObjectCard");
+                        showEndOfDeck = false;
+                    }
+                    else
+                    {
+                        // Recall Mode
+                        PersonCard = deck.GetNext();
+                        ActionCard = deck.GetNext();
+                        ObjectCard = deck.GetNext();
 
-                    CurrentNumberOfCards += 3;
-                    RaisePropertyChange("CurrentNumberOfCards");
+                        CurrentNumberOfCards += 3;
+                        RaisePropertyChange("CurrentNumberOfCards");
 
-                    // Add the latest on top
-                    var newRecentList = new List<PAOItem>();
-                    var paoItem = new PAOItem() { Person = PersonCard, Action = ActionCard, Object = ObjectCard };
-                    newRecentList.Add(paoItem);
+                        // Add the latest on top
+                        var newRecentList = new List<PAOItem>();
+                        var paoItem = new PAOItem() { Person = PersonCard, Action = ActionCard, Object = ObjectCard };
+                        newRecentList.Add(paoItem);
 
-                    newRecentList.AddRange(RecentCards);
+                        newRecentList.AddRange(RecentCards);
 
-                    RecentCards = new ObservableCollection<PAOItem>(newRecentList);
-                    RaisePropertyChange("RecentCards");
+                        RecentCards = new ObservableCollection<PAOItem>(newRecentList);
+                        RaisePropertyChange("RecentCards");
+                    }
                 }
+
+                RaisePropertyChange("PersonCard");
+                RaisePropertyChange("ActionCard");
+                RaisePropertyChange("ObjectCard");
             }
         }
 
         private void OnNew()
         {
             InstructionText = "Prepare yourself and store the following cards with the help of your choosen strategy.";
-            MaxNumberOfCards = cardCount;
+            MaxNumberOfCards = CurrentDeck.Cards.Count();
             CurrentNumberOfCards = 0;
             RecentCards = new ObservableCollection<PAOItem>();
 
             // Create a new deck and shuffle it.
             var cards = CurrentDeck.Cards;
-            cardCount = CurrentDeck.Cards.Count();
-
             deck = new Deck(cards);
             deck.Shuffle();
             cardsLeft = true;
+            showEndOfDeck = true;
 
             // Update the UI
             RaisePropertyChange("InstructionText");
