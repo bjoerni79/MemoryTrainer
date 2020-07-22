@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MemoryTrainer.MVVM
@@ -37,6 +38,16 @@ namespace MemoryTrainer.MVVM
         public void Execute(object parameter)
         {
             executer();
+        }
+
+        public void Refresh()
+        {
+            var handler = CanExecuteChanged;
+            if (handler != null)
+            {
+                var args = new EventArgs();
+                handler(this, args);
+            }
         }
     }
 }

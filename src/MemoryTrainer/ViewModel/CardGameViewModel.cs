@@ -21,8 +21,8 @@ namespace MemoryTrainer.ViewModel
             NextCards = new DefaultCommand(OnNextCards);
             New = new DefaultCommand(OnNew);
             Close = new DefaultCommand(OnClose);
-            MarkAsOk = new DefaultCommand(() => OnMarkAs(true));
-            MarkAsFailed = new DefaultCommand(() => OnMarkAs(false));
+            MarkAsOk = new DefaultCommand(() => OnMarkAs(true),IsRecallMode);
+            MarkAsFailed = new DefaultCommand(() => OnMarkAs(false),IsRecallMode);
 
             // Init the decks
             var facade = new ContainerFacade();
@@ -45,7 +45,10 @@ namespace MemoryTrainer.ViewModel
 
         public ObservableCollection<DeckConfiguration> AvailableDecks { get; private set; }
 
-        public DeckConfiguration CurrentDeck { get; set; }
+        public DeckConfiguration CurrentDeck {
+            get;
+            set;
+        }
 
         public PlayingCard PersonCard { get; private set; }
 
@@ -53,15 +56,15 @@ namespace MemoryTrainer.ViewModel
 
         public PlayingCard ObjectCard { get; private set; }
 
-        public ICommand NextCards { get; private set; }
+        public DefaultCommand NextCards { get; private set; }
 
-        public ICommand New { get; private set; }
+        public DefaultCommand New { get; private set; }
 
-        public ICommand Close { get; private set; }
+        public DefaultCommand Close { get; private set; }
 
-        public ICommand MarkAsOk { get; private set; }
+        public DefaultCommand MarkAsOk { get; private set; }
 
-        public ICommand MarkAsFailed { get; private set; }
+        public DefaultCommand MarkAsFailed { get; private set; }
 
         private void OnMarkAs(bool passed)
         {
@@ -73,6 +76,11 @@ namespace MemoryTrainer.ViewModel
                 currentItem.Refresh();
             }
 
+        }
+
+        private bool IsRecallMode()
+        {
+            return !cardsLeft;
         }
 
         private void OnNextCards()
@@ -151,6 +159,10 @@ namespace MemoryTrainer.ViewModel
                 RaisePropertyChange("ActionCard");
                 RaisePropertyChange("ObjectCard");
             }
+
+            // Trigger the Enabled / Disabled lifecycle of the OK and Failed buttons
+            MarkAsFailed.Refresh();
+            MarkAsOk.Refresh();
         }
 
         private void OnNew()
