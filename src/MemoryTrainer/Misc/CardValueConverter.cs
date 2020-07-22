@@ -80,6 +80,8 @@ namespace MemoryTrainer.Misc
             cardDict.Add(PlayingCard.BlackJoker, path + "black_joker.png");
         }
 
+
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var playingCard = value as PlayingCard?;
@@ -88,14 +90,19 @@ namespace MemoryTrainer.Misc
 
                 var uriString = cardDict[playingCard.Value];
                 var uri = new Uri(uriString, UriKind.RelativeOrAbsolute);
-                var image = Application.GetResourceStream(uri);
+                var imageStream = Application.GetResourceStream(uri);
 
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = image.Stream;
-                bitmapImage.EndInit();
+                // https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.imaging.bitmapdecoder?view=netcore-3.1
+                BitmapDecoder decoder = BitmapDecoder.Create(imageStream.Stream, BitmapCreateOptions.None, BitmapCacheOption.Default);
+                return decoder.Frames[0];
 
-                return bitmapImage;
+                //// Old implementation
+                //var bitmapImage = new BitmapImage();
+                //bitmapImage.BeginInit();
+                //bitmapImage.StreamSource = image.Stream;
+                //bitmapImage.EndInit();
+
+                //return bitmapImage;
             }
 
             return null;
