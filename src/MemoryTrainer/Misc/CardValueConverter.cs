@@ -26,9 +26,9 @@ namespace MemoryTrainer.Misc
             cardDict.Add(PlayingCard.Club_8, path + "8_of_clubs.png");
             cardDict.Add(PlayingCard.Club_9, path + "9_of_clubs.png");
             cardDict.Add(PlayingCard.Club_10, path + "10_of_clubs.png");
-            cardDict.Add(PlayingCard.Club_Jack, path + "jack_of_clubs.png");
-            cardDict.Add(PlayingCard.Club_Queen, path + "queen_of_clubs.png");
-            cardDict.Add(PlayingCard.Club_King, path + "king_of_clubs.png");
+            cardDict.Add(PlayingCard.Club_Jack, path + "jack_of_clubs2.png");
+            cardDict.Add(PlayingCard.Club_Queen, path + "queen_of_clubs2.png");
+            cardDict.Add(PlayingCard.Club_King, path + "king_of_clubs2.png");
             cardDict.Add(PlayingCard.Club_Ace, path + "ace_of_clubs.png");
 
             cardDict.Add(PlayingCard.Diamond_2, path + "2_of_diamonds.png");
@@ -40,9 +40,9 @@ namespace MemoryTrainer.Misc
             cardDict.Add(PlayingCard.Diamond_8, path + "8_of_diamonds.png");
             cardDict.Add(PlayingCard.Diamond_9, path + "9_of_diamonds.png");
             cardDict.Add(PlayingCard.Diamond_10, path + "10_of_diamonds.png");
-            cardDict.Add(PlayingCard.Diamond_Jack, path + "jack_of_diamonds.png");
-            cardDict.Add(PlayingCard.Diamond_Queen, path + "queen_of_diamonds.png");
-            cardDict.Add(PlayingCard.Diamond_King, path + "king_of_diamonds.png");
+            cardDict.Add(PlayingCard.Diamond_Jack, path + "jack_of_diamonds2.png");
+            cardDict.Add(PlayingCard.Diamond_Queen, path + "queen_of_diamonds2.png");
+            cardDict.Add(PlayingCard.Diamond_King, path + "king_of_diamonds2.png");
             cardDict.Add(PlayingCard.Diamond_Ace, path + "ace_of_diamonds.png");
 
             cardDict.Add(PlayingCard.Heart_2, path + "2_of_hearts.png");
@@ -54,9 +54,9 @@ namespace MemoryTrainer.Misc
             cardDict.Add(PlayingCard.Heart_8, path + "8_of_hearts.png");
             cardDict.Add(PlayingCard.Heart_9, path + "9_of_hearts.png");
             cardDict.Add(PlayingCard.Heart_10, path + "10_of_hearts.png");
-            cardDict.Add(PlayingCard.Heart_Jack, path + "jack_of_hearts.png");
-            cardDict.Add(PlayingCard.Heart_Queen, path + "queen_of_hearts.png");
-            cardDict.Add(PlayingCard.Heart_King, path + "king_of_hearts.png");
+            cardDict.Add(PlayingCard.Heart_Jack, path + "jack_of_hearts2.png");
+            cardDict.Add(PlayingCard.Heart_Queen, path + "queen_of_hearts2.png");
+            cardDict.Add(PlayingCard.Heart_King, path + "king_of_hearts2.png");
             cardDict.Add(PlayingCard.Heart_Ace, path + "ace_of_hearts.png");
 
             cardDict.Add(PlayingCard.Spade_2, path + "2_of_spades.png");
@@ -68,9 +68,9 @@ namespace MemoryTrainer.Misc
             cardDict.Add(PlayingCard.Spade_8, path + "8_of_spades.png");
             cardDict.Add(PlayingCard.Spade_9, path + "9_of_spades.png");
             cardDict.Add(PlayingCard.Spade_10, path + "10_of_spades.png");
-            cardDict.Add(PlayingCard.Spade_Jack, path + "jack_of_spades.png");
-            cardDict.Add(PlayingCard.Spade_Queen, path + "queen_of_spades.png");
-            cardDict.Add(PlayingCard.Spade_King, path + "king_of_spades.png");
+            cardDict.Add(PlayingCard.Spade_Jack, path + "jack_of_spades2.png");
+            cardDict.Add(PlayingCard.Spade_Queen, path + "queen_of_spades2.png");
+            cardDict.Add(PlayingCard.Spade_King, path + "king_of_spades2.png");
             cardDict.Add(PlayingCard.Spade_Ace, path + "ace_of_spades.png");
 
             cardDict.Add(PlayingCard.Deck, path + "deck.png");
