@@ -21,6 +21,8 @@ namespace MemoryTrainer.ViewModel
             NextCards = new DefaultCommand(OnNextCards);
             New = new DefaultCommand(OnNew);
             Close = new DefaultCommand(OnClose);
+            MarkAsOk = new DefaultCommand(() => OnMarkAs(true));
+            MarkAsFailed = new DefaultCommand(() => OnMarkAs(false));
 
             // Init the decks
             var facade = new ContainerFacade();
@@ -56,6 +58,22 @@ namespace MemoryTrainer.ViewModel
         public ICommand New { get; private set; }
 
         public ICommand Close { get; private set; }
+
+        public ICommand MarkAsOk { get; private set; }
+
+        public ICommand MarkAsFailed { get; private set; }
+
+        private void OnMarkAs(bool passed)
+        {
+            if (RecentCards != null && RecentCards.Any())
+            {
+                var currentItem = RecentCards.First();
+                currentItem.RecallOk = passed;
+
+                currentItem.Refresh();
+            }
+
+        }
 
         private void OnNextCards()
         {

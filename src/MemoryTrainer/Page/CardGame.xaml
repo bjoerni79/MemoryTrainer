@@ -24,6 +24,7 @@
         </Style>
 
         <misc:CardValueConverter x:Key="cardValueConverter" />
+        <misc:BooleanToImageConverter x:Key="booleanToImageConverter" />
 
     </UserControl.Resources>
 
@@ -62,7 +63,8 @@
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <RowDefinition Height="0.80*"/>
+                <RowDefinition Height="0.20*" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -81,11 +83,24 @@
             <Image Grid.Row="0" Grid.Column="2" Style="{StaticResource cardImage}" Source="{Binding Path=ObjectCard,Converter={StaticResource cardValueConverter}}">
             </Image>
 
-            <ListBox Grid.Row="0" Grid.Column="3" Background="AntiqueWhite" ItemsSource="{Binding Path=RecentCards,Mode=OneWay}" Margin="5">
+            <WrapPanel Grid.Row="1" Grid.ColumnSpan="3">
+                <Button Style="{StaticResource CommandButton}" Command="{Binding Path=MarkAsOk}" >
+                    <Label>Yes, mark it as Correct!</Label>
+                </Button>
+
+                <Button Style="{StaticResource CommandButton}" Command="{Binding Path=MarkAsFailed}">
+                    <Label>No. Could not recall it.</Label>
+                </Button>
+            </WrapPanel>
+            
+
+            
+            <ListBox Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Background="AntiqueWhite" ItemsSource="{Binding Path=RecentCards,Mode=OneWay}" Margin="5">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Center">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                                 <ColumnDefinition />
@@ -94,8 +109,10 @@
                             <Image Grid.Column="0" Margin="10" Width="150" Height="150" Source="{Binding Path=Person,Converter={StaticResource cardValueConverter}}"/>
 
                             <Image Grid.Column="1" Margin="10" Width="150" Height="150" Source="{Binding Path=Action,Converter={StaticResource cardValueConverter}}"/>
-
+                            
                             <Image Grid.Column="2" Margin="10" Width="150" Height="150" Source="{Binding Path=Object,Converter={StaticResource cardValueConverter}}"/>
+
+                            <Image Grid.Column="3" Margin="10" Width="50" Height="50" Source="{Binding Path=RecallOk,Converter={StaticResource booleanToImageConverter}}" />
 
                         </Grid>
                     </DataTemplate>

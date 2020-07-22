@@ -9,17 +9,28 @@ namespace MemoryTrainer.MVVM
     public class DefaultCommand : ICommand
     {
         private Action executer;
+        private Func<bool> isExecutable;
 
         public DefaultCommand(Action action)
         {
             executer += action;
-            // Func<...> for CanExecute
+        }
+
+        public DefaultCommand(Action action, Func<bool> canBeExecuted)
+        {
+            executer += action;
+            isExecutable += canBeExecuted;
         }
 
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
         {
+            if (isExecutable != null)
+            {
+                return isExecutable();
+            }
+
             return true;
         }
 
