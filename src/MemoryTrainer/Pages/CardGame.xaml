@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="MemoryTrainer.Page.CardGame"
+﻿<UserControl x:Class="MemoryTrainer.Pages.CardGame"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MemoryTrainer.Page"
+             xmlns:local="clr-namespace:MemoryTrainer.Pages"
              xmlns:misc="clr-namespace:MemoryTrainer.Misc"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -89,11 +89,9 @@
                 </Button>
 
                 <Button Style="{StaticResource CommandButton}" Command="{Binding Path=MarkAsFailed}">
-                    <Label>No. Could not recall it.</Label>
+                    <Label>No, did not recall it.</Label>
                 </Button>
             </WrapPanel>
-            
-
             
             <ListBox Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Background="AntiqueWhite" ItemsSource="{Binding Path=RecentCards,Mode=OneWay}" Margin="5">
                 <ListBox.ItemTemplate>

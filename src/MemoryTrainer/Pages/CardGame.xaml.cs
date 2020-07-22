@@ -1,5 +1,4 @@
 ﻿using MemoryTrainer.MVVM;
-using MemoryTrainer.Service;
 using MemoryTrainer.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -14,25 +13,25 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MemoryTrainer.Page
+namespace MemoryTrainer.Pages
 {
     /// <summary>
-    /// Interaction logic for Help.xaml
+    /// Interaction logic for CardGame.xaml
     /// </summary>
-    public partial class Help : UserControl,IPage
+    public partial class CardGame : UserControl, IPage
     {
         private string id;
 
-        public Help(string id)
+        public CardGame(string id)
         {
             InitializeComponent();
 
-            var containerHelper = new ContainerFacade();
-            var vm = containerHelper.Get<HelpViewModel>(id);
+            this.id = id;
+
+            var containerFacade = new ContainerFacade();
+            var vm = containerFacade.Get<CardGameViewModel>(id);
 
             DataContext = vm;
-
-            this.id = id;
         }
 
         public string GetId()

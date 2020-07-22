@@ -7,10 +7,13 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Page\CardGame.xaml.cs">
+    <Compile Update="Misc\HelpText.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Page\Help.xaml.cs">
+    <Compile Update="Pages\CardGame.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Help.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -18,13 +21,16 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Misc\HelpText.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Misc\UI.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Page\CardGame.xaml">
+    <Page Update="Pages\CardGame.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Page\Help.xaml">
+    <Page Update="Pages\Help.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿using MemoryTrainer.MVVM;
-using MemoryTrainer.Page;
+using MemoryTrainer.Pages;
 using MemoryTrainer.Service;
 using System;
 using System.Collections.Generic;
