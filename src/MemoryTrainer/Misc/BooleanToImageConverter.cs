@@ -28,14 +28,13 @@ namespace MemoryTrainer.Misc
                 }
 
                 var uri = new Uri(uriString, UriKind.RelativeOrAbsolute);
-                var image = Application.GetResourceStream(uri);
+                var imageStream = Application.GetResourceStream(uri);
 
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = image.Stream;
-                bitmapImage.EndInit();
+                // https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.imaging.bitmapdecoder?view=netcore-3.1
+                BitmapDecoder decoder = BitmapDecoder.Create(imageStream.Stream, BitmapCreateOptions.None, BitmapCacheOption.Default);
 
-                return bitmapImage;
+                imageStream.Stream.Close();
+                return decoder.Frames[0];
             }
             else
             {

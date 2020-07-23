@@ -36,11 +36,9 @@
 
             <Button Style="{StaticResource CommandButton}" Command="{Binding Path=NextCards}">Next Cards</Button>
 
-            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=Close}" Background="AntiqueWhite">Close</Button>
-
             <Label VerticalContentAlignment="Center" FontSize="12" FontWeight="DemiBold" >Selected Deck:</Label>
 
-            <ComboBox ItemsSource="{Binding Path=AvailableDecks}" SelectedItem="{Binding Path=CurrentDeck,Mode=TwoWay,NotifyOnSourceUpdated=True}">
+            <ComboBox ItemsSource="{Binding Path=AvailableDecks}" SelectedItem="{Binding Path=CurrentDeck,Mode=TwoWay,NotifyOnSourceUpdated=True,}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -49,6 +47,8 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=Close}" Background="AntiqueWhite">Close</Button>
 
         </ToolBar>
 

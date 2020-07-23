@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\src",
+    "\\src\\MemoryTrainer",
+    "\\src\\MemoryTrainer\\Misc"
   ],
   "SelectedNode": "\\src\\MemoryTrainer.sln",
   "PreviewInSolutionExplorer": false

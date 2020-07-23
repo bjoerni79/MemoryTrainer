@@ -8,16 +8,39 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HelpText">
 
-    <FlowDocumentReader>
+    <Page.Resources>
+        <Style x:Key="titleParagraph" TargetType="Paragraph">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
+
+        <Style x:Key="defaultParagraph" TargetType="Paragraph">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Page.Resources>
+
+    
+    
+    <FlowDocumentReader IsTwoPageViewEnabled="False" IsFindEnabled="False" >
         <FlowDocument>
             <Section>
-                <Paragraph>
+                <Paragraph Style="{StaticResource titleParagraph}">
                     Welcome!
                 </Paragraph>
-                <Paragraph>
-                    This tool contains small memory games ....
+                <Paragraph Style="{StaticResource defaultParagraph}">
+                    This tool contains small games for improving the memory. It is inspired by the book Remember it! written by Nelson Dellis. If you need any hints or strategies, 
+                    please consult this book. At the moment, there is only one game available and more games are already in preparation. This is a spare time project and it is done when it is done.
                 </Paragraph>
-                
+                <Paragraph  Style="{StaticResource defaultParagraph}">
+                    Enjoy the games and hopefully you find it useful.
+                </Paragraph>
+            </Section>
+            <Section>
+                <Paragraph Style="{StaticResource titleParagraph}">PAO Card Game</Paragraph>
+                <Paragraph Style="{StaticResource defaultParagraph}">
+                    I thought about creating such a game for a long time. Everybody knows playing cards and if you can recall a playing card in your memory journey then you can recall other content as well. 
+                    This games uses the PAO (Person Action Object) strategy, but you can use any other you prefer. Please follow the instructions in the game and good luck.
+                </Paragraph>
             </Section>
         </FlowDocument>
     </FlowDocumentReader>
