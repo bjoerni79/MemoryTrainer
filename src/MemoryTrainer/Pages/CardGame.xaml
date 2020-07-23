@@ -38,7 +38,7 @@
 
             <Label VerticalContentAlignment="Center" FontSize="12" FontWeight="DemiBold" >Selected Deck:</Label>
 
-            <ComboBox ItemsSource="{Binding Path=AvailableDecks}" SelectedItem="{Binding Path=CurrentDeck,Mode=TwoWay,NotifyOnSourceUpdated=True,}">
+            <ComboBox ItemsSource="{Binding Path=AvailableDecks}" SelectedItem="{Binding Path=CurrentDeck,Mode=TwoWay,NotifyOnSourceUpdated=True}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
