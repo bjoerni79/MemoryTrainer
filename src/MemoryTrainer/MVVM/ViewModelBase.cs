@@ -7,8 +7,15 @@ using System.Text;
 
 namespace MemoryTrainer.MMVM
 {
+    /// <summary>
+    /// Base class for all viewmodels.
+    /// </summary>
     public class ViewModelBase : INotifyPropertyChanged, IViewModel
     {
+        /// <summary>
+        /// Raises a property change on a binded property
+        /// </summary>
+        /// <param name="eventName">the property name</param>
         protected void RaisePropertyChange(string eventName)
         {
             var handler = PropertyChanged;
@@ -19,13 +26,20 @@ namespace MemoryTrainer.MMVM
             }
         }
 
+        /// <summary>
+        /// The page assigned to this view model
+        /// </summary>
         protected IPage page;
+
 
         public void Init(IPage page)
         {
             this.page = page;
         }
 
+        /// <summary>
+        /// Closes the view model and the view.
+        /// </summary>
         protected void InternalClose()
         {
             var id = page.GetId();

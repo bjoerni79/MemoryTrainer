@@ -6,27 +6,49 @@ using System.Windows.Automation;
 
 namespace MemoryTrainer.MVVM
 {
+    /// <summary>
+    /// Implements the container interface IContainer
+    /// </summary>
     public class Container : IContainer
     {
         private List<ContainerItem> itemList;
 
+        /// <summary>
+        /// Creates a new Container instance
+        /// </summary>
         public Container()
         {
             itemList = new List<ContainerItem>();
         }
 
+        /// <summary>
+        /// See IContainer for details
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="instance"></param>
+        /// <param name="id"></param>
         public void Add(Type type, object instance, string id)
         {
             var item = new ContainerItem(type, instance, id);
             itemList.Add(item);
         }
 
+        /// <summary>
+        /// See IContainer for details
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="instance"></param>
         public void AddService(Type type, object instance)
         {
             var item = new ContainerItem(type, instance, null);
             itemList.Add(item);
         }
 
+        /// <summary>
+        /// See IContainer for details
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public object Get(Type type)
         {
             if (!IsAvailable(type))
@@ -37,6 +59,11 @@ namespace MemoryTrainer.MVVM
             return GetItem(type);
         }
 
+        /// <summary>
+        /// See IContainer for details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public object Get(string id)
         {
             if (!IsAvailable(id))
@@ -47,18 +74,32 @@ namespace MemoryTrainer.MVVM
             return GetItem(id);
         }
 
+        /// <summary>
+        /// See IContainer for details
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
         public bool IsAvailable(Type t)
         {
             var item = GetItem(t);
             return item != null;
         }
 
+        /// <summary>
+        /// See IContainer for details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool IsAvailable(string id)
         {
             var item = GetItem(id);
             return item != null;
         }
 
+        /// <summary>
+        /// See IContainer for details
+        /// </summary>
+        /// <param name="id"></param>
         public void Remove(string id)
         {
             if (IsAvailable(id))
