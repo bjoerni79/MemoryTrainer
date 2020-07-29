@@ -98,6 +98,8 @@ namespace MemoryTrainer.ViewModel
                 }
             }
 
+            OnNew();
+
         }
 
         private void OnMarkAs(bool passed)
