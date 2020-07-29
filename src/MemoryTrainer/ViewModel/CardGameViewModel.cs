@@ -4,6 +4,7 @@ using MemoryTrainer.MVVM;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
@@ -23,6 +24,8 @@ namespace MemoryTrainer.ViewModel
             Close = new DefaultCommand(OnClose);
             MarkAsOk = new DefaultCommand(() => OnMarkAs(true),IsRecallMode);
             MarkAsFailed = new DefaultCommand(() => OnMarkAs(false),IsRecallMode);
+            SelectDeck = new ParameterCommand(OnSelectDeck);
+
 
             // Init the decks
             var facade = new ContainerFacade();
@@ -34,6 +37,8 @@ namespace MemoryTrainer.ViewModel
             // Start the game
             OnNew();
         }
+
+        #region UI elements
 
         public string InstructionText { get; private set; }
 
@@ -56,6 +61,10 @@ namespace MemoryTrainer.ViewModel
 
         public PlayingCard ObjectCard { get; private set; }
 
+        #endregion
+
+        #region Commands
+
         public DefaultCommand NextCards { get; private set; }
 
         public DefaultCommand New { get; private set; }
@@ -65,6 +74,31 @@ namespace MemoryTrainer.ViewModel
         public DefaultCommand MarkAsOk { get; private set; }
 
         public DefaultCommand MarkAsFailed { get; private set; }
+
+        public ParameterCommand SelectDeck { get; private set; }
+
+        #endregion
+
+        #region Game Logic
+
+        private void OnSelectDeck(object parameter)
+        {
+            // Run some type checks before we start using it.
+            int index;
+            var selectedDeck = parameter as string;
+            if (Int32.TryParse(selectedDeck,out index))
+            {
+                // Try to get the deck at this index
+                var deckAtIndex = AvailableDecks.ElementAtOrDefault(index);
+                if (deckAtIndex != null)
+                {
+                    // Found. Apply and update UI
+                    CurrentDeck = deckAtIndex;
+                    RaisePropertyChange("CurrentDeck");
+                }
+            }
+
+        }
 
         private void OnMarkAs(bool passed)
         {
@@ -127,9 +161,9 @@ namespace MemoryTrainer.ViewModel
                 {
                     if (showEndOfDeck)
                     {
-                        PersonCard = PlayingCard.Blank;
-                        ActionCard = PlayingCard.Blank;
-                        ObjectCard = PlayingCard.Blank;
+                        PersonCard = PlayingCard.Deck;
+                        ActionCard = PlayingCard.Deck;
+                        ObjectCard = PlayingCard.Deck;
 
                         showEndOfDeck = false;
                     }
@@ -194,5 +228,7 @@ namespace MemoryTrainer.ViewModel
         {
             InternalClose();
         }
+
+        #endregion
     }
 }

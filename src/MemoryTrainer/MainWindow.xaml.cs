@@ -51,7 +51,7 @@ namespace MemoryTrainer
 
         public IPage CreatePage(PageSelection element, string pageId)
         {
-            object page;
+            UserControl page;
             string headerName = "Unknown";
 
             switch(element)
