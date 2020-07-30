@@ -14,5 +14,7 @@ namespace MemoryTrainer.MVVM
         /// </summary>
         /// <returns></returns>
         string GetId();
+
+        void SetFocus();
     }
 }

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MemoryTrainer.Pages"
              xmlns:misc="clr-namespace:MemoryTrainer.Misc"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
 
     <UserControl.Resources>
         <Style x:Key="cardImage" TargetType="Image">
@@ -30,10 +30,10 @@
 
     <UserControl.InputBindings>
         <!-- Apply the Command Button -->
-        <KeyBinding Command="{Binding Path=New}" Key="G" />
-        <KeyBinding Command="{Binding Path=MarkAsOk}" Key="O" />
-        <KeyBinding Command="{Binding Path=MarkAsFailed}" Key="F" />
-        <KeyBinding Command="{Binding Path=NextCards}" Key="N" />
+        <KeyBinding Command="{Binding Path=New}" Key="N" />
+        <KeyBinding Command="{Binding Path=MarkAsOk}" Key="Up" />
+        <KeyBinding Command="{Binding Path=MarkAsFailed}" Key="Down" />
+        <KeyBinding Command="{Binding Path=NextCards}" Key="Right" />
 
         <!-- Select of the index in the deck selection 1,2,3,4,5... -->
         <KeyBinding Key="D1" Command="{Binding Path=SelectDeck}" CommandParameter="0"/>
@@ -75,7 +75,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=Close}" Background="AntiqueWhite">
+            <Button x:Name="close" Style="{StaticResource CommandButton}" Command="{Binding Path=Close}" Background="AntiqueWhite">
                 Close
             </Button>
 

@@ -41,6 +41,13 @@
                     I thought about creating such a game for a long time. Everybody knows playing cards and if you can recall a playing card in your memory journey then you can recall other content as well. 
                     This games uses the PAO (Person Action Object) strategy, but you can use any other you prefer. Please follow the instructions in the game and good luck.
                 </Paragraph>
+                <Paragraph>
+                    The keys
+                    <Bold>N</Bold>,
+                    <Bold>Right Arrow</Bold>,
+                    <Bold>Up Arrow</Bold>,
+                    <Bold>Down Arrow</Bold> are bound to New Game, Next, Correct Recall and Incorrect Recall. The keys 1-7 selecting the different available decks.
+                </Paragraph>
             </Section>
             <Section>
                 <Paragraph>
