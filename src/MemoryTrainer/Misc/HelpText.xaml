@@ -42,6 +42,14 @@
                     This games uses the PAO (Person Action Object) strategy, but you can use any other you prefer. Please follow the instructions in the game and good luck.
                 </Paragraph>
             </Section>
+            <Section>
+                <Paragraph>
+                    Icon made by
+https://www.flaticon.com/authors/freepik  from https://www.flaticon.com
+
+                </Paragraph>
+            </Section>
+            
         </FlowDocument>
     </FlowDocumentReader>
 </Page>
