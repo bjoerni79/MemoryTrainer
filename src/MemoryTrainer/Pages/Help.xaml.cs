@@ -42,6 +42,11 @@ namespace MemoryTrainer.Pages
             return id;
         }
 
+        public void SetFocus()
+        {
+            //Nothing to do
+        }
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             

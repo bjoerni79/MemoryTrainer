@@ -1,25 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MemoryTrainer.MVVM
 {
-    /// <summary>
-    /// Implements a WPF ready button representation based on ICommand
-    /// </summary>
-    public class DefaultCommand : ICommand
+    public class ParameterCommand : ICommand 
     {
-        private Action executer;
+        private Action<object> executer;
         private Func<bool> isExecutable;
 
         /// <summary>
         /// Creates a new DefaultCommand
         /// </summary>
         /// <param name="action">the action delegate</param>
-        public DefaultCommand(Action action)
+        public ParameterCommand(Action<object> action)
         {
             executer += action;
         }
@@ -29,7 +25,7 @@ namespace MemoryTrainer.MVVM
         /// </summary>
         /// <param name="action">the action delegate</param>
         /// <param name="canBeExecuted">the enabled/disabled logic delegate</param>
-        public DefaultCommand(Action action, Func<bool> canBeExecuted)
+        public ParameterCommand(Action<object> action, Func<bool> canBeExecuted)
         {
             executer += action;
             isExecutable += canBeExecuted;
@@ -61,7 +57,7 @@ namespace MemoryTrainer.MVVM
         /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
-            executer();
+            executer(parameter);
         }
 
         /// <summary>

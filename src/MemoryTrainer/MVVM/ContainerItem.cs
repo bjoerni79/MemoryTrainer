@@ -5,8 +5,17 @@ using System.Text;
 
 namespace MemoryTrainer.MVVM
 {
+    /// <summary>
+    /// Internal structure of a container item
+    /// </summary>
     internal class ContainerItem
     {
+        /// <summary>
+        /// Creates a new ContainerItem
+        /// </summary>
+        /// <param name="t">the type</param>
+        /// <param name="instance">the instance</param>
+        /// <param name="id">the id</param>
         internal ContainerItem(Type t, object instance, string id)
         {
             ItemType = t;
@@ -14,10 +23,19 @@ namespace MemoryTrainer.MVVM
             ItemId = id;
         }
 
+        /// <summary>
+        /// Returns the Item Type
+        /// </summary>
         internal Type ItemType { get; private set; }
 
+        /// <summary>
+        /// Returns the Item Instance
+        /// </summary>
         internal Object ItemInstance { get; private set; }
 
+        /// <summary>
+        /// Returns the Item ID
+        /// </summary>
         internal string ItemId { get; private set; }
     }
 }

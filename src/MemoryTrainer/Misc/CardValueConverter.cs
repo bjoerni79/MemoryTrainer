@@ -9,6 +9,9 @@ using System.Windows.Media.Imaging;
 
 namespace MemoryTrainer.Misc
 {
+    /// <summary>
+    /// Converts a card of type PlayingCard to an image
+    /// </summary>
     public class CardValueConverter : IValueConverter
     {
         private Dictionary<PlayingCard, string> cardDict;
@@ -16,6 +19,7 @@ namespace MemoryTrainer.Misc
 
         public CardValueConverter()
         {
+            // Build up the dictionary. 
             cardDict = new Dictionary<PlayingCard, string>();
             cardDict.Add(PlayingCard.Club_2, path + "2_of_clubs.png");
             cardDict.Add(PlayingCard.Club_3, path + "3_of_clubs.png");
@@ -87,7 +91,7 @@ namespace MemoryTrainer.Misc
             var playingCard = value as PlayingCard?;
             if (playingCard.HasValue)
             {
-
+                // Convert the playing card to an image
                 var uriString = cardDict[playingCard.Value];
                 var uri = new Uri(uriString, UriKind.RelativeOrAbsolute);
 

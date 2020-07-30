@@ -8,6 +8,9 @@ using System.Windows.Media.Imaging;
 
 namespace MemoryTrainer.Misc
 {
+    /// <summary>
+    /// Converts a boolean to a passed or failed image
+    /// </summary>
     public class BooleanToImageConverter : IValueConverter
     {
         private readonly string path = @"/Misc/Images/";
@@ -17,6 +20,7 @@ namespace MemoryTrainer.Misc
             var boolean = value as Nullable<bool>;
             if (boolean.HasValue)
             {
+                // If the nullable type has a value prepare the image
                 string uriString;
                 if (boolean.Value)
                 {
