@@ -3,12 +3,8 @@
 ################################################################################
 
 /src/MemoryTrainer/obj
-/src/MemoryTrainer.Lib.Test/obj
-/src/MemoryTrainer.Lib/obj
 /src/MemoryTrainer/bin/Debug/netcoreapp3.1
-/src/MemoryTrainer.Lib/bin/Debug/netcoreapp3.1
-/src/MemoryTrainer.Lib.Test/bin/Debug/netcoreapp3.1
-/src/MemoryTrainer/.vs
 /src/MemoryTrainer/bin/Release/netcoreapp3.1
+/src/MemoryTrainer/.vs
 /.vs
 *.suo
