@@ -1,0 +1,22 @@
+﻿
+Number Generator:
+-----------------
+
+Es gibt einen Konfigurator mit :
+- Kreditkartennummer Format
+- Kleine Zahlen xx xx xx
+- Mittlere Zahlen xx xx xx xx xx xx
+- Lange Zahlen xx xx xx xx xx xx xx xx xx xx
+
+und Anzahl von Testfragen.
+
+Dann:
+
+Alles wir generiert und der Anwender speichert das. Er muss als nächstes die Zahlen in eine Textbox schreiben.
+Ein Compare Button verifziert das später
+
+Bilder mappen
+-------------
+
+In einem Folder werden Bilder geladen (*.png und *.jpg). Diese werden dann via Random gezeigt und der Anwender speichert dies ab.
+Später muss er via Memory die Reihenfolge wieder hervorholen

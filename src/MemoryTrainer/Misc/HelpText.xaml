@@ -1,0 +1,62 @@
+﻿<Page x:Class="MemoryTrainer.Misc.HelpText"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MemoryTrainer.Misc"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="HelpText">
+
+    <Page.Resources>
+        <Style x:Key="titleParagraph" TargetType="Paragraph">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
+
+        <Style x:Key="defaultParagraph" TargetType="Paragraph">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Page.Resources>
+
+    
+    
+    <FlowDocumentReader IsTwoPageViewEnabled="False" IsFindEnabled="False" >
+        <FlowDocument>
+            <Section>
+                <Paragraph Style="{StaticResource titleParagraph}">
+                    Welcome!
+                </Paragraph>
+                <Paragraph Style="{StaticResource defaultParagraph}">
+                    This tool contains small games for improving the memory. It is inspired by the book Remember it! written by Nelson Dellis. If you need any hints or strategies, 
+                    please consult this book. At the moment, there is only one game available and more games are already in preparation. This is a spare time project and it is done when it is done.
+                </Paragraph>
+                <Paragraph  Style="{StaticResource defaultParagraph}">
+                    Enjoy the games and hopefully you find it useful.
+                </Paragraph>
+            </Section>
+            <Section>
+                <Paragraph Style="{StaticResource titleParagraph}">PAO Card Game</Paragraph>
+                <Paragraph Style="{StaticResource defaultParagraph}">
+                    I thought about creating such a game for a long time. Everybody knows playing cards and if you can recall a playing card in your memory journey then you can recall other content as well. 
+                    This games uses the PAO (Person Action Object) strategy, but you can use any other you prefer. Please follow the instructions in the game and good luck.
+                </Paragraph>
+                <Paragraph>
+                    The keys
+                    <Bold>N</Bold>,
+                    <Bold>Right Arrow</Bold>,
+                    <Bold>Up Arrow</Bold>,
+                    <Bold>Down Arrow</Bold> are bound to New Game, Next, Correct Recall and Incorrect Recall. The keys 1-7 selecting the different available decks.
+                </Paragraph>
+            </Section>
+            <Section>
+                <Paragraph>
+                    Icon made by
+https://www.flaticon.com/authors/freepik  from https://www.flaticon.com
+
+                </Paragraph>
+            </Section>
+            
+        </FlowDocument>
+    </FlowDocumentReader>
+</Page>

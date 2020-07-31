@@ -1,0 +1,7 @@
+﻿https://stackoverflow.com/questions/25366291/how-to-handle-dependency-injection-in-a-wpf-mvvm-application
+
+https://docs.microsoft.com/de-de/dotnet/desktop-wpf/fundamentals/styles-templates-overview
+
+https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions
+
+DataContext="{Binding Main, Source={StaticResource ViewModelLocator}}">
