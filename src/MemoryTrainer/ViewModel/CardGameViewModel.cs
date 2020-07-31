@@ -25,6 +25,7 @@ namespace MemoryTrainer.ViewModel
             Close = new DefaultCommand(OnClose);
             MarkAsOk = new DefaultCommand(() => OnMarkAs(true),IsRecallMode);
             MarkAsFailed = new DefaultCommand(() => OnMarkAs(false),IsRecallMode);
+            MarkFlip = new DefaultCommand(OnMarkFlip);
             SelectDeck = new ParameterCommand(OnSelectDeck);
             Restart = new DefaultCommand(OnRestart);
             StoreResult = new DefaultCommand(OnStoreResult, IsRecallMode);
@@ -77,6 +78,8 @@ namespace MemoryTrainer.ViewModel
 
         public IRefreshCommand MarkAsFailed { get; private set; }
 
+        public IRefreshCommand MarkFlip { get; private set; }
+
         public IRefreshCommand SelectDeck { get; private set; }
 
         public IRefreshCommand Restart { get; private set; }
@@ -89,12 +92,23 @@ namespace MemoryTrainer.ViewModel
 
         private void OnStoreResult()
         {
+            // 1. Create an application wide container for the PAO results
+            // 2. Store the current result into the container
 
+            // ...the Result Overview page (one single page like MainViewModel) shows it. This page also allows load / save of the results later.
         }
 
         private void OnRestart()
         {
+            // 1. Ask for confirmation (-> IUiService)
+            // 2. Restart the store / recall process with the same deck
 
+            // Create a new deck and shuffle it.
+            deck.ResetIndex();
+            cardsLeft = true;
+            showEndOfDeck = true;
+
+            PrepareUiForNewGame();
         }
 
         private void OnSelectDeck(object parameter)
@@ -128,6 +142,27 @@ namespace MemoryTrainer.ViewModel
                 currentItem.Refresh();
             }
 
+        }
+
+        private void OnMarkFlip()
+        {
+            if (RecentCards != null && RecentCards.Any())
+            {
+                var currentItem = RecentCards.First();
+                
+                if (currentItem.RecallOk.HasValue)
+                {
+                    var old = currentItem.RecallOk.Value;
+                    currentItem.RecallOk  = !old;
+
+                }
+                else
+                {
+                    currentItem.RecallOk = true;
+                }
+
+                currentItem.Refresh();
+            }
         }
 
         private bool IsRecallMode()
@@ -215,21 +250,32 @@ namespace MemoryTrainer.ViewModel
             // Trigger the Enabled / Disabled lifecycle of the OK and Failed buttons
             MarkAsFailed.Refresh();
             MarkAsOk.Refresh();
+            StoreResult.Refresh();
         }
 
         private void OnNew()
         {
-            InstructionText = "Prepare yourself and store the following cards with the help of your choosen strategy.";
-            MaxNumberOfCards = CurrentDeck.Cards.Count();
-            CurrentNumberOfCards = 0;
-            RecentCards = new ObservableCollection<PAOItem>();
-
             // Create a new deck and shuffle it.
             var cards = CurrentDeck.Cards;
             deck = new Deck(cards);
             deck.Shuffle();
             cardsLeft = true;
             showEndOfDeck = true;
+
+            PrepareUiForNewGame();
+        }
+
+        private void OnClose()
+        {
+            InternalClose();
+        }
+
+        private void PrepareUiForNewGame()
+        {
+            InstructionText = "Prepare yourself and store the following cards with the help of your choosen strategy.";
+            MaxNumberOfCards = CurrentDeck.Cards.Count();
+            CurrentNumberOfCards = 0;
+            RecentCards = new ObservableCollection<PAOItem>();
 
             // Update the UI
             RaisePropertyChange("InstructionText");
@@ -240,11 +286,6 @@ namespace MemoryTrainer.ViewModel
             RaisePropertyChange("CurrentDeck");
 
             OnNextCards();
-        }
-
-        private void OnClose()
-        {
-            InternalClose();
         }
 
         #endregion

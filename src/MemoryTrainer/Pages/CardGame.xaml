@@ -35,6 +35,10 @@
         <KeyBinding Command="{Binding Path=MarkAsFailed}" Key="Down" />
         <KeyBinding Command="{Binding Path=NextCards}" Key="Right" />
 
+        <MouseBinding MouseAction="RightClick" Command="{Binding Path=NextCards}" />
+        <MouseBinding MouseAction="WheelClick" Command="{Binding Path=MarkFlip}" />
+
+
         <!-- Select of the index in the deck selection 1,2,3,4,5... -->
         <KeyBinding Key="D1" Command="{Binding Path=SelectDeck}" CommandParameter="0"/>
         <KeyBinding Key="D2" Command="{Binding Path=SelectDeck}" CommandParameter="1"/>
@@ -53,7 +57,7 @@
                 New Game
             </Button>
 
-            <Button Style="{StaticResource CommandButton}">
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=Restart}">
                 Restart
             </Button>
 
@@ -75,7 +79,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <Button Style="{StaticResource CommandButton}" Background="AntiqueWhite" >
+            <Button Style="{StaticResource CommandButton}" Background="AntiqueWhite" Command="{Binding Path=StoreResult}" >
                 Store Result
             </Button>
 
