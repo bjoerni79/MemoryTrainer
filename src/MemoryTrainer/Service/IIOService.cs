@@ -1,4 +1,5 @@
-﻿using MemoryTrainer.Misc;
+﻿using MemoryTrainer.Environment;
+using MemoryTrainer.Misc;
 using MemoryTrainer.ViewModel;
 using System;
 using System.Collections.Generic;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MemoryTrainer.ViewModel
+namespace MemoryTrainer.Environment
 {
     public class GameSetting
     {

@@ -1,4 +1,5 @@
-﻿using MemoryTrainer.Misc;
+﻿using MemoryTrainer.Environment;
+using MemoryTrainer.Misc;
 using MemoryTrainer.MMVM;
 using MemoryTrainer.MVVM;
 using System;

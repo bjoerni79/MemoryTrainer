@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace MemoryTrainer.ViewModel
+namespace MemoryTrainer.Environment
 {
     /// <summary>
     /// Enum of playing cards including blank, covered and jokers
