@@ -10,7 +10,7 @@ namespace MemoryTrainer.MVVM
     /// <summary>
     /// Implements a WPF ready button representation based on ICommand
     /// </summary>
-    public class DefaultCommand : ICommand
+    public class DefaultCommand : IRefreshCommand
     {
         private Action executer;
         private Func<bool> isExecutable;

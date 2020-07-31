@@ -80,6 +80,11 @@ namespace MemoryTrainer
             return page as IPage;
         }
 
+        public bool ShowDialog(string message)
+        {
+            return false;
+        }
+
         public void Close(string pageId)
         {
             TabItem currentItem = null;

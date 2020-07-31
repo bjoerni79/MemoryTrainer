@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace MemoryTrainer.MVVM
 {
-    public class ParameterCommand : ICommand 
+    public class ParameterCommand : IRefreshCommand 
     {
         private Action<object> executer;
         private Func<bool> isExecutable;

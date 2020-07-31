@@ -158,6 +158,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Environment\" />
     <Folder Include="Properties\" />
   </ItemGroup>
 

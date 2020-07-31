@@ -25,7 +25,8 @@ namespace MemoryTrainer.ViewModel
             MarkAsOk = new DefaultCommand(() => OnMarkAs(true),IsRecallMode);
             MarkAsFailed = new DefaultCommand(() => OnMarkAs(false),IsRecallMode);
             SelectDeck = new ParameterCommand(OnSelectDeck);
-
+            Restart = new DefaultCommand(OnRestart);
+            StoreResult = new DefaultCommand(OnStoreResult, IsRecallMode);
 
             // Init the decks
             var facade = new ContainerFacade();
@@ -65,21 +66,35 @@ namespace MemoryTrainer.ViewModel
 
         #region Commands
 
-        public DefaultCommand NextCards { get; private set; }
+        public IRefreshCommand NextCards { get; private set; }
 
-        public DefaultCommand New { get; private set; }
+        public IRefreshCommand New { get; private set; }
 
-        public DefaultCommand Close { get; private set; }
+        public IRefreshCommand Close { get; private set; }
 
-        public DefaultCommand MarkAsOk { get; private set; }
+        public IRefreshCommand MarkAsOk { get; private set; }
 
-        public DefaultCommand MarkAsFailed { get; private set; }
+        public IRefreshCommand MarkAsFailed { get; private set; }
 
-        public ParameterCommand SelectDeck { get; private set; }
+        public IRefreshCommand SelectDeck { get; private set; }
+
+        public IRefreshCommand Restart { get; private set; }
+
+        public IRefreshCommand StoreResult { get; private set; }
 
         #endregion
 
         #region Game Logic
+
+        private void OnStoreResult()
+        {
+
+        }
+
+        private void OnRestart()
+        {
+
+        }
 
         private void OnSelectDeck(object parameter)
         {

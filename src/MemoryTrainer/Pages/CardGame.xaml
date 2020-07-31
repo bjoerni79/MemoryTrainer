@@ -53,13 +53,13 @@
                 New Game
             </Button>
 
+            <Button Style="{StaticResource CommandButton}">
+                Restart
+            </Button>
+
             <Button Style="{StaticResource CommandButton}" Command="{Binding Path=NextCards}">
                 Next Cards
             </Button>
-
-            <Button Style="{StaticResource CommandButton}">Restart</Button>
-
-            <Button Style="{StaticResource CommandButton}">Save Result</Button>
 
             <Label VerticalContentAlignment="Center" FontSize="12" FontWeight="DemiBold" >
                 Selected Deck:
@@ -74,6 +74,10 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+
+            <Button Style="{StaticResource CommandButton}" Background="AntiqueWhite" >
+                Store Result
+            </Button>
 
             <Button x:Name="close" Style="{StaticResource CommandButton}" Command="{Binding Path=Close}" Background="AntiqueWhite">
                 Close

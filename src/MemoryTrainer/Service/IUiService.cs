@@ -10,5 +10,7 @@ namespace MemoryTrainer.Service
         IPage CreatePage(PageSelection element,string pageId);
 
         void Close(string pageId);
+
+        bool ShowDialog(string message);
     }
 }
