@@ -9,6 +9,8 @@ namespace MemoryTrainer.Misc
     /// <summary>
     /// Represents the result of a PAO set. 
     /// </summary>
+    /// 
+    [Serializable]
     public class PAOItem : INotifyPropertyChanged
     {
         /// <summary>
