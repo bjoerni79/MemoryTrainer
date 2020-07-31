@@ -20,3 +20,7 @@ Bilder mappen
 
 In einem Folder werden Bilder geladen (*.png und *.jpg). Diese werden dann via Random gezeigt und der Anwender speichert dies ab.
 Später muss er via Memory die Reihenfolge wieder hervorholen
+
+
+
+--- Visual Studio Test---
