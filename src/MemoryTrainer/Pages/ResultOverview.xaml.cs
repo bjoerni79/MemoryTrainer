@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MemoryTrainer.MVVM;
+using MemoryTrainer.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -16,11 +18,28 @@ namespace MemoryTrainer.Pages
     /// <summary>
     /// Interaction logic for ResultPage.xaml
     /// </summary>
-    public partial class ResultPage : UserControl
+    public partial class ResultPage : UserControl, IPage
     {
-        public ResultPage()
+        private string pageId;
+
+        public ResultPage(string id)
         {
             InitializeComponent();
+
+            pageId = id;
+            var containerFacade = new ContainerFacade();
+            var vm = containerFacade.Get<ResultOverviewViewModel>(id);
+
+            DataContext = vm;
+        }
+
+        public string GetId()
+        {
+            return pageId;
+        }
+
+        public void SetFocus()
+        {
         }
     }
 }

@@ -19,11 +19,14 @@ namespace MemoryTrainer.ViewModel
 
             ShowHelp = new DefaultCommand(OnShowHelp);
             OpenCardGame = new DefaultCommand(OnOpenCardGame);
+            OpenResultOverview = new DefaultCommand(OnOpenResultOverview);
         }
 
         public ICommand ShowHelp { get; private set; }
 
         public ICommand OpenCardGame { get; private set; }
+
+        public ICommand OpenResultOverview { get; private set; }
 
         public string CurrentState { get; private set; }
 
@@ -37,6 +40,12 @@ namespace MemoryTrainer.ViewModel
         {
             var viewModel = new HelpViewModel();
             OpenPage(viewModel, PageSelection.ShowHelp);
+        }
+
+        private void OnOpenResultOverview()
+        {
+            var viewModel = new ResultOverviewViewModel();
+            OpenPage(viewModel, PageSelection.ResultOverview);
         }
 
         private void OpenPage(ViewModelBase viewModel, PageSelection pageSelection)

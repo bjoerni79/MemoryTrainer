@@ -1,6 +1,7 @@
 ﻿using MemoryTrainer.MVVM;
 using MemoryTrainer.Pages;
 using MemoryTrainer.Service;
+using MemoryTrainer.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,6 +64,10 @@ namespace MemoryTrainer
                 case PageSelection.ShowHelp:
                     headerName = "Help";
                     page = new Help(pageId);
+                    break;
+                case PageSelection.ResultOverview:
+                    headerName = "Result Overview";
+                    page = new ResultPage(pageId);
                     break;
                 default:
                     throw new Exception("Unknown page selection detected");

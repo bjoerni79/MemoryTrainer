@@ -96,13 +96,12 @@ namespace MemoryTrainer.ViewModel
             // 2. Store the current result into the container
 
             // ...the Result Overview page (one single page like MainViewModel) shows it. This page also allows load / save of the results later.
+
+
         }
 
         private void OnRestart()
         {
-            // 1. Ask for confirmation (-> IUiService)
-            // 2. Restart the store / recall process with the same deck
-
             // Create a new deck and shuffle it.
             deck.ResetIndex();
             cardsLeft = true;

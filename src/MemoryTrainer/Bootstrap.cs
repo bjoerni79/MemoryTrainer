@@ -88,6 +88,21 @@ namespace MemoryTrainer
                 PlayingCard.Spade_King,
                 PlayingCard.Spade_Ace
             };
+            var faceCards = new List<PlayingCard>()
+            {
+                PlayingCard.Diamond_Jack,
+                PlayingCard.Diamond_Queen,
+                PlayingCard.Diamond_King,
+                PlayingCard.Heart_Jack,
+                PlayingCard.Heart_Queen,
+                PlayingCard.Heart_King,
+                PlayingCard.Club_Jack,
+                PlayingCard.Club_Queen,
+                PlayingCard.Club_King,
+                PlayingCard.Spade_Jack,
+                PlayingCard.Spade_Queen,
+                PlayingCard.Spade_King,
+            };
 
             var allCards = new List<PlayingCard>();
             allCards.AddRange(diamondCards);
@@ -111,6 +126,7 @@ namespace MemoryTrainer
             settings.Add("Only Spade", spadeCards);
             settings.Add("Diamond and Heart", redCards);
             settings.Add("Club and Spade", blackCards);
+            settings.Add("Only Face Cards", faceCards);
 
             // Finally add it to the IOC container
             var facade = new ContainerFacade();
