@@ -182,18 +182,18 @@ namespace MemoryTrainer.ViewModel
                 RaisePropertyChange("ObjectCard");
 
                 CurrentNumberOfCards += 3;
-                RaisePropertyChange("CurrentNumberOfCards");
 
                 // Check for blank cards. 
-                var isEndOfDeck = (PersonCard == PlayingCard.Blank) || (ActionCard == PlayingCard.Blank) || (ObjectCard == PlayingCard.Blank);
+
+
+                //var isEndOfDeck = (PersonCard == PlayingCard.Blank) || (ActionCard == PlayingCard.Blank) || (ObjectCard == PlayingCard.Blank);
+                var isEndOfDeck = deck.IsEndOfDeck();
                 if (isEndOfDeck)
                 {
                     //TODO:  Switch to recall state!
                     InstructionText = "Well done!  Now prepare yourself for the recalling process. The list on the right shows the last cards later. What are the next three cards? Please click next when you are ready.";
-                    CurrentNumberOfCards = 0;
 
                     RaisePropertyChange("InstructionText");
-                    RaisePropertyChange("CurrentNumberOfCards");
 
                     deck.ResetIndex();
                     cardsLeft = false;
@@ -201,23 +201,22 @@ namespace MemoryTrainer.ViewModel
             }
             else
             {
-                if (deck.IsEndOfDeck())
+                if (showEndOfDeck)
                 {
-                    InstructionText = "That's it. Click New for a new round.";
-                    CurrentNumberOfCards = CurrentDeck.Cards.Count();
+                    PersonCard = PlayingCard.Deck;
+                    ActionCard = PlayingCard.Deck;
+                    ObjectCard = PlayingCard.Deck;
 
-                    RaisePropertyChange("InstructionText");
-                    RaisePropertyChange("CurrentNumberOfCards");
+                    CurrentNumberOfCards = 0;
+                    showEndOfDeck = false;
                 }
                 else
                 {
-                    if (showEndOfDeck)
-                    {
-                        PersonCard = PlayingCard.Deck;
-                        ActionCard = PlayingCard.Deck;
-                        ObjectCard = PlayingCard.Deck;
 
-                        showEndOfDeck = false;
+                    if (deck.IsEndOfDeck())
+                    {
+                        InstructionText = "Game Over. Please restart for the same deck or create a new one.";
+                        RaisePropertyChange("InstructionText");
                     }
                     else
                     {
@@ -227,7 +226,6 @@ namespace MemoryTrainer.ViewModel
                         ObjectCard = deck.GetNext();
 
                         CurrentNumberOfCards += 3;
-                        RaisePropertyChange("CurrentNumberOfCards");
 
                         // Add the latest on top
                         var newRecentList = new List<PAOItem>();
@@ -241,10 +239,13 @@ namespace MemoryTrainer.ViewModel
                     }
                 }
 
+
                 RaisePropertyChange("PersonCard");
                 RaisePropertyChange("ActionCard");
                 RaisePropertyChange("ObjectCard");
             }
+
+            RaisePropertyChange("CurrentNumberOfCards");
 
             // Trigger the Enabled / Disabled lifecycle of the OK and Failed buttons
             MarkAsFailed.Refresh();

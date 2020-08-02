@@ -31,6 +31,7 @@
     <UserControl.InputBindings>
         <!-- Apply the Command Button -->
         <KeyBinding Command="{Binding Path=New}" Key="N" />
+        <KeyBinding Command="{Binding Path=Restart}" Key="R" />
         <KeyBinding Command="{Binding Path=MarkAsOk}" Key="Up" />
         <KeyBinding Command="{Binding Path=MarkAsFailed}" Key="Down" />
         <KeyBinding Command="{Binding Path=NextCards}" Key="Right" />
