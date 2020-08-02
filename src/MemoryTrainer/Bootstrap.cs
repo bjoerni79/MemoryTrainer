@@ -22,7 +22,23 @@ namespace MemoryTrainer
         public void InitSettings()
         {
             var settings = new GameSetting();
+            var overview = new ResultOverview();
 
+            InitDecks(settings);
+            InitResultOverview(overview);
+
+            // Finally add it to the IOC container
+            var facade = new ContainerFacade();
+            facade.AddUnique(settings, "SETTINGS");
+        }
+
+        private void InitResultOverview(ResultOverview overview)
+        {
+
+        }
+
+        private void InitDecks(GameSetting settings)
+        {
             // Add different set of cards
             var diamondCards = new List<PlayingCard>()
             {
@@ -127,10 +143,6 @@ namespace MemoryTrainer
             settings.Add("Diamond and Heart", redCards);
             settings.Add("Club and Spade", blackCards);
             settings.Add("Only Face Cards", faceCards);
-
-            // Finally add it to the IOC container
-            var facade = new ContainerFacade();
-            facade.AddUnique(settings, "SETTINGS");
         }
     }
 }

@@ -48,7 +48,7 @@
         <ToolBar Background="WhiteSmoke">
             <Button Style="{StaticResource CommandButton}" Command="{Binding Path=ShowHelp}">Show Help</Button>
             <Button Style="{StaticResource CommandButton}" Command="{Binding Path=OpenCardGame}">Create PAO Card Game</Button>
-            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=OpenResultOverview}">Open Result Overview</Button>
+            <!--<Button Style="{StaticResource CommandButton}" Command="{Binding Path=OpenResultOverview}">Open Result Overview</Button>-->
             <!--<Button Style="{StaticResource CommandButton}"> Create Number Generator </Button>-->
             <!--<Button Style="{StaticResource SystemCommandButton}">Settings</Button>-->
         </ToolBar>
