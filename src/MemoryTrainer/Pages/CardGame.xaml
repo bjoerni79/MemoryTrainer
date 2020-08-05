@@ -10,8 +10,8 @@
 
     <UserControl.Resources>
         <Style x:Key="cardImage" TargetType="Image">
-            <Setter Property="Width" Value="200"/>
-            <Setter Property="Height" Value="200" />
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Height" Value="300" />
 
         </Style>
 
@@ -89,6 +89,14 @@
                 Close
             </Button>
 
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=MarkAsOk}" >
+                <Label>Yes, mark it as Correct!</Label>
+            </Button>
+
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=MarkAsFailed}">
+                <Label>No, did not recall it.</Label>
+            </Button>
+
         </ToolBar>
 
         <StackPanel Margin="5" DockPanel.Dock="Bottom">
@@ -102,8 +110,7 @@
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.80*"/>
-                <RowDefinition Height="0.20*" />
+                <RowDefinition />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -113,24 +120,22 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Row="0" Grid.Column="0" Style="{StaticResource cardImage}" Source="{Binding Path=PersonCard,Converter={StaticResource cardValueConverter}}" >
-            </Image>
+            <Border Padding="5" Grid.Row="0" Grid.Column="0" >
+                <Image Source="{Binding Path=PersonCard,Converter={StaticResource cardValueConverter}}" >
+                </Image>
+            </Border>
 
-            <Image Grid.Row="0" Grid.Column="1" Style="{StaticResource cardImage}" Source="{Binding Path=ActionCard,Converter={StaticResource cardValueConverter}}">
-            </Image>
+            <Border Padding="5" Grid.Row="0" Grid.Column="1">
+                <Image   Source="{Binding Path=ActionCard,Converter={StaticResource cardValueConverter}}">
+                </Image>
+            </Border>
 
-            <Image Grid.Row="0" Grid.Column="2" Style="{StaticResource cardImage}" Source="{Binding Path=ObjectCard,Converter={StaticResource cardValueConverter}}">
-            </Image>
+            <Border Padding="5" Grid.Row="0" Grid.Column="2" >
+                <Image  Source="{Binding Path=ObjectCard,Converter={StaticResource cardValueConverter}}">
+                </Image>
+            </Border>
 
-            <WrapPanel Grid.Row="1" Grid.ColumnSpan="3">
-                <Button Style="{StaticResource CommandButton}" Command="{Binding Path=MarkAsOk}" >
-                    <Label>Yes, mark it as Correct!</Label>
-                </Button>
 
-                <Button Style="{StaticResource CommandButton}" Command="{Binding Path=MarkAsFailed}">
-                    <Label>No, did not recall it.</Label>
-                </Button>
-            </WrapPanel>
             
             <ListBox Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Background="AntiqueWhite" ItemsSource="{Binding Path=RecentCards,Mode=OneWay}" Margin="5">
                 <ListBox.ItemTemplate>
