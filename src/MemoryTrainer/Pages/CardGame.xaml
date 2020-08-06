@@ -76,9 +76,9 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <Button Style="{StaticResource CommandButton}" Background="AntiqueWhite" Command="{Binding Path=StoreResult}" >
+            <!--<Button Style="{StaticResource CommandButton}" Background="AntiqueWhite" Command="{Binding Path=StoreResult}" >
                 Store Result
-            </Button>
+            </Button>-->
 
             <Button x:Name="close" Style="{StaticResource CommandButton}" Command="{Binding Path=Close}" Background="AntiqueWhite">
                 Close
