@@ -12,6 +12,9 @@ namespace MemoryTrainer
     /// </summary>
     public class Bootstrap
     {
+        public static string Settings = "SETTINGS";
+        public static string Results = "RESULTS";
+
         public Bootstrap()
         {
             Main = new MainWindowViewModel();
@@ -29,12 +32,16 @@ namespace MemoryTrainer
 
             // Finally add it to the IOC container
             var facade = new ContainerFacade();
-            facade.AddUnique(settings, "SETTINGS");
+            facade.AddUnique(settings, Settings);
+            facade.AddUnique(overview, Results);
         }
 
         private void InitResultOverview(ResultOverview overview)
         {
-
+            //
+            //  Restore the old results
+            //
+            overview.Restore();
         }
 
         private void InitDecks(GameSetting settings)

@@ -16,6 +16,7 @@ namespace MemoryTrainer.ViewModel
     {
         private bool cardsLeft;
         private bool showEndOfDeck;
+        private ResultOverview overview;
         private Deck deck = new Deck();
 
         public CardGameViewModel()
@@ -32,7 +33,8 @@ namespace MemoryTrainer.ViewModel
 
             // Init the decks
             var facade = new ContainerFacade();
-            var settings = facade.Get<GameSetting>("SETTINGS") as GameSetting;
+            var settings = facade.Get<GameSetting>(Bootstrap.Settings) as GameSetting;
+            overview = facade.Get<ResultOverview>(Bootstrap.Results) as ResultOverview;
 
             AvailableDecks = new ObservableCollection<DeckConfiguration>(settings.AvailableDecks);
             CurrentDeck = AvailableDecks.First();
@@ -97,7 +99,10 @@ namespace MemoryTrainer.ViewModel
 
             // ...the Result Overview page (one single page like MainViewModel) shows it. This page also allows load / save of the results later.
 
+            if (overview != null)
+            {
 
+            }
         }
 
         private void OnRestart()

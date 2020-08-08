@@ -11,6 +11,16 @@ namespace MemoryTrainer.Environment
 
         }
 
+        public void Restore()
+        {
+
+        }
+
+        public void Store()
+        {
+
+        }
+
 
     }
 }
