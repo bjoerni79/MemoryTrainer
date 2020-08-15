@@ -6,7 +6,36 @@
              xmlns:local="clr-namespace:MemoryTrainer.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="LightGreen">
+
+    <UserControl.Resources>
+
+        <Style x:Key="CommandButton" TargetType="Button">
+            <Setter Property="Margin" Value="5 0 5 0"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
+
+    </UserControl.Resources>
+
+    <DockPanel Background="LightGreen" LastChildFill="True">
+
+        <ToolBar Margin="5" Background="WhiteSmoke" DockPanel.Dock="Top">
+            <Button Style="{StaticResource CommandButton}" >
+                TODO
+            </Button>
+        </ToolBar>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <ListBox Grid.Column="0" Background="AntiqueWhite"></ListBox>
             
-    </Grid>
+        </Grid>
+        
+    </DockPanel>
 </UserControl>

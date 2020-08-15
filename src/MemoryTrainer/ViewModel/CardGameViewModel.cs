@@ -5,10 +5,7 @@ using MemoryTrainer.MVVM;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Windows.Input;
 
 namespace MemoryTrainer.ViewModel
 {
@@ -16,7 +13,6 @@ namespace MemoryTrainer.ViewModel
     {
         private bool cardsLeft;
         private bool showEndOfDeck;
-        private ResultOverview overview;
         private Deck deck = new Deck();
 
         public CardGameViewModel()
@@ -24,8 +20,8 @@ namespace MemoryTrainer.ViewModel
             NextCards = new DefaultCommand(OnNextCards);
             New = new DefaultCommand(OnNew);
             Close = new DefaultCommand(OnClose);
-            MarkAsOk = new DefaultCommand(() => OnMarkAs(true),IsRecallMode);
-            MarkAsFailed = new DefaultCommand(() => OnMarkAs(false),IsRecallMode);
+            MarkAsOk = new DefaultCommand(() => OnMarkAs(true), IsRecallMode);
+            MarkAsFailed = new DefaultCommand(() => OnMarkAs(false), IsRecallMode);
             MarkFlip = new DefaultCommand(OnMarkFlip);
             SelectDeck = new ParameterCommand(OnSelectDeck);
             Restart = new DefaultCommand(OnRestart);
@@ -34,7 +30,6 @@ namespace MemoryTrainer.ViewModel
             // Init the decks
             var facade = new ContainerFacade();
             var settings = facade.Get<GameSetting>(Bootstrap.Settings) as GameSetting;
-            overview = facade.Get<ResultOverview>(Bootstrap.Results) as ResultOverview;
 
             AvailableDecks = new ObservableCollection<DeckConfiguration>(settings.AvailableDecks);
             CurrentDeck = AvailableDecks.First();
@@ -55,7 +50,8 @@ namespace MemoryTrainer.ViewModel
 
         public ObservableCollection<DeckConfiguration> AvailableDecks { get; private set; }
 
-        public DeckConfiguration CurrentDeck {
+        public DeckConfiguration CurrentDeck
+        {
             get;
             set;
         }
@@ -94,11 +90,8 @@ namespace MemoryTrainer.ViewModel
 
         private void OnStoreResult()
         {
-            // 1. Create an application wide container for the PAO results
-            // 2. Store the current result into the container
-
-            // ...the Result Overview page (one single page like MainViewModel) shows it. This page also allows load / save of the results later.
-
+            var facade = new ContainerFacade();
+            var overview = facade.Get<ResultOverview>(Bootstrap.Results) as ResultOverview;
             if (overview != null)
             {
 
@@ -120,7 +113,7 @@ namespace MemoryTrainer.ViewModel
             // Run some type checks before we start using it.
             int index;
             var selectedDeck = parameter as string;
-            if (Int32.TryParse(selectedDeck,out index))
+            if (Int32.TryParse(selectedDeck, out index))
             {
                 // Try to get the deck at this index
                 var deckAtIndex = AvailableDecks.ElementAtOrDefault(index);
@@ -153,11 +146,11 @@ namespace MemoryTrainer.ViewModel
             if (RecentCards != null && RecentCards.Any())
             {
                 var currentItem = RecentCards.First();
-                
+
                 if (currentItem.RecallOk.HasValue)
                 {
                     var old = currentItem.RecallOk.Value;
-                    currentItem.RecallOk  = !old;
+                    currentItem.RecallOk = !old;
 
                 }
                 else
