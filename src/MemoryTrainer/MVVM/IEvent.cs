@@ -7,7 +7,8 @@ namespace MemoryTrainer.MVVM
     /// <summary>
     /// Event description for listening and triggering updates in views
     /// </summary>
-    public interface IEvent
+    public interface IEvent<T> where T:EventArgs
     {
+        void Trigger(T args);
     }
 }
