@@ -8,6 +8,10 @@ namespace MemoryTrainer.Environment
     {
         public List<PAOResultItem> resultItems;
 
+        public string Comment { get; set; }
+
+        public string DeckTitle { get; set; }
+
         public PAOResult()
         {
             resultItems = new List<PAOResultItem>();

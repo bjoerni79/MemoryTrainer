@@ -94,7 +94,39 @@ namespace MemoryTrainer.ViewModel
             var overview = facade.Get<ResultOverview>(Bootstrap.Results) as ResultOverview;
             if (overview != null)
             {
+                // Build the result and store it
+                var paoResult = new PAOResult();
+                foreach (var item in RecentCards)
+                {
+                    var resultItem = new PAOResultItem();
+                    FillResultItem(item, resultItem);
 
+                    paoResult.Add(resultItem);
+                }
+
+                // Add it to the overview.
+                paoResult.Comment = "Added at " + DateTime.Now.ToShortDateString();
+                paoResult.DeckTitle = CurrentDeck.Title;
+                overview.Add(paoResult);
+            }
+        }
+
+        private void FillResultItem(PAOItem item, PAOResultItem resultItem)
+        {
+            resultItem.Person = item.Person;
+            resultItem.Action = item.Action;
+            resultItem.Object = item.Object;
+
+            if (item.RecallOk.HasValue)
+            {
+                if (item.RecallOk.Value)
+                {
+                    resultItem.RecallState = 1;
+                }
+                else
+                {
+                    resultItem.RecallState = 2;
+                }
             }
         }
 
