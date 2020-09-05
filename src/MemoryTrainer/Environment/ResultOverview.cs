@@ -24,6 +24,11 @@ namespace MemoryTrainer.Environment
 
         }
 
+        public void Load()
+        {
+
+        }
+
         public IEnumerable<PAOResult> PAOResults
         {
             get

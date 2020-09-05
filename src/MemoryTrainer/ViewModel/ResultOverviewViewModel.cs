@@ -25,7 +25,11 @@ namespace MemoryTrainer.ViewModel
 
         public IRefreshCommand Refresh { get; private set; }
 
+        public PAOResultOverview CurrentResultOverview { get; set; }
+
         public ObservableCollection<PAOResultOverview> Results { get; set; }
+
+        public ObservableCollection<PAOResultItem>  SelectedCards {get;set;}
 
         private void OnClose()
         {
@@ -46,6 +50,7 @@ namespace MemoryTrainer.ViewModel
                     paoResultOverview.Comment = paoResult.Comment;
                     paoResultOverview.Deck = paoResult.DeckTitle;
 
+                    id++;
                     list.Add(paoResultOverview);
                 }
 
