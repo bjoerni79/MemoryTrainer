@@ -27,6 +27,10 @@ namespace MemoryTrainer.ViewModel
             OnRefresh();
         }
 
+        public IRefreshCommand LoadFile { get; private set; }
+
+        public IRefreshCommand SaveFile { get; private set; }
+
         public IRefreshCommand Close { get; private set; }
 
         public IRefreshCommand Refresh { get; private set; }
@@ -51,6 +55,16 @@ namespace MemoryTrainer.ViewModel
         private void OnClose()
         {
             InternalClose();
+        }
+
+        private void InternalLoadFile(string filename)
+        {
+
+        }
+
+        private void InternalSaveFile(string filename)
+        {
+
         }
 
         private void RenderCards()
