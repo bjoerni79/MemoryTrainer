@@ -19,7 +19,7 @@
         </Style>
 
         <misc:CardValueConverter x:Key="cardValueConverter" />
-        <misc:BooleanToImageConverter x:Key="booleanToImageConverter" />
+        <misc:IntegerToImageConverter x:Key="integerToImageConverter" />
 
     </UserControl.Resources>
 
@@ -87,7 +87,7 @@
 
                             <Image Grid.Column="2" Margin="10" Width="150" Height="150" Source="{Binding Path=Object,Converter={StaticResource cardValueConverter}}"/>
 
-                            <Image Grid.Column="3" Margin="10" Width="50" Height="50" Source="{Binding Path=RecallOk,Converter={StaticResource booleanToImageConverter}}" />
+                            <Image Grid.Column="3" Margin="10" Width="50" Height="50" Source="{Binding Path=RecallState,Converter={StaticResource integerToImageConverter}}" />
 
                         </Grid>
                     </DataTemplate>
