@@ -90,6 +90,11 @@ namespace MemoryTrainer
             return false;
         }
 
+        public string ShowOpenFileDialog()
+        {
+            return null;
+        }
+
         public void Close(string pageId)
         {
             TabItem currentItem = null;
@@ -114,5 +119,6 @@ namespace MemoryTrainer
                 containerHelper.Remove(pageId);
             }
         }
+
     }
 }

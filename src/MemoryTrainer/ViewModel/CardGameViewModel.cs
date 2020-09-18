@@ -101,7 +101,7 @@ namespace MemoryTrainer.ViewModel
                     var resultItem = new PAOResultItem();
                     FillResultItem(item, resultItem);
 
-                    paoResult.Add(resultItem);
+                    paoResult.Items.Add(resultItem);
                 }
 
                 // Add it to the overview.

@@ -124,16 +124,16 @@ namespace MemoryTrainer.ViewModel
                         Comment = "Test Result 1",
                         DeckTitle = "Test Deck 1"
                     };
-                    testResult1.Add(new PAOResultItem { Person = PlayingCard.Diamond_Jack, Action = PlayingCard.Diamond_Queen, Object = PlayingCard.Diamond_King, RecallState = 0 });
-                    testResult1.Add(new PAOResultItem { Person = PlayingCard.Heart_Jack, Action = PlayingCard.Heart_Queen, Object = PlayingCard.Heart_King, RecallState = 1 });
-                    testResult1.Add(new PAOResultItem { Person = PlayingCard.Spade_Jack, Action = PlayingCard.Spade_Queen, Object = PlayingCard.Spade_King, RecallState = 2 });
+                    testResult1.Items.Add(new PAOResultItem { Person = PlayingCard.Diamond_Jack, Action = PlayingCard.Diamond_Queen, Object = PlayingCard.Diamond_King, RecallState = 0 });
+                    testResult1.Items.Add(new PAOResultItem { Person = PlayingCard.Heart_Jack, Action = PlayingCard.Heart_Queen, Object = PlayingCard.Heart_King, RecallState = 1 });
+                    testResult1.Items.Add(new PAOResultItem { Person = PlayingCard.Spade_Jack, Action = PlayingCard.Spade_Queen, Object = PlayingCard.Spade_King, RecallState = 2 });
 
 
                     // testResult2
                     var testResult2 = new PAOResult();
                     testResult2.Comment = "Test Result 2";
                     testResult2.DeckTitle = "Test Deck 2";
-                    testResult2.Add(new PAOResultItem { Person = PlayingCard.Diamond_2, Action = PlayingCard.Diamond_3, Object = PlayingCard.Diamond_4 });
+                    testResult2.Items.Add(new PAOResultItem { Person = PlayingCard.Diamond_2, Action = PlayingCard.Diamond_3, Object = PlayingCard.Diamond_4 });
 
                     results.Add(testResult1);
                     results.Add(testResult2);

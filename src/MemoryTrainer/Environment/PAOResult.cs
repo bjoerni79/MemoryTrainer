@@ -6,32 +6,18 @@ namespace MemoryTrainer.Environment
 {
     public class PAOResult
     {
-        public List<PAOResultItem> resultItems;
-
         public string Comment { get; set; }
 
         public string DeckTitle { get; set; }
 
         public PAOResult()
         {
-            resultItems = new List<PAOResultItem>();
+            Items = new List<PAOResultItem>();
         }
 
-        public void Add(PAOResultItem item)
+        public List<PAOResultItem> Items
         {
-            resultItems.Add(item);
-        }
-
-        public IEnumerable<PAOResultItem> Items
-        {
-            get
-            {
-                //
-                //  Create a copy of the list and return it
-                //
-                var newList = new List<PAOResultItem>(resultItems);
-                return newList;
-            }
+            get;set;
         }
     }
 }
