@@ -1,5 +1,6 @@
 ﻿using MemoryTrainer.Environment;
 using MemoryTrainer.MVVM;
+using MemoryTrainer.Service;
 using MemoryTrainer.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace MemoryTrainer
     {
         public static string Settings = "SETTINGS";
         public static string Results = "RESULTS";
+        public static string IoService = "IOSERVICE";
 
         public Bootstrap()
         {
@@ -26,6 +28,7 @@ namespace MemoryTrainer
         {
             var settings = new GameSetting();
             var overview = new ResultOverview();
+            var ioService = new IoService();
 
             InitDecks(settings);
             InitResultOverview(overview);
@@ -34,6 +37,7 @@ namespace MemoryTrainer
             var facade = new ContainerFacade();
             facade.AddUnique(settings, Settings);
             facade.AddUnique(overview, Results);
+            facade.AddUnique(ioService, IoService);
         }
 
         private void InitResultOverview(ResultOverview overview)

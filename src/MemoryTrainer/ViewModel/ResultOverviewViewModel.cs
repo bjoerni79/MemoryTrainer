@@ -2,6 +2,7 @@
 using MemoryTrainer.Misc;
 using MemoryTrainer.MMVM;
 using MemoryTrainer.MVVM;
+using MemoryTrainer.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,11 +19,14 @@ namespace MemoryTrainer.ViewModel
         private Dictionary<int, PAOResult> resultDict;
 
         private bool isDebugModeEnabled = true;
+        private string debugFile = @"C:\temp\paos.json";
 
         public ResultOverviewViewModel()
         {
             Close = new DefaultCommand(OnClose);
             Refresh = new DefaultCommand(OnRefresh);
+            SaveFile = new DefaultCommand(OnSaveFile);
+            LoadFile = new DefaultCommand(OnLoadFile);
 
             OnRefresh();
         }
@@ -55,16 +59,6 @@ namespace MemoryTrainer.ViewModel
         private void OnClose()
         {
             InternalClose();
-        }
-
-        private void InternalLoadFile(string filename)
-        {
-
-        }
-
-        private void InternalSaveFile(string filename)
-        {
-
         }
 
         private void RenderCards()
@@ -153,6 +147,40 @@ namespace MemoryTrainer.ViewModel
                 // Refresh the UI
                 Results = new ObservableCollection<PAOResultOverview>(list);
                 RaisePropertyChange("Results");
+            }
+        }
+
+        private void OnLoadFile()
+        {
+            var file = debugFile;
+            InternalLoadFile(file);
+        }
+
+        private void OnSaveFile()
+        {
+            var file = debugFile;
+            InternalSaveFile(file);
+        }
+
+        private void InternalLoadFile(string filename)
+        {
+            //TODO: Get the IO Service and test it
+            var facade = new ContainerFacade();
+            var ioService = facade.Get<IIOService>(Bootstrap.IoService);
+            if (ioService != null)
+            {
+
+            }
+        }
+
+        private void InternalSaveFile(string filename)
+        {
+            //TODO: Get the IO Service and test it!
+            var facade = new ContainerFacade();
+            var ioService = facade.Get<IIOService>(Bootstrap.IoService);
+            if (ioService != null)
+            {
+
             }
         }
     }
