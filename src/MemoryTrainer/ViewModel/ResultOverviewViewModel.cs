@@ -6,6 +6,7 @@ using MemoryTrainer.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Documents;
@@ -152,35 +153,70 @@ namespace MemoryTrainer.ViewModel
 
         private void OnLoadFile()
         {
-            var file = debugFile;
-            InternalLoadFile(file);
+            var facade = new ContainerFacade();
+            var uiService = facade.Get<IUiService>();
+            var file = uiService.ShowOpenFileDialog();
+
+            if (file != null)
+            {
+                try
+                {
+                    var result = InternalLoadFile(file);
+
+                    //             resultOverview = facade.Get<ResultOverview>(Bootstrap.Results);
+                    // What to do???
+                }
+                catch (IOServiceException serviceException)
+                {
+                    uiService.ShowDialog(serviceException.Message, "Error");
+                }
+
+            }
+
         }
 
         private void OnSaveFile()
         {
-            var file = debugFile;
-            InternalSaveFile(file);
+            var facade = new ContainerFacade();
+            var uiService = facade.Get<IUiService>();
+            var file = uiService.ShowSaveFileDialog();
+
+            if (file != null)
+            {
+                try
+                {
+                    InternalSaveFile(file);
+                }
+                catch (IOServiceException serviceException)
+                {
+                    uiService.ShowDialog(serviceException.Message, "Error");
+                }
+                
+            }
+
         }
 
-        private void InternalLoadFile(string filename)
+        private IEnumerable<PAOResult> InternalLoadFile(string filename)
         {
-            //TODO: Get the IO Service and test it
             var facade = new ContainerFacade();
             var ioService = facade.Get<IIOService>(Bootstrap.IoService);
             if (ioService != null)
             {
-
+                var result = ioService.LoadResult(filename);
+                return result;
             }
+
+            return null;
         }
 
         private void InternalSaveFile(string filename)
         {
-            //TODO: Get the IO Service and test it!
             var facade = new ContainerFacade();
             var ioService = facade.Get<IIOService>(Bootstrap.IoService);
             if (ioService != null)
             {
-
+                var results = resultDict.Values;
+                ioService.SaveResult(results, filename);
             }
         }
     }

@@ -30,11 +30,11 @@
                 Refresh
             </Button>
 
-            <Button Style="{StaticResource CommandButton}" >
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=SaveFile}" >
                 Save
             </Button>
 
-            <Button Style="{StaticResource CommandButton}" >
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=LoadFile}" >
                 Load
             </Button>
             

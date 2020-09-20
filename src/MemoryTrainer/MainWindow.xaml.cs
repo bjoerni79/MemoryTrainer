@@ -2,6 +2,7 @@
 using MemoryTrainer.Pages;
 using MemoryTrainer.Service;
 using MemoryTrainer.ViewModel;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,13 +86,37 @@ namespace MemoryTrainer
             return page as IPage;
         }
 
-        public bool ShowDialog(string message)
+        public bool ShowDialog(string message, string caption)
         {
-            return false;
+            MessageBox.Show(message, caption);
+            return true;
         }
 
         public string ShowOpenFileDialog()
         {
+            var dialog = new OpenFileDialog();
+            dialog.Filter = "PAO Results|*.json|All Files|*.*";
+            var result = dialog.ShowDialog(this);
+            if (result.HasValue && result.Value)
+            {
+                var filename = dialog.FileName;
+                return filename;
+            }
+
+            return null;
+        }
+
+        public string ShowSaveFileDialog()
+        {
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "PAO Results|*.json|All Files|*.*";
+            var result = dialog.ShowDialog(this);
+            if (result.HasValue && result.Value)
+            {
+                var filename = dialog.FileName;
+                return filename;
+            }
+
             return null;
         }
 
@@ -119,6 +144,7 @@ namespace MemoryTrainer
                 containerHelper.Remove(pageId);
             }
         }
+
 
     }
 }

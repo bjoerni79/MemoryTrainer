@@ -27,39 +27,57 @@ namespace MemoryTrainer.Service
 
         public IEnumerable<PAOResult> LoadResult(string filename)
         {
-            //
-            // 1. Read the JSON string
-            //
-            string jsonCoding;
-            using (var textReader = File.OpenText(filename))
+            List<PAOResult> results; ;
+
+            try
             {
-                jsonCoding = textReader.ReadToEnd();
+                //
+                // 1. Read the JSON string
+                //
+                string jsonCoding;
+                using (var textReader = File.OpenText(filename))
+                {
+                    jsonCoding = textReader.ReadToEnd();
+                }
+
+                //
+                // 2. Deserialize to JSON
+                //
+
+                results = JsonSerializer.Deserialize<List<PAOResult>>(jsonCoding, defaultOptions);
+            }
+            catch (Exception ex)
+            {
+                throw new IOServiceException("Could not load PAO Results. " + ex.Message, ex);
             }
 
-            //
-            // 2. Deserialize to JSON
-            //
-
-            var results = JsonSerializer.Deserialize<List<PAOResult>>(jsonCoding, defaultOptions);
             return results;
         }
 
         public void SaveResult(IEnumerable<PAOResult> result, string filename)
         {
-            //
-            // 1. Serialize to JSON
-            //
-            var paoResultList = new List<PAOResult>();
-            paoResultList.AddRange(result);
-            var jsonCoding = JsonSerializer.Serialize(paoResultList, defaultOptions);
-
-            //
-            // 2. Write it to the file
-            //
-            using (var textwriter = File.CreateText(filename))
+            try
             {
-                textwriter.Write(jsonCoding);
+                //
+                // 1. Serialize to JSON
+                //
+                var paoResultList = new List<PAOResult>();
+                paoResultList.AddRange(result);
+                var jsonCoding = JsonSerializer.Serialize(paoResultList, defaultOptions);
+
+                //
+                // 2. Write it to the file
+                //
+                using (var textwriter = File.CreateText(filename))
+                {
+                    textwriter.Write(jsonCoding);
+                }
             }
+            catch (Exception ex)
+            {
+                throw new IOServiceException("Could not save PAO Results " + ex.Message, ex);
+            }
+
         }
     }
 }
