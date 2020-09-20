@@ -3,10 +3,98 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:misc="clr-namespace:MemoryTrainer.Misc"
              xmlns:local="clr-namespace:MemoryTrainer.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="LightGreen">
+
+    <UserControl.Resources>
+
+        <Style x:Key="CommandButton" TargetType="Button">
+            <Setter Property="Margin" Value="5 0 5 0"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
+
+        <misc:CardValueConverter x:Key="cardValueConverter" />
+        <misc:IntegerToImageConverter x:Key="integerToImageConverter" />
+
+    </UserControl.Resources>
+
+    <DockPanel Background="LightGreen" LastChildFill="True">
+
+        <ToolBar Margin="5" Background="WhiteSmoke" DockPanel.Dock="Top">
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=Refresh}" >
+                Refresh
+            </Button>
+
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=SaveFile}" >
+                Save
+            </Button>
+
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=LoadFile}" >
+                Load
+            </Button>
             
-    </Grid>
+            <Button x:Name="close" Style="{StaticResource CommandButton}" Command="{Binding Path=Close}" Background="AntiqueWhite">
+                Close
+            </Button>
+        </ToolBar>
+
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <ListBox Grid.Column="0"  ItemsSource="{Binding Path=Results}" Margin="5" SelectedItem="{Binding Path=CurrentResultOverview,Mode=TwoWay}">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="{Binding Path=Deck}"/>
+                            <Label Grid.Row="1" Content="{Binding Path=Comment}"/>
+                            <CheckBox Grid.Row="2" IsChecked="{Binding Path=Selected,Mode=TwoWay}">Selected</CheckBox>
+
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                
+            </ListBox>
+
+            <ListBox Grid.Column="1" Background="AntiqueWhite" ItemsSource="{Binding Path=SelectedCards,Mode=OneWay}" Margin="5">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Margin="10" Width="150" Height="150" Source="{Binding Path=Person,Converter={StaticResource cardValueConverter}}"/>
+
+                            <Image Grid.Column="1" Margin="10" Width="150" Height="150" Source="{Binding Path=Action,Converter={StaticResource cardValueConverter}}"/>
+
+                            <Image Grid.Column="2" Margin="10" Width="150" Height="150" Source="{Binding Path=Object,Converter={StaticResource cardValueConverter}}"/>
+
+                            <Image Grid.Column="3" Margin="10" Width="50" Height="50" Source="{Binding Path=RecallState,Converter={StaticResource integerToImageConverter}}" />
+
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+        </Grid>
+        
+    </DockPanel>
 </UserControl>

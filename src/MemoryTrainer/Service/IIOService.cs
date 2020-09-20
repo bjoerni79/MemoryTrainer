@@ -23,17 +23,15 @@ namespace MemoryTrainer.Service
         /// <summary>
         /// Saves a result of the PAO card game to the writer
         /// </summary>
-        /// <param name="items">the items to be stored</param>
-        /// <param name="writer">the writer target</param>
-        void SaveResult(IEnumerable<PAOItem> items,TextWriter writer);
+        /// <param name="results">the result</param>
+        /// <param name="filename">the writer target</param>
+        void SaveResult(IEnumerable<PAOResult> result,string filename);
 
         /// <summary>
         /// Reads a PAO result from an external source
         /// </summary>
-        /// <param name="reader">the reader source</param>
-        /// <returns>The PAOItems objects</returns>
-        IEnumerable<PAOItem> LoadResult(TextReader reader);
-
-
+        /// <param name="filename">the reader source</param>
+        /// <returns>The PAOResult collection </returns>
+        IEnumerable<PAOResult> LoadResult(string filename);
     }
 }

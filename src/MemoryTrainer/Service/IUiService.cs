@@ -11,6 +11,10 @@ namespace MemoryTrainer.Service
 
         void Close(string pageId);
 
-        bool ShowDialog(string message);
+        bool ShowDialog(string message, string caption);
+
+        string ShowOpenFileDialog();
+
+        string ShowSaveFileDialog();
     }
 }
