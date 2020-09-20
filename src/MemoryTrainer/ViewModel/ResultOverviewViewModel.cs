@@ -19,8 +19,8 @@ namespace MemoryTrainer.ViewModel
         private PAOResultOverview currentResultOverview;
         private Dictionary<int, PAOResult> resultDict;
 
-        private bool isDebugModeEnabled = true;
-        private string debugFile = @"C:\temp\paos.json";
+        private bool isDebugModeEnabled = false;
+        //private string debugFile = @"C:\temp\paos.json";
 
         public ResultOverviewViewModel()
         {
@@ -156,23 +156,21 @@ namespace MemoryTrainer.ViewModel
             var facade = new ContainerFacade();
             var uiService = facade.Get<IUiService>();
             var file = uiService.ShowOpenFileDialog();
-
             if (file != null)
             {
                 try
                 {
+                    // Load the resutls and refresh the view
                     var result = InternalLoadFile(file);
-
-                    //             resultOverview = facade.Get<ResultOverview>(Bootstrap.Results);
-                    // What to do???
+                    resultOverview = facade.Get<ResultOverview>(Bootstrap.Results);
+                    resultOverview.Reload(result);
+                    OnRefresh();
                 }
                 catch (IOServiceException serviceException)
                 {
                     uiService.ShowDialog(serviceException.Message, "Error");
                 }
-
             }
-
         }
 
         private void OnSaveFile()
@@ -180,7 +178,6 @@ namespace MemoryTrainer.ViewModel
             var facade = new ContainerFacade();
             var uiService = facade.Get<IUiService>();
             var file = uiService.ShowSaveFileDialog();
-
             if (file != null)
             {
                 try
@@ -190,10 +187,8 @@ namespace MemoryTrainer.ViewModel
                 catch (IOServiceException serviceException)
                 {
                     uiService.ShowDialog(serviceException.Message, "Error");
-                }
-                
+                }   
             }
-
         }
 
         private IEnumerable<PAOResult> InternalLoadFile(string filename)

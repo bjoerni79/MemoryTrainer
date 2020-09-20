@@ -14,21 +14,6 @@ namespace MemoryTrainer.Environment
             paoResults = new List<PAOResult>();
         }
 
-        public void Restore()
-        {
-
-        }
-
-        public void Store()
-        {
-
-        }
-
-        public void Load()
-        {
-
-        }
-
         public IEnumerable<PAOResult> PAOResults
         {
             get
@@ -36,6 +21,11 @@ namespace MemoryTrainer.Environment
                 var newList = new List<PAOResult>(paoResults);
                 return newList;
             }
+        }
+
+        public void Reload(IEnumerable<PAOResult> newResults)
+        {
+            paoResults = new List<PAOResult>(newResults);
         }
 
         public void Add(PAOResult result)

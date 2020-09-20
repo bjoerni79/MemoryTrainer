@@ -45,7 +45,7 @@ namespace MemoryTrainer
             //
             //  Restore the old results
             //
-            overview.Restore();
+            //overview.Restore();
         }
 
         private void InitDecks(GameSetting settings)
