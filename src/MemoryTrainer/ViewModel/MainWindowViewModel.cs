@@ -15,7 +15,7 @@ namespace MemoryTrainer.ViewModel
 
         public MainWindowViewModel()
         {
-            CurrentState = "Memory Trainer Version 1.2";
+            CurrentState = "Memory Trainer Version 1.3";
 
             ShowHelp = new DefaultCommand(OnShowHelp);
             OpenCardGame = new DefaultCommand(OnOpenCardGame);
