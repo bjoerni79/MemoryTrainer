@@ -30,19 +30,29 @@
                 Refresh
             </Button>
 
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=LoadFile}" >
+                Load
+            </Button>
+
             <Button Style="{StaticResource CommandButton}" Command="{Binding Path=SaveFile}" >
                 Save
             </Button>
 
-            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=LoadFile}" >
-                Load
+
+            <Button Style="{StaticResource CommandButton}" >
+                Select Source
             </Button>
-            
+
             <Button x:Name="close" Style="{StaticResource CommandButton}" Command="{Binding Path=Close}" Background="AntiqueWhite">
                 Close
             </Button>
         </ToolBar>
 
+        <WrapPanel Margin="5 0 5 0" DockPanel.Dock="Top">
+            <Label>Source: </Label>
+            <Label>My current source TODO</Label>
+        </WrapPanel>
+        
         <Grid Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

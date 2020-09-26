@@ -44,6 +44,8 @@ namespace MemoryTrainer.ViewModel
 
         private void OnOpenResultOverview()
         {
+            //TODO: If the Page is already open then do not create one!
+
             var viewModel = new ResultOverviewViewModel();
             OpenPage(viewModel, PageSelection.ResultOverview);
         }
