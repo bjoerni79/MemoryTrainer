@@ -18,9 +18,7 @@ namespace MemoryTrainer.ViewModel
         private ResultOverview resultOverview;
         private PAOResultOverview currentResultOverview;
         private Dictionary<int, PAOResult> resultDict;
-
         private bool isDebugModeEnabled = false;
-        //private string debugFile = @"C:\temp\paos.json";
 
         public ResultOverviewViewModel()
         {
@@ -28,6 +26,9 @@ namespace MemoryTrainer.ViewModel
             Refresh = new DefaultCommand(OnRefresh);
             SaveFile = new DefaultCommand(OnSaveFile);
             LoadFile = new DefaultCommand(OnLoadFile);
+            SelectSource = new DefaultCommand(OnSelectedSource);
+
+            Source = @"C:\temp\paos.json";
 
             OnRefresh();
         }
@@ -36,9 +37,13 @@ namespace MemoryTrainer.ViewModel
 
         public IRefreshCommand SaveFile { get; private set; }
 
+        public IRefreshCommand SelectSource { get; private set; }
+
         public IRefreshCommand Close { get; private set; }
 
         public IRefreshCommand Refresh { get; private set; }
+
+        public string Source { get; set; }
 
         public PAOResultOverview CurrentResultOverview
         {
@@ -151,25 +156,35 @@ namespace MemoryTrainer.ViewModel
             }
         }
 
+        private void OnSelectedSource()
+        {
+            var facade = new ContainerFacade();
+            var uiService = facade.Get<IUiService>();
+
+            var result = uiService.ShowOpenFileDialog();
+            if (result != null)
+            {
+                Source = result;
+                RaisePropertyChange("Source");
+            }
+        }
+
         private void OnLoadFile()
         {
             var facade = new ContainerFacade();
             var uiService = facade.Get<IUiService>();
-            var file = uiService.ShowOpenFileDialog();
-            if (file != null)
+
+            try
             {
-                try
-                {
-                    // Load the resutls and refresh the view
-                    var result = InternalLoadFile(file);
-                    resultOverview = facade.Get<ResultOverview>(Bootstrap.Results);
-                    resultOverview.Reload(result);
-                    OnRefresh();
-                }
-                catch (IOServiceException serviceException)
-                {
-                    uiService.ShowDialog(serviceException.Message, "Error");
-                }
+                // Load the resutls and refresh the view
+                var result = InternalLoadFile(Source);
+                resultOverview = facade.Get<ResultOverview>(Bootstrap.Results);
+                resultOverview.Reload(result);
+                OnRefresh();
+            }
+            catch (IOServiceException serviceException)
+            {
+                uiService.ShowDialog(serviceException.Message, "Error");
             }
         }
 
@@ -177,18 +192,15 @@ namespace MemoryTrainer.ViewModel
         {
             var facade = new ContainerFacade();
             var uiService = facade.Get<IUiService>();
-            var file = uiService.ShowSaveFileDialog();
-            if (file != null)
+
+            try
             {
-                try
-                {
-                    InternalSaveFile(file);
-                }
-                catch (IOServiceException serviceException)
-                {
-                    uiService.ShowDialog(serviceException.Message, "Error");
-                }   
+                InternalSaveFile(Source);
             }
+            catch (IOServiceException serviceException)
+            {
+                uiService.ShowDialog(serviceException.Message, "Error");
+            }   
         }
 
         private IEnumerable<PAOResult> InternalLoadFile(string filename)
