@@ -43,6 +43,10 @@
                 Select Source
             </Button>
 
+            <Button Style="{StaticResource CommandButton}"   >
+                Apply Changes
+            </Button>
+
             <Button x:Name="close" Style="{StaticResource CommandButton}" Command="{Binding Path=Close}" Background="AntiqueWhite">
                 Close
             </Button>
@@ -59,14 +63,19 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <ListBox Grid.Column="0"  ItemsSource="{Binding Path=Results}" Margin="5" SelectedItem="{Binding Path=CurrentResultOverview,Mode=TwoWay}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <ListBox Grid.Column="0" Grid.RowSpan="2" ItemsSource="{Binding Path=Results}" Margin="5" SelectedItem="{Binding Path=CurrentResultOverview,Mode=TwoWay}">
 
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
+                                <RowDefinition />
+                                <RowDefinition />
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
@@ -80,7 +89,26 @@
                 
             </ListBox>
 
-            <ListBox Grid.Column="1" Background="AntiqueWhite" ItemsSource="{Binding Path=SelectedCards,Mode=OneWay}" Margin="5">
+            <Grid Grid.Column="1" Grid.Row="0" Margin="0 0 5 0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <Label Grid.Row="0">Deck:</Label>
+                <Label Grid.Row="1">Comment:</Label>
+
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="1" Text="{Binding Path=CurrentDeck}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="1" Text="{Binding Path=CurrentComment}" />
+            </Grid>
+
+            <ListBox Grid.Column="1" Grid.Row="1" Background="AntiqueWhite" ItemsSource="{Binding Path=SelectedCards,Mode=OneWay}" Margin="5">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Center">

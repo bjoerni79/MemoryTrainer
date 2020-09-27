@@ -45,6 +45,10 @@ namespace MemoryTrainer.ViewModel
 
         public string Source { get; set; }
 
+        public string CurrentDeck { get; set; }
+
+        public string CurrentComment { get; set; }
+
         public PAOResultOverview CurrentResultOverview
         {
             get
@@ -93,7 +97,12 @@ namespace MemoryTrainer.ViewModel
                     }
 
                     SelectedCards = new ObservableCollection<PAOResultItem>(tempList);
+                    CurrentDeck = CurrentResultOverview.Deck;
+                    CurrentComment = CurrentResultOverview.Comment;
+
                     RaisePropertyChange("SelectedCards");
+                    RaisePropertyChange("CurrentDeck");
+                    RaisePropertyChange("CurrentComment");
                 }
             }
         }
