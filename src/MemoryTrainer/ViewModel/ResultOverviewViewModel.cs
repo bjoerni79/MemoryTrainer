@@ -28,8 +28,6 @@ namespace MemoryTrainer.ViewModel
             LoadFile = new DefaultCommand(OnLoadFile);
             SelectSource = new DefaultCommand(OnSelectedSource);
 
-            Source = @"C:\temp\paos.json";
-
             OnRefresh();
         }
 
@@ -113,6 +111,8 @@ namespace MemoryTrainer.ViewModel
             resultOverview = facade.Get<ResultOverview>(Bootstrap.Results);
             if (resultOverview != null)
             {
+                Source = resultOverview.Source;
+
                 // Create a list and and an ID integer to play with later.
                 var list = new List<PAOResultOverview>();
                 int id = 0;

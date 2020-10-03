@@ -39,9 +39,9 @@
             </Button>
 
 
-            <Button Style="{StaticResource CommandButton}"  Command="{Binding Path=SelectSource}" >
+            <!--<Button Style="{StaticResource CommandButton}"  Command="{Binding Path=SelectSource}" >
                 Select Source
-            </Button>
+            </Button>-->
 
             <Button Style="{StaticResource CommandButton}"   >
                 Apply Changes
