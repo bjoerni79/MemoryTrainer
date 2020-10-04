@@ -20,13 +20,21 @@ namespace MemoryTrainer.ViewModel
         private Dictionary<int, PAOResult> resultDict;
         private bool isDebugModeEnabled = false;
 
+        private string currentDeck;
+        private string oldCurrentDeck;
+
+        private string comment;
+        private string oldComment;
+
         public ResultOverviewViewModel()
         {
             Close = new DefaultCommand(OnClose);
             Refresh = new DefaultCommand(OnRefresh);
             SaveFile = new DefaultCommand(OnSaveFile);
             LoadFile = new DefaultCommand(OnLoadFile);
-            SelectSource = new DefaultCommand(OnSelectedSource);
+            ApplyChanges = new DefaultCommand(OnApplyChanges, IsContentChanged);
+
+            //SelectSource = new DefaultCommand(OnSelectedSource);
 
             OnRefresh();
         }
@@ -41,11 +49,35 @@ namespace MemoryTrainer.ViewModel
 
         public IRefreshCommand Refresh { get; private set; }
 
-        public string Source { get; set; }
+        public IRefreshCommand ApplyChanges { get; private set; }
 
-        public string CurrentDeck { get; set; }
+        public string Source { get; private set; }
 
-        public string CurrentComment { get; set; }
+        public string CurrentDeck
+        {
+            get
+            {
+                return currentDeck;
+            }
+            set
+            {
+                currentDeck = value;
+                ApplyChanges.Refresh();
+            }
+        }
+
+        public string CurrentComment
+        {
+            get
+            {
+                return comment;
+            }
+            set
+            {
+                comment = value;
+                ApplyChanges.Refresh();
+            }
+        }
 
         public PAOResultOverview CurrentResultOverview
         {
@@ -94,15 +126,44 @@ namespace MemoryTrainer.ViewModel
                         tempList.Add(paoResultItem);
                     }
 
+                    oldCurrentDeck = CurrentResultOverview.Deck;
+                    oldComment = CurrentResultOverview.Comment;
+
                     SelectedCards = new ObservableCollection<PAOResultItem>(tempList);
                     CurrentDeck = CurrentResultOverview.Deck;
                     CurrentComment = CurrentResultOverview.Comment;
+                    
 
                     RaisePropertyChange("SelectedCards");
                     RaisePropertyChange("CurrentDeck");
                     RaisePropertyChange("CurrentComment");
                 }
             }
+        }
+
+        private bool IsContentChanged()
+        {
+            if (oldComment == null || oldCurrentDeck == null)
+            {
+                return false;
+            }
+
+            var isCommentDifferent = !(oldComment.Equals(comment));
+            var isDeckDifferent =  !(oldCurrentDeck.Equals(currentDeck));
+
+            return isCommentDifferent || isDeckDifferent;
+        }
+
+        private void OnApplyChanges()
+        {
+            oldComment = CurrentComment;
+            oldCurrentDeck = CurrentDeck;
+
+            CurrentResultOverview.Deck = CurrentDeck;
+            CurrentResultOverview.Comment = CurrentDeck;
+
+            RaisePropertyChange("Results");
+            ApplyChanges.Refresh();
         }
 
         private void OnRefresh()
@@ -125,29 +186,7 @@ namespace MemoryTrainer.ViewModel
                 //
                 //  Create some fake results for debugging if enabled
                 //
-                if (isDebugModeEnabled)
-                {
-                    // testResult1
-                    var testResult1 = new PAOResult
-                    {
-                        Comment = "Test Result 1",
-                        DeckTitle = "Test Deck 1"
-                    };
-                    testResult1.Items.Add(new PAOResultItem { Person = PlayingCard.Diamond_Jack, Action = PlayingCard.Diamond_Queen, Object = PlayingCard.Diamond_King, RecallState = 0 });
-                    testResult1.Items.Add(new PAOResultItem { Person = PlayingCard.Heart_Jack, Action = PlayingCard.Heart_Queen, Object = PlayingCard.Heart_King, RecallState = 1 });
-                    testResult1.Items.Add(new PAOResultItem { Person = PlayingCard.Spade_Jack, Action = PlayingCard.Spade_Queen, Object = PlayingCard.Spade_King, RecallState = 2 });
-
-
-                    // testResult2
-                    var testResult2 = new PAOResult();
-                    testResult2.Comment = "Test Result 2";
-                    testResult2.DeckTitle = "Test Deck 2";
-                    testResult2.Items.Add(new PAOResultItem { Person = PlayingCard.Diamond_2, Action = PlayingCard.Diamond_3, Object = PlayingCard.Diamond_4 });
-
-                    results.Add(testResult1);
-                    results.Add(testResult2);
-                }
-
+                AddDebugValues(results);
                 foreach (var paoResult in results)
                 {
                     var paoResultOverview = new PAOResultOverview(id);
@@ -165,18 +204,44 @@ namespace MemoryTrainer.ViewModel
             }
         }
 
-        private void OnSelectedSource()
+        private void AddDebugValues(List<PAOResult> results)
         {
-            var facade = new ContainerFacade();
-            var uiService = facade.Get<IUiService>();
-
-            var result = uiService.ShowOpenFileDialog();
-            if (result != null)
+            if (isDebugModeEnabled)
             {
-                Source = result;
-                RaisePropertyChange("Source");
+                // testResult1
+                var testResult1 = new PAOResult
+                {
+                    Comment = "Test Result 1",
+                    DeckTitle = "Test Deck 1"
+                };
+                testResult1.Items.Add(new PAOResultItem { Person = PlayingCard.Diamond_Jack, Action = PlayingCard.Diamond_Queen, Object = PlayingCard.Diamond_King, RecallState = 0 });
+                testResult1.Items.Add(new PAOResultItem { Person = PlayingCard.Heart_Jack, Action = PlayingCard.Heart_Queen, Object = PlayingCard.Heart_King, RecallState = 1 });
+                testResult1.Items.Add(new PAOResultItem { Person = PlayingCard.Spade_Jack, Action = PlayingCard.Spade_Queen, Object = PlayingCard.Spade_King, RecallState = 2 });
+
+
+                // testResult2
+                var testResult2 = new PAOResult();
+                testResult2.Comment = "Test Result 2";
+                testResult2.DeckTitle = "Test Deck 2";
+                testResult2.Items.Add(new PAOResultItem { Person = PlayingCard.Diamond_2, Action = PlayingCard.Diamond_3, Object = PlayingCard.Diamond_4 });
+
+                results.Add(testResult1);
+                results.Add(testResult2);
             }
         }
+
+        //private void OnSelectedSource()
+        //{
+        //    var facade = new ContainerFacade();
+        //    var uiService = facade.Get<IUiService>();
+
+        //    var result = uiService.ShowOpenFileDialog();
+        //    if (result != null)
+        //    {
+        //        Source = result;
+        //        RaisePropertyChange("Source");
+        //    }
+        //}
 
         private void OnLoadFile()
         {

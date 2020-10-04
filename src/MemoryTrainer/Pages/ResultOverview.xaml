@@ -43,7 +43,7 @@
                 Select Source
             </Button>-->
 
-            <Button Style="{StaticResource CommandButton}"   >
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=ApplyChanges}"  >
                 Apply Changes
             </Button>
 
@@ -104,8 +104,8 @@
                 <Label Grid.Row="0">Deck:</Label>
                 <Label Grid.Row="1">Comment:</Label>
 
-                <TextBox Grid.Row="0" Grid.Column="1" Margin="1" Text="{Binding Path=CurrentDeck}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="1" Text="{Binding Path=CurrentComment}" />
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="1" Text="{Binding Path=CurrentDeck,Mode=TwoWay}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="1" Text="{Binding Path=CurrentComment,Mode=TwoWay}" />
             </Grid>
 
             <ListBox Grid.Column="1" Grid.Row="1" Background="AntiqueWhite" ItemsSource="{Binding Path=SelectedCards,Mode=OneWay}" Margin="5">
