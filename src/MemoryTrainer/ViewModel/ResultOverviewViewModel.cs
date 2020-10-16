@@ -156,14 +156,20 @@ namespace MemoryTrainer.ViewModel
 
         private void OnApplyChanges()
         {
-            oldComment = CurrentComment;
-            oldCurrentDeck = CurrentDeck;
+            var facade = new ContainerFacade();
+            resultOverview = facade.Get<ResultOverview>(Bootstrap.Results);
+            if (resultOverview != null)
+            {
+                // Get the ID of the current id and get the instance
+                var id = CurrentResultOverview.Id;
 
-            CurrentResultOverview.Deck = CurrentDeck;
-            CurrentResultOverview.Comment = CurrentDeck;
+                //var item = resultOverview.PAOResults.Skip(id).First();
 
-            RaisePropertyChange("Results");
-            ApplyChanges.Refresh();
+
+
+
+                //OnRefresh();
+            }
         }
 
         private void OnRefresh()
@@ -201,6 +207,10 @@ namespace MemoryTrainer.ViewModel
                 // Refresh the UI
                 Results = new ObservableCollection<PAOResultOverview>(list);
                 RaisePropertyChange("Results");
+
+                oldComment = null;
+                oldCurrentDeck = null;
+                ApplyChanges.Refresh();
             }
         }
 

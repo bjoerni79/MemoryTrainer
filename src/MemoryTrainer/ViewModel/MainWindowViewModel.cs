@@ -4,6 +4,7 @@ using MemoryTrainer.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MemoryTrainer.ViewModel
@@ -11,6 +12,7 @@ namespace MemoryTrainer.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         private const string name_prefix = "page_";
+        private const string name_resultOverview = "resultOverview";
         private int nextId = 1;
 
         public MainWindowViewModel()
@@ -44,10 +46,25 @@ namespace MemoryTrainer.ViewModel
 
         private void OnOpenResultOverview()
         {
-            //TODO: If the Page is already open then do not create one!
+            var helper = new ContainerFacade();
+            var uiService = helper.Get<IUiService>();
 
-            var viewModel = new ResultOverviewViewModel();
-            OpenPage(viewModel, PageSelection.ResultOverview);
+            if (uiService != null)
+            {
+                // Create or resuse the view model and view
+                if (!helper.Exists(name_resultOverview))
+                {
+                    var viewModel = new ResultOverviewViewModel();
+                    helper.Add(viewModel, name_resultOverview);
+                    var page = uiService.ShowResultOverview(name_resultOverview);
+                    viewModel.Init(page);
+                }
+                else
+                {
+                    uiService.ShowResultOverview(name_resultOverview);
+                }
+
+            }
         }
 
         private void OpenPage(ViewModelBase viewModel, PageSelection pageSelection)

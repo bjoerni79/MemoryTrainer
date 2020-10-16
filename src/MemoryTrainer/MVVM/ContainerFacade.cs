@@ -132,5 +132,12 @@ namespace MemoryTrainer.MVVM
             var container = Container;
             container.Remove(pageId);
         }
+
+        public bool Exists(string pageId)
+        {
+            var container = Container;
+            bool exists = container.IsAvailable(pageId);
+            return exists;
+        }
     }
 }

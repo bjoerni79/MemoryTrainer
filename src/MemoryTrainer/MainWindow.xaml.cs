@@ -45,16 +45,35 @@ namespace MemoryTrainer
 
         }
 
-        /*
-         * TODO:
-         * 
-         * Erzeuge einen Container und füge ihn in den Application Dict mit ein. -> IOC
-         */
+        public IPage ShowResultOverview(string id)
+        {
+            var headerName = "Result Overview";
+            var page = new ResultPage(id);
+
+            var viewFound = false;
+            foreach (TabItem item in tabControl.Items)
+            {
+                // let's do some old school coding ...
+                if (item.Name.Equals(id))
+                {
+                    viewFound = true;
+                    item.Focus();
+                    break;
+                }
+            }
+
+            if (!viewFound)
+            {
+                CreateTab(page, id, headerName);
+            }
+
+            return page;
+        }
 
         public IPage CreatePage(PageSelection element, string pageId)
         {
             UserControl page;
-            string headerName = "Unknown";
+            string headerName;
 
             switch(element)
             {
@@ -66,24 +85,25 @@ namespace MemoryTrainer
                     headerName = "Help";
                     page = new Help(pageId);
                     break;
-                case PageSelection.ResultOverview:
-                    headerName = "Result Overview";
-                    page = new ResultPage(pageId);
-                    break;
                 default:
                     throw new Exception("Unknown page selection detected");
             }
 
+            CreateTab(page, pageId, headerName);
+
+            return page as IPage;
+        }
+
+        private void CreateTab(UserControl page, string id, string headerName)
+        {
             // Create a new page {element
             var tabItem = new TabItem() { Header = headerName };
             tabItem.Content = page;
-            tabItem.Name = pageId;
+            tabItem.Name = id;
             tabItem.HeaderTemplate = FindResource("tabItemTemplate") as DataTemplate;
 
             tabControl.Items.Add(tabItem);
             tabItem.Focus();
-
-            return page as IPage;
         }
 
         public bool ShowDialog(string message, string caption)
