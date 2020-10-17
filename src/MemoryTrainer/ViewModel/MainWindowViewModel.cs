@@ -4,6 +4,7 @@ using MemoryTrainer.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MemoryTrainer.ViewModel
@@ -11,11 +12,12 @@ namespace MemoryTrainer.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         private const string name_prefix = "page_";
+        private const string name_resultOverview = "resultOverview";
         private int nextId = 1;
 
         public MainWindowViewModel()
         {
-            CurrentState = "Memory Trainer Version 1.2";
+            CurrentState = "Memory Trainer Version 1.3";
 
             ShowHelp = new DefaultCommand(OnShowHelp);
             OpenCardGame = new DefaultCommand(OnOpenCardGame);
@@ -44,8 +46,25 @@ namespace MemoryTrainer.ViewModel
 
         private void OnOpenResultOverview()
         {
-            var viewModel = new ResultOverviewViewModel();
-            OpenPage(viewModel, PageSelection.ResultOverview);
+            var helper = new ContainerFacade();
+            var uiService = helper.Get<IUiService>();
+
+            if (uiService != null)
+            {
+                // Create or resuse the view model and view
+                if (!helper.Exists(name_resultOverview))
+                {
+                    var viewModel = new ResultOverviewViewModel();
+                    helper.Add(viewModel, name_resultOverview);
+                    var page = uiService.ShowResultOverview(name_resultOverview);
+                    viewModel.Init(page);
+                }
+                else
+                {
+                    uiService.ShowResultOverview(name_resultOverview);
+                }
+
+            }
         }
 
         private void OpenPage(ViewModelBase viewModel, PageSelection pageSelection)

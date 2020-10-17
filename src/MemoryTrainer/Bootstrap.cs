@@ -4,6 +4,7 @@ using MemoryTrainer.Service;
 using MemoryTrainer.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace MemoryTrainer
@@ -31,7 +32,7 @@ namespace MemoryTrainer
             var ioService = new IoService();
 
             InitDecks(settings);
-            InitResultOverview(overview);
+            InitResultOverview(overview,ioService);
 
             // Finally add it to the IOC container
             var facade = new ContainerFacade();
@@ -40,12 +41,23 @@ namespace MemoryTrainer
             facade.AddUnique(ioService, IoService);
         }
 
-        private void InitResultOverview(ResultOverview overview)
+        private void InitResultOverview(ResultOverview overview,IIOService ioService)
         {
-            //
-            //  Restore the old results
-            //
-            //overview.Restore();
+            // If the default source file exists, try to load the content
+
+            var sourceFile = overview.Source;
+            if (File.Exists(sourceFile))
+            {
+                try
+                {
+                    var results = ioService.LoadResult(sourceFile);
+                    overview.Reload(results);
+                }
+                catch (IOException ioException)
+                {
+                    //TODO: What to do??
+                }
+            }
         }
 
         private void InitDecks(GameSetting settings)

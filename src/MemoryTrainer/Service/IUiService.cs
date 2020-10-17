@@ -9,6 +9,8 @@ namespace MemoryTrainer.Service
     {
         IPage CreatePage(PageSelection element,string pageId);
 
+        IPage ShowResultOverview(string id);
+
         void Close(string pageId);
 
         bool ShowDialog(string message, string caption);
