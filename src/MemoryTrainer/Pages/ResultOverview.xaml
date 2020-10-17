@@ -81,7 +81,7 @@
 
                             <Label Grid.Row="0" Content="{Binding Path=Deck}"/>
                             <Label Grid.Row="1" Content="{Binding Path=Comment}"/>
-                            <CheckBox Grid.Row="2" IsChecked="{Binding Path=Selected,Mode=TwoWay}">Selected</CheckBox>
+                            <!--<CheckBox Grid.Row="2" IsChecked="{Binding Path=Selected,Mode=TwoWay}">Selected</CheckBox>-->
 
                         </Grid>
                     </DataTemplate>
