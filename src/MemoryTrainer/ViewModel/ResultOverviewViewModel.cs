@@ -162,13 +162,11 @@ namespace MemoryTrainer.ViewModel
             {
                 // Get the ID of the current id and get the instance
                 var id = CurrentResultOverview.Id;
+                var item = resultOverview.PAOResults.Skip(id).First();
 
-                //var item = resultOverview.PAOResults.Skip(id).First();
-
-
-
-
-                //OnRefresh();
+                item.Comment = CurrentComment;
+                item.DeckTitle = CurrentDeck;
+                OnRefresh();
             }
         }
 
