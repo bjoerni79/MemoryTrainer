@@ -8,6 +8,7 @@ namespace MemoryTrainer
     {
         ShowHelp,
         CardGame,
-        ResultOverview
+        ResultOverview,
+        ManageImageList
     }
 }

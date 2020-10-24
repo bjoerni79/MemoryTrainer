@@ -21,6 +21,25 @@ Bilder mappen
 In einem Folder werden Bilder geladen (*.png und *.jpg). Diese werden dann via Random gezeigt und der Anwender speichert dies ab.
 Später muss er via Memory die Reihenfolge wieder hervorholen
 
+{
+	"Title":"Test JSON File",
+	"Images" : [
+		{
+			"Name":"Burger"
+			"Src":"burger.jpg"
+		},
+		{
+			"Name":"Nüsse"
+			"Src":"peanuts.jpg"
+		},
+		{
+			"Name":"Erdbeeren"
+			"Src":"strawberries.jpg"
+		},
+		{
+			"Name":"Quesadilla"
+			"Src":"quesadilla.jpg"
+		}
+	]
+}
 
-
---- Visual Studio Test---
