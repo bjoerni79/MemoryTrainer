@@ -85,6 +85,11 @@ namespace MemoryTrainer
                     headerName = "Help";
                     page = new Help(pageId);
                     break;
+                case PageSelection.NumberGame:
+                    page = new NumbersGame(pageId);
+                    headerName = "Number Game";
+                    break;
+
                 default:
                     throw new Exception("Unknown page selection detected");
             }

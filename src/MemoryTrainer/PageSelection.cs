@@ -9,6 +9,7 @@ namespace MemoryTrainer
         ShowHelp,
         CardGame,
         ResultOverview,
+        NumberGame,
         ManageImageList
     }
 }
