@@ -58,15 +58,7 @@
 
         <TabControl x:Name="tabControl" Grid.Row="1"  >
 
-            <!--<TabItem>
-                <TabItem.Header>
-                    <TextBlock>Start</TextBlock>
-                </TabItem.Header>
-                <StackPanel>
-                    <TextBlock>Please select the page..</TextBlock>
-                </StackPanel>
-            </TabItem>-->
-            
+           
             
         </TabControl>
 
