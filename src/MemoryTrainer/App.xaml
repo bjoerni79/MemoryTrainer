@@ -6,7 +6,28 @@
              StartupUri="MainWindow.xaml"
              Startup="Application_Startup">
     <Application.Resources>
+        <!-- System Wide for MMVM ! -->
         <local:Bootstrap x:Key="ViewModelLocator"/>
         <mvvm:Container x:Key="Container"/>
+        
+        
+        <!-- Styles-->
+        <Style x:Key="CommandButton" TargetType="Button">
+            <Setter Property="Margin" Value="5 0 5 0"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
+
+        <Style x:Key="SystemCommandButton" TargetType="Button">
+            <Setter Property="Margin" Value="5 2 5 2"/>
+            <Setter Property="Background" Value="AntiqueWhite"/>
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
     </Application.Resources>
 </Application>
