@@ -161,4 +161,8 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Generic.MVVM\Generic.MVVM.csproj" />
+  </ItemGroup>
+
 </Project>
