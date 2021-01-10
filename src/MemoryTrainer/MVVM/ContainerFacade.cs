@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Generic.MVVM;
+using System.Windows;
 
 namespace MemoryTrainer.MVVM
 {
@@ -95,9 +96,9 @@ namespace MemoryTrainer.MVVM
         /// <typeparam name="T">the type of the viewm odel</typeparam>
         /// <param name="vm">the view model instance</param>
         /// <param name="pageId">the page id</param>
-        public void Add<T>(T vm, string pageId) where T:ViewModelBase
+        public void Add<T>(T vm, string pageId) where T:GenericViewModel
         {
-            Container.Add(typeof(ViewModelBase), vm, pageId);
+            Container.Add(typeof(GenericViewModel), vm, pageId);
         }
 
         /// <summary>
