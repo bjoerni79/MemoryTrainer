@@ -9,7 +9,7 @@
     <DockPanel Background="LightGreen" LastChildFill="True">
 
         <ToolBar Margin="5" Background="WhiteSmoke" DockPanel.Dock="Top">
-            <Button x:Name="close" Command="{Binding Path=Close}" Background="AntiqueWhite">
+            <Button x:Name="close" Style="{StaticResource SystemCommandButton}" Command="{Binding Path=Close}" Background="AntiqueWhite">
                 Close
             </Button>
         </ToolBar>
