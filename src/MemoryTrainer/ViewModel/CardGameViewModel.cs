@@ -28,7 +28,7 @@ namespace MemoryTrainer.ViewModel
             StoreResult = new DefaultCommand(OnStoreResult, IsRecallMode);
 
             // Init the decks
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             var settings = facade.Get<GameSetting>(Bootstrap.Settings) as GameSetting;
 
             AvailableDecks = new ObservableCollection<DeckConfiguration>(settings.AvailableDecks);
@@ -90,7 +90,7 @@ namespace MemoryTrainer.ViewModel
 
         private void OnStoreResult()
         {
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             var overview = facade.Get<ResultOverview>(Bootstrap.Results) as ResultOverview;
             if (overview != null)
             {

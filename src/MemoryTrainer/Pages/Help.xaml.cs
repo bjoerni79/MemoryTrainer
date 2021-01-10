@@ -29,7 +29,7 @@ namespace MemoryTrainer.Pages
         {
             InitializeComponent();
 
-            var containerHelper = new ContainerFacade();
+            var containerHelper = FacadeFactory.Create();
             var vm = containerHelper.Get<HelpViewModel>(id);
 
             DataContext = vm;

@@ -33,7 +33,7 @@ namespace MemoryTrainer.ViewModel
         {
             var id = page.GetId();
 
-            var helper = new ContainerFacade();
+            var helper = FacadeFactory.Create();
             var uiService = helper.Get<IUiService>();
 
             if (uiService != null)

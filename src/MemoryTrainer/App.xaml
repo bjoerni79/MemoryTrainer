@@ -8,7 +8,7 @@
     <Application.Resources>
         <!-- System Wide for MMVM ! -->
         <local:Bootstrap x:Key="ViewModelLocator"/>
-        <mvvm:Container x:Key="Container"/>
+        <!--<mvvm:Container x:Key="Container"/>-->
         
         
         <!-- Styles-->

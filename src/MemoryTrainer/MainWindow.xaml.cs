@@ -1,4 +1,5 @@
-﻿using MemoryTrainer.MVVM;
+﻿using Generic.MVVM.IOC;
+using MemoryTrainer.MVVM;
 using MemoryTrainer.Pages;
 using MemoryTrainer.Service;
 using MemoryTrainer.ViewModel;
@@ -165,7 +166,7 @@ namespace MemoryTrainer
                 tabControl.Items.Remove(currentItem);
 
                 // Remove the associated view model
-                var containerHelper = new ContainerFacade();
+                var containerHelper = FacadeFactory.Create();
                 containerHelper.Remove(pageId);
             }
         }

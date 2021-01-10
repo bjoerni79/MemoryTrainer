@@ -156,7 +156,7 @@ namespace MemoryTrainer.ViewModel
 
         private void OnApplyChanges()
         {
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             resultOverview = facade.Get<ResultOverview>(Bootstrap.Results);
             if (resultOverview != null)
             {
@@ -172,7 +172,7 @@ namespace MemoryTrainer.ViewModel
 
         private void OnRefresh()
         {
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             resultOverview = facade.Get<ResultOverview>(Bootstrap.Results);
             if (resultOverview != null)
             {
@@ -253,7 +253,7 @@ namespace MemoryTrainer.ViewModel
 
         private void OnLoadFile()
         {
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             var uiService = facade.Get<IUiService>();
 
             try
@@ -272,7 +272,7 @@ namespace MemoryTrainer.ViewModel
 
         private void OnSaveFile()
         {
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             var uiService = facade.Get<IUiService>();
 
             try
@@ -287,7 +287,7 @@ namespace MemoryTrainer.ViewModel
 
         private IEnumerable<PAOResult> InternalLoadFile(string filename)
         {
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             var ioService = facade.Get<IIOService>(Bootstrap.IoService);
             if (ioService != null)
             {
@@ -300,7 +300,7 @@ namespace MemoryTrainer.ViewModel
 
         private void InternalSaveFile(string filename)
         {
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             var ioService = facade.Get<IIOService>(Bootstrap.IoService);
             if (ioService != null)
             {

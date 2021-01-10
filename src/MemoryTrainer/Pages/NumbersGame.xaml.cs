@@ -28,7 +28,7 @@ namespace MemoryTrainer.Pages
 
             this.id = id;
 
-            var containerFacade = new ContainerFacade();
+            var containerFacade = FacadeFactory.Create();
             var vm = containerFacade.Get<NumberGameViewModel>(id);
 
             DataContext = vm;

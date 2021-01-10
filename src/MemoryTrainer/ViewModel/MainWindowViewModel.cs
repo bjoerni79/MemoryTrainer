@@ -55,7 +55,7 @@ namespace MemoryTrainer.ViewModel
 
         private void OnOpenResultOverview()
         {
-            var helper = new ContainerFacade();
+            var helper = FacadeFactory.Create();
             var uiService = helper.Get<IUiService>();
 
             if (uiService != null)
@@ -78,7 +78,7 @@ namespace MemoryTrainer.ViewModel
 
         private void OpenPage(PageViewModel viewModel, PageSelection pageSelection)
         {
-            var helper = new ContainerFacade();
+            var helper = FacadeFactory.Create();
             var uiService = helper.Get<IUiService>();
 
             if (uiService != null)

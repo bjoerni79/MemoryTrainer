@@ -27,7 +27,7 @@ namespace MemoryTrainer.Pages
             InitializeComponent();
 
             pageId = id;
-            var containerFacade = new ContainerFacade();
+            var containerFacade = FacadeFactory.Create();
             var vm = containerFacade.Get<ResultOverviewViewModel>(id);
 
             DataContext = vm;

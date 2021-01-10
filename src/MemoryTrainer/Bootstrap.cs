@@ -20,6 +20,10 @@ namespace MemoryTrainer
 
         public Bootstrap()
         {
+            // Init the IoC Facade!
+            FacadeFactory.InitFactory();
+
+            // Create a view model for the main windows
             Main = new MainWindowViewModel();
         }
 
@@ -35,7 +39,7 @@ namespace MemoryTrainer
             InitResultOverview(overview,ioService);
 
             // Finally add it to the IOC container
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             facade.AddUnique(settings, Settings);
             facade.AddUnique(overview, Results);
             facade.AddUnique(ioService, IoService);
