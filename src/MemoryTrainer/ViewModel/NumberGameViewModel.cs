@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MemoryTrainer.ViewModel
 {
-    public class NumberGameViewModel : ViewModelBase
+    public class NumberGameViewModel : PageViewModel
     {
 
         public IRefreshCommand Close { get; private set; }

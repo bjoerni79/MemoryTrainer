@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace MemoryTrainer.ViewModel
 {
-    public class CardGameViewModel : ViewModelBase
+    public class CardGameViewModel : PageViewModel
     {
         private bool cardsLeft;
         private bool showEndOfDeck;

@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace MemoryTrainer.ViewModel
 {
-    public class HelpViewModel : ViewModelBase
+    public class HelpViewModel : PageViewModel
     {
         public HelpViewModel()
         {

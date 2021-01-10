@@ -10,7 +10,7 @@ namespace MemoryTrainer.MMVM
     /// <summary>
     /// Base class for all viewmodels.
     /// </summary>
-    public class ViewModelBase : INotifyPropertyChanged, IViewModel
+    public class ViewModelBase : INotifyPropertyChanged
     {
         /// <summary>
         /// Raises a property change on a binded property
@@ -23,33 +23,6 @@ namespace MemoryTrainer.MMVM
             {
                 var args = new PropertyChangedEventArgs(eventName);
                 handler(this, args);
-            }
-        }
-
-        /// <summary>
-        /// The page assigned to this view model
-        /// </summary>
-        protected IPage page;
-
-
-        public void Init(IPage page)
-        {
-            this.page = page;
-        }
-
-        /// <summary>
-        /// Closes the view model and the view.
-        /// </summary>
-        protected void InternalClose()
-        {
-            var id = page.GetId();
-
-            var helper = new ContainerFacade();
-            var uiService = helper.Get<IUiService>();
-
-            if (uiService != null)
-            {
-                uiService.Close(id);
             }
         }
 

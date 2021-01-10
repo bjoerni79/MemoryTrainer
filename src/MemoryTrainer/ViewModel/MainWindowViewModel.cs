@@ -76,7 +76,7 @@ namespace MemoryTrainer.ViewModel
             }
         }
 
-        private void OpenPage(ViewModelBase viewModel, PageSelection pageSelection)
+        private void OpenPage(PageViewModel viewModel, PageSelection pageSelection)
         {
             var helper = new ContainerFacade();
             var uiService = helper.Get<IUiService>();

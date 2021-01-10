@@ -13,7 +13,7 @@ using System.Windows.Documents;
 
 namespace MemoryTrainer.ViewModel
 {
-    public class ResultOverviewViewModel : ViewModelBase
+    public class ResultOverviewViewModel : PageViewModel
     {
         private ResultOverview resultOverview;
         private PAOResultOverview currentResultOverview;
