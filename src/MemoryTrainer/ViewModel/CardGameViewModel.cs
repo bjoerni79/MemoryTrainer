@@ -1,6 +1,6 @@
-﻿using MemoryTrainer.Environment;
+﻿using Generic.MVVM;
+using MemoryTrainer.Environment;
 using MemoryTrainer.Misc;
-using MemoryTrainer.MMVM;
 using MemoryTrainer.MVVM;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,4 @@
-﻿using MemoryTrainer.MMVM;
-using MemoryTrainer.MVVM;
+﻿using Generic.MVVM;
 using MemoryTrainer.Service;
 using System;
 using System.Collections.Generic;

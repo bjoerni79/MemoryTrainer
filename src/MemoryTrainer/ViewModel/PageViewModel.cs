@@ -1,4 +1,4 @@
-﻿using MemoryTrainer.MMVM;
+﻿using Generic.MVVM;
 using MemoryTrainer.MVVM;
 using MemoryTrainer.Service;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MemoryTrainer.ViewModel
 {
-    public abstract class PageViewModel : ViewModelBase, IViewModel
+    public abstract class PageViewModel : GenericViewModel, IViewModel
     {
         internal PageViewModel() : base()
         {

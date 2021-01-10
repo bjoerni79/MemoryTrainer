@@ -1,5 +1,4 @@
-﻿using MemoryTrainer.MMVM;
-using MemoryTrainer.MVVM;
+﻿using MemoryTrainer.MVVM;
 using MemoryTrainer.Service;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Windows.Input;
 
 namespace MemoryTrainer.ViewModel
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : Generic.MVVM.GenericViewModel
     {
         private const string name_prefix = "page_";
         private const string name_resultOverview = "resultOverview";
