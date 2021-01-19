@@ -1,4 +1,5 @@
 ﻿using Generic.MVVM;
+using Generic.MVVM.Event;
 using MemoryTrainer.Environment;
 using MemoryTrainer.Misc;
 using MemoryTrainer.MVVM;
@@ -108,6 +109,13 @@ namespace MemoryTrainer.ViewModel
                 paoResult.Comment = "Added at " + DateTime.Now.ToShortDateString();
                 paoResult.DeckTitle = CurrentDeck.Title;
                 overview.Add(paoResult);
+
+                //TODO: Fire event that a reload is required in the result overview?
+                var eventManager = facade.Get<EventController>(Bootstrap.EventManager) as EventController;
+                var newCardGameResult = eventManager.GetEvent(Bootstrap.EventNewCardGame);
+
+                var task = newCardGameResult.TriggerAsync();
+                
             }
         }
 

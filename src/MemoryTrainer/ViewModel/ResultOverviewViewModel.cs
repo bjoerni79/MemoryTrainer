@@ -10,10 +10,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Documents;
+using Generic.MVVM.Event;
 
 namespace MemoryTrainer.ViewModel
 {
-    public class ResultOverviewViewModel : PageViewModel
+    public class ResultOverviewViewModel : PageViewModel, IEventListener
     {
         private ResultOverview resultOverview;
         private PAOResultOverview currentResultOverview;
@@ -35,6 +36,12 @@ namespace MemoryTrainer.ViewModel
             ApplyChanges = new DefaultCommand(OnApplyChanges, IsContentChanged);
 
             //SelectSource = new DefaultCommand(OnSelectedSource);
+
+            var facade = FacadeFactory.Create();
+            var eventManager = facade.Get<EventController>(Bootstrap.EventManager);
+            var newDataEvent = eventManager.GetEvent(Bootstrap.EventNewCardGame);
+            newDataEvent.AddListener(this);
+
 
             OnRefresh();
         }
@@ -307,6 +314,11 @@ namespace MemoryTrainer.ViewModel
                 var results = resultDict.Values;
                 ioService.SaveResult(results, filename);
             }
+        }
+
+        public void OnTrigger(string eventId)
+        {
+            OnRefresh();
         }
     }
 }
