@@ -25,10 +25,14 @@ namespace Generic.MVVM.Event
         /// </summary>
         string EventId { get; }
         /// <summary>
+        /// Triggers the event synchronously
+        /// </summary>
+        void Trigger();
+        /// <summary>
         /// Triggers the event asynchronously
         /// </summary>
         /// <returns>The task instance</returns>
-        Task TriggerAsync();
+        //Task TriggerAsync();
         /// <summary>
         /// Clears all listener
         /// </summary>

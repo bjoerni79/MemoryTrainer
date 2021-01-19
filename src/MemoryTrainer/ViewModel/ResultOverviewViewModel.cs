@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Documents;
 using Generic.MVVM.Event;
+using System.Windows;
 
 namespace MemoryTrainer.ViewModel
 {

@@ -111,11 +111,10 @@ namespace MemoryTrainer.ViewModel
                 overview.Add(paoResult);
 
                 //TODO: Fire event that a reload is required in the result overview?
-                var eventManager = facade.Get<EventController>(Bootstrap.EventManager) as EventController;
+                var eventManager = facade.Get<EventController>(Bootstrap.EventManager);
                 var newCardGameResult = eventManager.GetEvent(Bootstrap.EventNewCardGame);
 
-                var task = newCardGameResult.TriggerAsync();
-                
+                newCardGameResult.Trigger();
             }
         }
 

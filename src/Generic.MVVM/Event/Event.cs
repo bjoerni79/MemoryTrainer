@@ -77,33 +77,44 @@ namespace Generic.MVVM.Event
             listenerCollection = new List<IEventListener>();
         }
 
+        ///// <summary>
+        ///// Triggers the event ... TODO!
+        ///// </summary>
+        ///// <returns></returns>
+        //public async Task TriggerAsync()
+        //{
+
+        //    /*
+        //     * Todo:
+        //     * 
+        //     * Wie implementiert man eine Task Umgebung aus dem Interface heraus?  Ich meine mit async.  
+        //     * 
+        //     * Über die IEventListener gehen und parallel oder synchron feuern?  Das muss irgendwie ein Parameter werden
+        //     */
+
+        //    //TODO: At the moment only Serial mode!
+        //    var tasks = new List<Task>();
+
+        //    foreach (var listener in listenerCollection)
+        //    {
+        //        var updateTask = Task.Run(() => listener.OnTrigger(EventId));
+        //        tasks.Add(updateTask);
+        //    }
+
+        //    await Task.WhenAll(tasks);
+        //}
+
         /// <summary>
-        /// Triggers the event ... TODO!
+        /// Triggers the event synchronously
         /// </summary>
-        /// <returns></returns>
-        public async Task TriggerAsync()
+        /// <seealso cref="IEvent.Trigger"/>
+        public void Trigger()
         {
-
-            /*
-             * Todo:
-             * 
-             * Wie implementiert man eine Task Umgebung aus dem Interface heraus?  Ich meine mit async.  
-             * 
-             * Über die IEventListener gehen und parallel oder synchron feuern?  Das muss irgendwie ein Parameter werden
-             */
-
-            //TODO: At the moment only Serial mode!
-
             foreach (var listener in listenerCollection)
             {
-                await new Task(UpdateListener, listener);
-            }
-        }
+                listener.OnTrigger(EventId);
 
-        private void UpdateListener(object listenerObject)
-        {
-            var listener = listenerObject as IEventListener;
-            listener.OnTrigger(EventId);
+            }
         }
     }
 }
