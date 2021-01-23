@@ -112,7 +112,15 @@ namespace Generic.MVVM.Event
         {
             foreach (var listener in listenerCollection)
             {
-                listener.OnTrigger(EventId);
+                try
+                {
+                    listener.OnTrigger(EventId);
+                }
+                catch (Exception ex)
+                {
+                    throw new EventTriggerException(EventId, "Exception occured during trigger", ex);
+                }
+
 
             }
         }
