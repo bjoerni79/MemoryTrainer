@@ -13,27 +13,16 @@ namespace Generic.MVVM.Event
     public class Event : IEvent
     {
         private List<IEventListener> listenerCollection;
-        private EventTriggerMode mode;
 
-        /// <summary>
-        /// Creates a new event
-        /// </summary>
-        /// <param name="eventId">the id</param>
-        /// <param name="mode">the mode</param>
-        public Event(string eventId, EventTriggerMode mode)
-        {
-            EventId = eventId;
-            this.mode = mode;
-            listenerCollection = new List<IEventListener>();
-        }
 
         /// <summary>
         /// Creates a new event with serial triggering
         /// </summary>
         /// <param name="eventId">the id</param>
-        public Event(string eventId) : this(eventId, EventTriggerMode.Serial)
+        public Event(string eventId) 
         {
-            // empty
+            EventId = eventId;
+            listenerCollection = new List<IEventListener>();
         }
 
         /// <summary>
@@ -77,32 +66,22 @@ namespace Generic.MVVM.Event
             listenerCollection = new List<IEventListener>();
         }
 
-        ///// <summary>
-        ///// Triggers the event ... TODO!
-        ///// </summary>
-        ///// <returns></returns>
-        //public async Task TriggerAsync()
-        //{
+        /// <summary>
+        /// Triggers the event asynchronously and waits for all pending tasks
+        /// </summary>
+        /// <returns>A task reference</returns>
+        public async Task TriggerAsync()
+        {
+            var tasks = new List<Task>();
 
-        //    /*
-        //     * Todo:
-        //     * 
-        //     * Wie implementiert man eine Task Umgebung aus dem Interface heraus?  Ich meine mit async.  
-        //     * 
-        //     * Über die IEventListener gehen und parallel oder synchron feuern?  Das muss irgendwie ein Parameter werden
-        //     */
+            foreach (var listener in listenerCollection)
+            {
+                var updateTask = Task.Run(() => listener.OnTrigger(EventId));
+                tasks.Add(updateTask);
+            }
 
-        //    //TODO: At the moment only Serial mode!
-        //    var tasks = new List<Task>();
-
-        //    foreach (var listener in listenerCollection)
-        //    {
-        //        var updateTask = Task.Run(() => listener.OnTrigger(EventId));
-        //        tasks.Add(updateTask);
-        //    }
-
-        //    await Task.WhenAll(tasks);
-        //}
+            await Task.WhenAll(tasks);
+        }
 
         /// <summary>
         /// Triggers the event synchronously
