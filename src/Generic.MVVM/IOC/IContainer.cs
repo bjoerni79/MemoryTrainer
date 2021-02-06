@@ -1,9 +1,8 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MemoryTrainer.MVVM
+namespace Generic.MVVM.IOC
 {
     /// <summary>
     /// Defines a container for managing the application wide instances like ViewModel etc.
@@ -16,7 +15,7 @@ namespace MemoryTrainer.MVVM
         /// <param name="type">the type</param>
         /// <param name="instance">the instance</param>
         /// <param name="id">the internal ID</param>
-        void Add(Type type, object instance,string id);
+        void Add(Type type, object instance, string id);
         /// <summary>
         /// Adds a new service
         /// </summary>

@@ -1,6 +1,7 @@
-﻿using MemoryTrainer.Environment;
+﻿using Generic.MVVM;
+using Generic.MVVM.Event;
+using MemoryTrainer.Environment;
 using MemoryTrainer.Misc;
-using MemoryTrainer.MMVM;
 using MemoryTrainer.MVVM;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Linq;
 
 namespace MemoryTrainer.ViewModel
 {
-    public class CardGameViewModel : ViewModelBase
+    public class CardGameViewModel : PageViewModel
     {
         private bool cardsLeft;
         private bool showEndOfDeck;
@@ -28,7 +29,7 @@ namespace MemoryTrainer.ViewModel
             StoreResult = new DefaultCommand(OnStoreResult, IsRecallMode);
 
             // Init the decks
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             var settings = facade.Get<GameSetting>(Bootstrap.Settings) as GameSetting;
 
             AvailableDecks = new ObservableCollection<DeckConfiguration>(settings.AvailableDecks);
@@ -90,7 +91,7 @@ namespace MemoryTrainer.ViewModel
 
         private void OnStoreResult()
         {
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             var overview = facade.Get<ResultOverview>(Bootstrap.Results) as ResultOverview;
             if (overview != null)
             {
@@ -108,6 +109,12 @@ namespace MemoryTrainer.ViewModel
                 paoResult.Comment = "Added at " + DateTime.Now.ToShortDateString();
                 paoResult.DeckTitle = CurrentDeck.Title;
                 overview.Add(paoResult);
+
+                //TODO: Fire event that a reload is required in the result overview?
+                var eventManager = facade.Get<EventController>(Bootstrap.EventManager);
+                var newCardGameResult = eventManager.GetEvent(Bootstrap.EventNewCardGame);
+
+                newCardGameResult.Trigger();
             }
         }
 

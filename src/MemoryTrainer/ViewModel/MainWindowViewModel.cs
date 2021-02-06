@@ -1,4 +1,4 @@
-﻿using MemoryTrainer.MMVM;
+﻿using Generic.MVVM;
 using MemoryTrainer.MVVM;
 using MemoryTrainer.Service;
 using System;
@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace MemoryTrainer.ViewModel
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : Generic.MVVM.GenericViewModel
     {
         private const string name_prefix = "page_";
         private const string name_resultOverview = "resultOverview";
@@ -17,11 +17,12 @@ namespace MemoryTrainer.ViewModel
 
         public MainWindowViewModel()
         {
-            CurrentState = "Memory Trainer Version 1.3";
+            CurrentState = "Memory Trainer Version 1.4.1";
 
             ShowHelp = new DefaultCommand(OnShowHelp);
             OpenCardGame = new DefaultCommand(OnOpenCardGame);
             OpenResultOverview = new DefaultCommand(OnOpenResultOverview);
+            OpenNumberGame = new DefaultCommand(OnOpenNumberGame);
         }
 
         public ICommand ShowHelp { get; private set; }
@@ -30,12 +31,20 @@ namespace MemoryTrainer.ViewModel
 
         public ICommand OpenResultOverview { get; private set; }
 
+        public ICommand OpenNumberGame { get; private set; }
+
         public string CurrentState { get; private set; }
 
         private void OnOpenCardGame()
         {
             var viewModel = new CardGameViewModel();
             OpenPage(viewModel, PageSelection.CardGame);
+        }
+
+        private void OnOpenNumberGame()
+        {
+            var viewModel = new NumberGameViewModel();
+            OpenPage(viewModel, PageSelection.NumberGame);
         }
 
         private void OnShowHelp()
@@ -46,7 +55,7 @@ namespace MemoryTrainer.ViewModel
 
         private void OnOpenResultOverview()
         {
-            var helper = new ContainerFacade();
+            var helper = FacadeFactory.Create();
             var uiService = helper.Get<IUiService>();
 
             if (uiService != null)
@@ -67,9 +76,9 @@ namespace MemoryTrainer.ViewModel
             }
         }
 
-        private void OpenPage(ViewModelBase viewModel, PageSelection pageSelection)
+        private void OpenPage(PageViewModel viewModel, PageSelection pageSelection)
         {
-            var helper = new ContainerFacade();
+            var helper = FacadeFactory.Create();
             var uiService = helper.Get<IUiService>();
 
             if (uiService != null)

@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Text;
-using System.Windows.Controls;
-using System.Windows.Input;
 
-namespace MemoryTrainer.MVVM
+namespace Generic.MVVM
 {
     /// <summary>
-    /// Implements a WPF ready button representation based on ICommand
+    /// Implements a RefreshCommand with no parameter
     /// </summary>
+    /// <seealso cref="IRefreshCommand"/>
     public class DefaultCommand : IRefreshCommand
     {
         private Action executer;

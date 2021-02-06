@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Automation;
 
-namespace MemoryTrainer.MVVM
+namespace Generic.MVVM.IOC
 {
     /// <summary>
     /// Implements the container interface IContainer
@@ -109,10 +108,10 @@ namespace MemoryTrainer.MVVM
             }
         }
 
-        private object GetItem (Type t)
+        private object GetItem(Type t)
         {
             var item = itemList.FirstOrDefault(curItem => curItem.ItemType == t);
-            
+
             return item?.ItemInstance;
         }
 
@@ -122,7 +121,7 @@ namespace MemoryTrainer.MVVM
             return item?.ItemInstance;
         }
 
-        private ContainerItem GetContainerItem (string id)
+        private ContainerItem GetContainerItem(string id)
         {
             var item = itemList.FirstOrDefault(curItem => curItem.ItemId != null && curItem.ItemId.Equals(id));
             return item;

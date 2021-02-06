@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Text;
 
-namespace MemoryTrainer.MVVM
+namespace Generic.MVVM.IOC
 {
     /// <summary>
     /// Internal structure of a container item

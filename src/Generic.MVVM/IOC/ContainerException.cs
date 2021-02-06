@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MemoryTrainer.MVVM
+namespace Generic.MVVM.IOC
 {
     /// <summary>
     /// Exception for all runtime errors regarding the IContainer interface
     /// </summary>
-    public class ContainerException : ApplicationException
+    public class ContainerException : GenericMvvmException
     {
         /// <summary>
         /// Creates a new ContainerException

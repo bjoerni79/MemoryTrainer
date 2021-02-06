@@ -1,23 +1,22 @@
 ﻿using Generic.MVVM;
-using MemoryTrainer.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows.Input;
 
 namespace MemoryTrainer.ViewModel
 {
-    public class HelpViewModel : PageViewModel
+    public class NumberGameViewModel : PageViewModel
     {
-        public HelpViewModel()
+
+        public IRefreshCommand Close { get; private set; }
+
+        public NumberGameViewModel()
         {
             Close = new DefaultCommand(OnClose);
         }
 
-        public ICommand Close { get; private set; }
 
-
-        private void OnClose()
+        public void OnClose()
         {
             InternalClose();
         }

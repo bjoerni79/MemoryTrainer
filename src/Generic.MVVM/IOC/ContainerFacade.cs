@@ -1,11 +1,8 @@
-﻿using MemoryTrainer.MMVM;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Windows;
 
-namespace MemoryTrainer.MVVM
+namespace Generic.MVVM.IOC
 {
     /// <summary>
     /// Helper class for accessing the IContainer implementation
@@ -15,27 +12,13 @@ namespace MemoryTrainer.MVVM
         /// <summary>
         /// Creates a new ContainerFacade
         /// </summary>
-        public ContainerFacade()
+        public ContainerFacade(IContainer containerInstance)
         {
-
+            Container = containerInstance;
         }
 
         private IContainer Container
-        {
-            get
-            {
-                IContainer container = null;
-                foreach (var currentInstance in Application.Current.Resources.Values)
-                {
-                    if (currentInstance is IContainer)
-                    {
-                        container = currentInstance as IContainer;
-                        break;
-                    }
-                }
-
-                return container;
-            }
+        { get;set;
         }
 
         /// <summary>
@@ -44,7 +27,7 @@ namespace MemoryTrainer.MVVM
         /// <typeparam name="T">the expected type</typeparam>
         /// <returns>the instance</returns>
         /// <remarks>Throws an ContainerException if not possible</remarks>
-        public T Get<T>() where T: class
+        public T Get<T>() where T : class
         {
             IContainer container = Container;
 
@@ -84,7 +67,7 @@ namespace MemoryTrainer.MVVM
                 throw new ContainerException("Could not resolve requested instance");
             }
 
-            
+
 
             if (!(instance is T))
             {
@@ -100,9 +83,9 @@ namespace MemoryTrainer.MVVM
         /// <typeparam name="T">the type of the viewm odel</typeparam>
         /// <param name="vm">the view model instance</param>
         /// <param name="pageId">the page id</param>
-        public void Add<T>(T vm, string pageId) where T:ViewModelBase
+        public void Add<T>(T vm, string pageId) where T : GenericViewModel
         {
-            Container.Add(typeof(ViewModelBase), vm, pageId);
+            Container.Add(typeof(GenericViewModel), vm, pageId);
         }
 
         /// <summary>
@@ -112,7 +95,7 @@ namespace MemoryTrainer.MVVM
         /// <param name="instance">the instance</param>
         /// <param name="id">the id</param>
         /// <remarks>Throws an ContainerException if the type already exists</remarks>
-        public void AddUnique<T>(T instance,string id)
+        public void AddUnique<T>(T instance, string id)
         {
             var available = Container.IsAvailable((typeof(T)));
             if (available)

@@ -1,6 +1,6 @@
 ﻿using MemoryTrainer.Environment;
 using MemoryTrainer.Misc;
-using MemoryTrainer.MMVM;
+using Generic.MVVM;
 using MemoryTrainer.MVVM;
 using MemoryTrainer.Service;
 using System;
@@ -10,10 +10,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Documents;
+using Generic.MVVM.Event;
+using System.Windows;
 
 namespace MemoryTrainer.ViewModel
 {
-    public class ResultOverviewViewModel : ViewModelBase
+    public class ResultOverviewViewModel : PageViewModel, IEventListener
     {
         private ResultOverview resultOverview;
         private PAOResultOverview currentResultOverview;
@@ -35,6 +37,12 @@ namespace MemoryTrainer.ViewModel
             ApplyChanges = new DefaultCommand(OnApplyChanges, IsContentChanged);
 
             //SelectSource = new DefaultCommand(OnSelectedSource);
+
+            var facade = FacadeFactory.Create();
+            var eventManager = facade.Get<EventController>(Bootstrap.EventManager);
+            var newDataEvent = eventManager.GetEvent(Bootstrap.EventNewCardGame);
+            newDataEvent.AddListener(this);
+
 
             OnRefresh();
         }
@@ -156,7 +164,7 @@ namespace MemoryTrainer.ViewModel
 
         private void OnApplyChanges()
         {
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             resultOverview = facade.Get<ResultOverview>(Bootstrap.Results);
             if (resultOverview != null)
             {
@@ -172,7 +180,7 @@ namespace MemoryTrainer.ViewModel
 
         private void OnRefresh()
         {
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             resultOverview = facade.Get<ResultOverview>(Bootstrap.Results);
             if (resultOverview != null)
             {
@@ -253,7 +261,7 @@ namespace MemoryTrainer.ViewModel
 
         private void OnLoadFile()
         {
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             var uiService = facade.Get<IUiService>();
 
             try
@@ -272,7 +280,7 @@ namespace MemoryTrainer.ViewModel
 
         private void OnSaveFile()
         {
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             var uiService = facade.Get<IUiService>();
 
             try
@@ -287,7 +295,7 @@ namespace MemoryTrainer.ViewModel
 
         private IEnumerable<PAOResult> InternalLoadFile(string filename)
         {
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             var ioService = facade.Get<IIOService>(Bootstrap.IoService);
             if (ioService != null)
             {
@@ -300,13 +308,18 @@ namespace MemoryTrainer.ViewModel
 
         private void InternalSaveFile(string filename)
         {
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             var ioService = facade.Get<IIOService>(Bootstrap.IoService);
             if (ioService != null)
             {
                 var results = resultDict.Values;
                 ioService.SaveResult(results, filename);
             }
+        }
+
+        public void OnTrigger(string eventId)
+        {
+            OnRefresh();
         }
     }
 }

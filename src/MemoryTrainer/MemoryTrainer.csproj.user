@@ -27,9 +27,6 @@
     <Page Update="Misc\HelpText.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Misc\UI.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Pages\CardGame.xaml">
       <SubType>Designer</SubType>
     </Page>

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
-using System.Windows.Input;
 
-namespace MemoryTrainer.MVVM
+namespace Generic.MVVM
 {
-    public class ParameterCommand : IRefreshCommand 
+    /// <summary>
+    /// Implements a RefreshCommand with one generic parameter
+    /// </summary>
+    /// <seealso cref="IRefreshCommand"/>
+    public class ParameterCommand : IRefreshCommand
     {
         private Action<object> executer;
         private Func<bool> isExecutable;

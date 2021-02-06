@@ -8,3 +8,7 @@
 /src/MemoryTrainer/.vs
 /.vs
 *.suo
+/src/MemoryTrainer/bin/Debug/net5.0-windows
+/src/.vs/MemoryTrainer/DesignTimeBuild/.dtbcache.v2
+/src/Generic.MVVM/bin/Debug/netstandard2.0
+/src/Generic.MVVM/obj

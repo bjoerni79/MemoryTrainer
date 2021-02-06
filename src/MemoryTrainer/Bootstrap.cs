@@ -1,4 +1,5 @@
-﻿using MemoryTrainer.Environment;
+﻿using Generic.MVVM.Event;
+using MemoryTrainer.Environment;
 using MemoryTrainer.MVVM;
 using MemoryTrainer.Service;
 using MemoryTrainer.ViewModel;
@@ -17,9 +18,16 @@ namespace MemoryTrainer
         public static string Settings = "SETTINGS";
         public static string Results = "RESULTS";
         public static string IoService = "IOSERVICE";
+        public static string EventManager = "EVENTMANAGER";
+
+        public static string EventNewCardGame = "NewCardGame";
 
         public Bootstrap()
         {
+            // Init the IoC Facade!
+            FacadeFactory.InitFactory();
+
+            // Create a view model for the main windows
             Main = new MainWindowViewModel();
         }
 
@@ -30,15 +38,20 @@ namespace MemoryTrainer
             var settings = new GameSetting();
             var overview = new ResultOverview();
             var ioService = new IoService();
+            var eventManager = new EventController();
 
             InitDecks(settings);
             InitResultOverview(overview,ioService);
 
+            // Adds internal events for the app
+            eventManager.Add(new Event(EventNewCardGame));
+
             // Finally add it to the IOC container
-            var facade = new ContainerFacade();
+            var facade = FacadeFactory.Create();
             facade.AddUnique(settings, Settings);
             facade.AddUnique(overview, Results);
             facade.AddUnique(ioService, IoService);
+            facade.AddUnique(eventManager, EventManager);
         }
 
         private void InitResultOverview(ResultOverview overview,IIOService ioService)

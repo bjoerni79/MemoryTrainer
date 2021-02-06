@@ -1,5 +1,4 @@
 ﻿using MemoryTrainer.MVVM;
-using MemoryTrainer.Service;
 using MemoryTrainer.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -9,32 +8,30 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Xml;
 
 namespace MemoryTrainer.Pages
 {
     /// <summary>
-    /// Interaction logic for Help.xaml
+    /// Interaction logic for NumbersGame.xaml
     /// </summary>
-    public partial class Help : UserControl,IPage
+    public partial class NumbersGame : UserControl, IPage
     {
         private string id;
 
-        public Help(string id)
+        public NumbersGame(string id)
         {
             InitializeComponent();
 
-            var containerHelper = FacadeFactory.Create();
-            var vm = containerHelper.Get<HelpViewModel>(id);
+            this.id = id;
+
+            var containerFacade = FacadeFactory.Create();
+            var vm = containerFacade.Get<NumberGameViewModel>(id);
 
             DataContext = vm;
-
-            this.id = id;
         }
 
         public string GetId()
@@ -44,14 +41,7 @@ namespace MemoryTrainer.Pages
 
         public void SetFocus()
         {
-            //Nothing to do
-        }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-
-            //var la = XamlReader.Load()
+            close.Focus();
         }
     }
 }
