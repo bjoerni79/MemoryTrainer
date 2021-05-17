@@ -27,15 +27,19 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <!-- TODO: Use Ribbon! 
+            https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.ribbon.ribbon?view=net-5.0
+        -->
 
         <ToolBar Background="WhiteSmoke">
             <Button Style="{StaticResource CommandButton}" Command="{Binding Path=ShowHelp}">Show Help</Button>
             <Button Style="{StaticResource CommandButton}" Command="{Binding Path=OpenCardGame}">Create PAO Card Game</Button>
-            <!--<Button Style="{StaticResource CommandButton}" Command="{Binding Path=OpenNumberGame}">Create Number Generator</Button>-->
+            <Button Style="{StaticResource CommandButton}">Image List Game</Button>
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=OpenNumberGame}">Create Number Generator</Button>
             <Button Style="{StaticResource CommandButton}" Command="{Binding Path=OpenResultOverview}">Open PAO Result Overview</Button>
 
-            <!--<Button Style="{StaticResource CommandButton}">Image List Game</Button>
-            <Button Style="{StaticResource CommandButton}">Manage Image List</Button>" -->
+            
+            <Button Style="{StaticResource CommandButton}">Manage Image List</Button>
         </ToolBar>
 
 
