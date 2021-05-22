@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+    <Page Remove="Properties\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Misc\Images\10_of_clubs.png" />
     <None Remove="Misc\Images\10_of_diamonds.png" />
     <None Remove="Misc\Images\10_of_hearts.png" />
@@ -155,10 +162,6 @@
     <Resource Include="Misc\Images\queen_of_spades.png" />
     <Resource Include="Misc\Images\queen_of_spades2.png" />
     <Resource Include="Misc\Images\red_joker.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
   </ItemGroup>
 
   <ItemGroup>
