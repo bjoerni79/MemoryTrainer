@@ -1,4 +1,4 @@
-﻿<Window x:Class="MemoryTrainer.MainWindow"
+﻿<RibbonWindow x:Class="MemoryTrainer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -31,22 +31,32 @@
             https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.ribbon.ribbon?view=net-5.0
         -->
 
-        <ToolBar Background="WhiteSmoke">
-            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=ShowHelp}">Show Help</Button>
-            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=OpenCardGame}">Create PAO Card Game</Button>
-            <Button Style="{StaticResource CommandButton}">Image List Game</Button>
-            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=OpenNumberGame}">Create Number Generator</Button>
-            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=OpenResultOverview}">Open PAO Result Overview</Button>
-
+        <Ribbon x:Name="myRibbon" >
             
-            <Button Style="{StaticResource CommandButton}">Manage Image List</Button>
-        </ToolBar>
+            <RibbonTab Header="Help">
+                <RibbonGroup>
+                    <RibbonButton Label="Help" Command="{Binding Path=ShowHelp}"/>
+                </RibbonGroup> 
+            </RibbonTab>
+            <RibbonTab Header="PAO Card Game">
+                <RibbonGroup>
+                    <RibbonButton Label="Create" Command="{Binding Path=OpenCardGame}"/>
+                </RibbonGroup>
+                <RibbonGroup>
+                    <RibbonButton Label="Show Results" Command="{Binding Path=OpenResultOverview}"/>
+                </RibbonGroup>
+            </RibbonTab>
+
+            <RibbonTab Header="Number Game">
+                <RibbonGroup>
+                    <RibbonButton Label="Create" Command="{Binding Path=OpenNumberGame}"/>
+                </RibbonGroup>
+            </RibbonTab>
+        </Ribbon>
+        
 
 
         <TabControl x:Name="tabControl" Grid.Row="1"  >
-
-           
-            
         </TabControl>
 
         <StatusBar Grid.Row="2">
@@ -56,4 +66,4 @@
         </StatusBar>
 
     </Grid>
-</Window>
+</RibbonWindow>
