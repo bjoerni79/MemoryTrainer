@@ -15,9 +15,9 @@
 
     </UserControl.Resources>
 
-    <DockPanel Background="LightGreen" LastChildFill="True">
+    <DockPanel  LastChildFill="True">
 
-        <ToolBar Margin="5" Background="WhiteSmoke" DockPanel.Dock="Top">
+        <ToolBar Style="{StaticResource DefaultToolbar}" DockPanel.Dock="Top">
             <Button Style="{StaticResource CommandButton}" Command="{Binding Path=Refresh}" >
                 Refresh
             </Button>
@@ -39,7 +39,7 @@
                 Apply Changes
             </Button>
 
-            <Button x:Name="close" Style="{StaticResource CommandButton}" Command="{Binding Path=Close}" Background="AntiqueWhite">
+            <Button x:Name="close" Style="{StaticResource SystemCommandButton}" Command="{Binding Path=Close}" >
                 Close
             </Button>
         </ToolBar>
