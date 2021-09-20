@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "fc8025df-286c-4713-9050-e3c9b53fecde": {
+      "ProjectGuid": "fc8025df-286c-4713-9050-e3c9b53fecde",
+      "DisplayName": "MemoryTrainer",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "f97b9000-1e45-4f08-b212-b1c5c9a8ea2d": {
+      "ProjectGuid": "f97b9000-1e45-4f08-b212-b1c5c9a8ea2d",
+      "DisplayName": "Generic.MVVM",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

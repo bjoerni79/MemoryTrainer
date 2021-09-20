@@ -38,9 +38,9 @@
         <KeyBinding Key="D8" Command="{Binding Path=SelectDeck}" CommandParameter="7"/>
     </UserControl.InputBindings>
     
-    <DockPanel Background="LightGreen" LastChildFill="True">
+    <DockPanel  LastChildFill="True">
 
-        <ToolBar Margin="5" Background="WhiteSmoke" DockPanel.Dock="Top">
+        <ToolBar Style="{StaticResource DefaultToolbar}" DockPanel.Dock="Top">
 
             <Button Style="{StaticResource CommandButton}" Command="{Binding Path=New}">
                 New Game
@@ -68,11 +68,11 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <Button Style="{StaticResource CommandButton}" Background="AntiqueWhite" Command="{Binding Path=StoreResult}" >
+            <Button Style="{StaticResource SystemCommandButton}" Command="{Binding Path=StoreResult}" >
                 Store Result
             </Button>
 
-            <Button x:Name="close" Style="{StaticResource CommandButton}" Command="{Binding Path=Close}" Background="AntiqueWhite">
+            <Button x:Name="close" Style="{StaticResource SystemCommandButton}" Command="{Binding Path=Close}" >
                 Close
             </Button>
 
@@ -107,17 +107,17 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Border Padding="5" Grid.Row="0" Grid.Column="0" >
+            <Border Padding="5" Grid.Row="0" Grid.Column="0"  >
                 <Image Source="{Binding Path=PersonCard,Converter={StaticResource cardValueConverter}}" >
                 </Image>
             </Border>
 
-            <Border Padding="5" Grid.Row="0" Grid.Column="1">
+            <Border Padding="5" Grid.Row="0" Grid.Column="1"  >
                 <Image   Source="{Binding Path=ActionCard,Converter={StaticResource cardValueConverter}}">
                 </Image>
             </Border>
 
-            <Border Padding="5" Grid.Row="0" Grid.Column="2" >
+            <Border Padding="5" Grid.Row="0" Grid.Column="2"  >
                 <Image  Source="{Binding Path=ObjectCard,Converter={StaticResource cardValueConverter}}">
                 </Image>
             </Border>
