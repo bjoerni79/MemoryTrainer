@@ -31,8 +31,8 @@
             https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.ribbon.ribbon?view=net-5.0
         -->
 
-        <Ribbon x:Name="myRibbon"  >
-            
+        <Ribbon x:Name="myRibbon" IsMinimized="True"  >
+
             <RibbonTab Header="Help">
                 <RibbonGroup>
                     <RibbonButton Label="Help" Command="{Binding Path=ShowHelp}"/>
