@@ -25,14 +25,17 @@ namespace MemoryTrainer.Environment
             }
 
             Original = orginalValue;
+            OriginalDisplay = orginalValue;
             Response = String.Empty;
             Order = 0;
         }
 
+        public string OriginalDisplay { get; set; }
+
         /// <summary>
         /// The generated number scheme
         /// </summary>
-        public string Original { get; set; }
+        public string Original { get; private set; }
 
         /// <summary>
         /// The higher the value, the higher is this Number prioritized. Default is 0.

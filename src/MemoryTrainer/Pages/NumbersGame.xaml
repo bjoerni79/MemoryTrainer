@@ -12,9 +12,32 @@
             <Button x:Name="close" Style="{StaticResource SystemCommandButton}" Command="{Binding Path=Close}" >
                 Close
             </Button>
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=GenerateCreditCard}">
+                Add Credit Card
+            </Button>
         </ToolBar>
 
         <Grid Margin="5">
+            <ListBox ItemsSource="{Binding Path=NumberCollection}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0">Orignal</Label>
+                            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=OriginalDisplay}"></Label>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
 
     </DockPanel>

@@ -13,23 +13,24 @@ namespace MemoryTrainer.Environment
 
         }
 
-        public string CreateCreditCard()
+        public Number CreateCreditCard()
         {
             // 49xx xxxx xxxx xxxx
+            var creditCard = "49xx xxxx xxxx xxxx";
 
-            return string.Empty;
+            return new Number(creditCard);
         }
 
         public string CreateIban()
         {
             // DExx xxxx xxxx xxxx xxxx xx
 
-            return string.Empty;
+            return "DExx xxxx xxxx xxxx xxxx xx";
         }
 
         public string CreateNumber(int length)
         {
-            return string.Empty;
+            return "123";
         }
     }
 }

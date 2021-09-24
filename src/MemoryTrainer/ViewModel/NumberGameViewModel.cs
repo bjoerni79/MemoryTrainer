@@ -2,6 +2,8 @@
 using MemoryTrainer.Environment;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 
 namespace MemoryTrainer.ViewModel
@@ -18,15 +20,21 @@ namespace MemoryTrainer.ViewModel
 
             // Bind the commands
             Close = new DefaultCommand(OnClose);
-
-
+            GenerateCreditCard = new DefaultCommand(OnGenerateVisaCard);
         }
+
+        public ObservableCollection<Number> NumberCollection { get; private set; }
 
         public IRefreshCommand Close { get; private set; }
 
+        public IRefreshCommand GenerateCreditCard { get; private set; }
+
         private void OnGenerateVisaCard()
         {
+            var creditCardNumber = numberGenerator.CreateCreditCard();
+            numberSet.Add(creditCardNumber);
 
+            Refresh();
         }
 
         private void OnGenerateNumber()
@@ -34,8 +42,16 @@ namespace MemoryTrainer.ViewModel
 
         }
 
+        private void Refresh()
+        {
+            //Get the entries based on the order property
+            var numbers = numberSet.Numbers.OrderBy(n => n.Order);
 
-        public void OnClose()
+            NumberCollection = new ObservableCollection<Number>(numbers);
+            RaisePropertyChange("NumberCollection");
+        }
+
+        private void OnClose()
         {
             InternalClose();
         }
