@@ -23,11 +23,15 @@ namespace MemoryTrainer
             this.tabControl = tabControl; 
         }
 
+        public MainWindow MainWindow => mainWindow;
+
+        public TabControl TabControl => tabControl;
+
         public void Close(string pageId)
         {
             TabItem currentItem = null;
 
-            var items = tabControl.Items;
+            var items = TabControl.Items;
             foreach (TabItem item in items)
             {
                 if (item.Name.Equals(pageId))
@@ -40,7 +44,7 @@ namespace MemoryTrainer
             if (currentItem != null)
             {
                 // Remove the TabItem
-                tabControl.Items.Remove(currentItem);
+                TabControl.Items.Remove(currentItem);
 
                 // Remove the associated view model
                 var containerHelper = FacadeFactory.Create();
@@ -87,7 +91,7 @@ namespace MemoryTrainer
         {
             var dialog = new OpenFileDialog();
             dialog.Filter = "PAO Results|*.json|All Files|*.*";
-            var result = dialog.ShowDialog(mainWindow);
+            var result = dialog.ShowDialog(MainWindow);
             if (result.HasValue && result.Value)
             {
                 var filename = dialog.FileName;
@@ -103,7 +107,7 @@ namespace MemoryTrainer
             var page = new ResultPage(id);
 
             var viewFound = false;
-            foreach (TabItem item in tabControl.Items)
+            foreach (TabItem item in TabControl.Items)
             {
                 // let's do some old school coding ...
                 if (item.Name.Equals(id))
@@ -126,7 +130,7 @@ namespace MemoryTrainer
         {
             var dialog = new SaveFileDialog();
             dialog.Filter = "PAO Results|*.json|All Files|*.*";
-            var result = dialog.ShowDialog(mainWindow);
+            var result = dialog.ShowDialog(MainWindow);
             if (result.HasValue && result.Value)
             {
                 var filename = dialog.FileName;
@@ -142,9 +146,9 @@ namespace MemoryTrainer
             var tabItem = new TabItem() { Header = headerName };
             tabItem.Content = page;
             tabItem.Name = id;
-            tabItem.HeaderTemplate = mainWindow.FindResource("tabItemTemplate") as DataTemplate;
+            tabItem.HeaderTemplate = MainWindow.FindResource("tabItemTemplate") as DataTemplate;
 
-            tabControl.Items.Add(tabItem);
+            TabControl.Items.Add(tabItem);
             tabItem.Focus();
         }
     }
