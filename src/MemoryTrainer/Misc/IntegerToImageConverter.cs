@@ -10,8 +10,6 @@ namespace MemoryTrainer.Misc
 {
     public class IntegerToImageConverter : IValueConverter
     {
-        private readonly string path = @"/Misc/Images/";
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int recallState;
@@ -23,24 +21,18 @@ namespace MemoryTrainer.Misc
 
                 if (recallState == 1)
                 {
-                    uriString = path + "OK.png";
+                    uriString = ImageConverterHelper.Passed;
                 }
 
                 if (recallState == 2)
                 {
-                    uriString = path + "NotOK.png";
+                    uriString = ImageConverterHelper.Failed;
                 }
 
                 if (uriString != null)
                 {
-                    var uri = new Uri(uriString, UriKind.RelativeOrAbsolute);
-                    var imageStream = Application.GetResourceStream(uri);
-
-                    // https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.imaging.bitmapdecoder?view=netcore-3.1
-                    BitmapDecoder decoder = BitmapDecoder.Create(imageStream.Stream, BitmapCreateOptions.None, BitmapCacheOption.Default);
-
-                    imageStream.Stream.Close();
-                    return decoder.Frames[0];
+                    var helper = new ImageConverterHelper();
+                    return helper.Decode(uriString);
                 }
 
                 return null;

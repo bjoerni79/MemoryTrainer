@@ -31,7 +31,17 @@ namespace MemoryTrainer.ViewModel
 
         private void OnGenerateVisaCard()
         {
+            var creditCardNumberPassed = numberGenerator.CreateCreditCard();
+            creditCardNumberPassed.CompareResult = 1;
+
+            var creditCardNumberFailed = numberGenerator.CreateCreditCard();
+            creditCardNumberFailed.CompareResult = 2;
+
             var creditCardNumber = numberGenerator.CreateCreditCard();
+            
+
+            numberSet.Add(creditCardNumberPassed);
+            numberSet.Add(creditCardNumberFailed);
             numberSet.Add(creditCardNumber);
 
             Refresh();

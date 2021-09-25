@@ -28,7 +28,28 @@ namespace MemoryTrainer.Environment
             OriginalDisplay = orginalValue;
             Response = String.Empty;
             Order = 0;
+            CompareResult = 0;
         }
+
+        /// <summary>
+        /// Shows the value or hides it
+        /// </summary>
+        /// <param name="isReadable">true shows the content</param>
+        public void SetReadable(bool isReadable)
+        {
+            if (isReadable)
+            {
+                OriginalDisplay = Original;
+            }
+            else
+            {
+                OriginalDisplay = "...";
+            }
+
+            Refresh();
+        }
+
+        #region Properties
 
         public string OriginalDisplay { get; set; }
 
@@ -47,6 +68,12 @@ namespace MemoryTrainer.Environment
         /// </summary>
         public string Response { get; set; }
 
+        public int CompareResult { get; set; }
+
+        #endregion
+
+        #region INotifyPropertyChanged interface and helper
+
         /// <summary>
         /// Trigger the INotifyPropertyChanged event and update the listeners (i.e a WPF UI Element)
         /// </summary>
@@ -57,6 +84,8 @@ namespace MemoryTrainer.Environment
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Original"));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Response"));
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CompareResult"));
         }
 
         /// <summary>
@@ -64,5 +93,7 @@ namespace MemoryTrainer.Environment
         /// </summary>
         /// <seealso cref="INotifyPropertyChanged.PropertyChanged"/>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
     }
 }

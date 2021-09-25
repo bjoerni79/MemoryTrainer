@@ -94,15 +94,9 @@ namespace MemoryTrainer.Misc
             {
                 // Convert the playing card to an image
                 var uriString = cardDict[playingCard.Value];
-                var uri = new Uri(uriString, UriKind.RelativeOrAbsolute);
 
-                var imageStream = Application.GetResourceStream(uri);
-
-                // https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.imaging.bitmapdecoder?view=netcore-3.1
-                BitmapDecoder decoder = BitmapDecoder.Create(imageStream.Stream, BitmapCreateOptions.None, BitmapCacheOption.Default);
-
-                imageStream.Stream.Close();
-                return decoder.Frames[0];
+                var helper = new ImageConverterHelper();
+                return helper.Decode(uriString,true);
             }
 
             return null;
