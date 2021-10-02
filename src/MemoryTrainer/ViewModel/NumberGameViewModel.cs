@@ -1,5 +1,6 @@
 ﻿using Generic.MVVM;
 using MemoryTrainer.Environment;
+using MemoryTrainer.Misc;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,13 +16,30 @@ namespace MemoryTrainer.ViewModel
 
         public NumberGameViewModel()
         {
+            //Set the complexity level
+            ComplexityLevel = new ObservableCollection<NumberComplexityEnum>();
+            ComplexityLevel.Add(NumberComplexityEnum.Simple);
+            ComplexityLevel.Add(NumberComplexityEnum.Medium);
+            ComplexityLevel.Add(NumberComplexityEnum.Complex);
+            SelectedComplexityLevel = ComplexityLevel.First();
+            CharacterEnabled = true;
+
+            // Init the components
             numberGenerator = new NumberGenerator();
             numberSet = new NumberSet();
 
             // Bind the commands
             Close = new DefaultCommand(OnClose);
             GenerateCreditCard = new DefaultCommand(OnGenerateVisaCard);
+            GenerateIban = new DefaultCommand(OnGenerateIban);
+            GenerateNumber = new DefaultCommand(OnGenerateNumber);
         }
+
+        public ObservableCollection<NumberComplexityEnum> ComplexityLevel { get; private set; }
+
+        public NumberComplexityEnum SelectedComplexityLevel { get; set; }
+
+        public bool CharacterEnabled { get; set; }
 
         public ObservableCollection<Number> NumberCollection { get; private set; }
 
@@ -29,30 +47,38 @@ namespace MemoryTrainer.ViewModel
 
         public IRefreshCommand GenerateCreditCard { get; private set; }
 
-        private void OnGenerateVisaCard()
+        public IRefreshCommand GenerateIban { get; private set; }
+
+        public IRefreshCommand GenerateNumber { get; private set; }
+
+        private void OnGenerateIban()
         {
-            var creditCardNumberPassed = numberGenerator.CreateCreditCard();
-            creditCardNumberPassed.CompareResult = 1;
-
-            var creditCardNumberFailed = numberGenerator.CreateCreditCard();
-            creditCardNumberFailed.CompareResult = 2;
-
-            var creditCardNumber = numberGenerator.CreateCreditCard();
-            
-
-            numberSet.Add(creditCardNumberPassed);
-            numberSet.Add(creditCardNumberFailed);
-            numberSet.Add(creditCardNumber);
-
-            Refresh();
+            var number = numberGenerator.CreateIban();
+            AddEntry(number);
         }
 
         private void OnGenerateNumber()
         {
-
+            var number = numberGenerator.CreateNumber(5, true);
+            AddEntry(number);
         }
 
-        private void Refresh()
+        private void OnGenerateVisaCard()
+        {
+            var creditCardNumber = numberGenerator.CreateCreditCard();
+            AddEntry(creditCardNumber);
+        }
+
+        private void AddEntry(Number number)
+        {
+            numberSet.Add(number);
+
+            //Get the entries based on the order property
+            var numbers = numberSet.Numbers.OrderBy(n => n.Order);
+            PopulateView();
+        }
+
+        private void PopulateView()
         {
             //Get the entries based on the order property
             var numbers = numberSet.Numbers.OrderBy(n => n.Order);

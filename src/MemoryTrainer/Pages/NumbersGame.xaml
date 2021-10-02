@@ -41,9 +41,24 @@
             <Button x:Name="close" Style="{StaticResource SystemCommandButton}" Command="{Binding Path=Close}" >
                 Close
             </Button>
+            
             <Button Style="{StaticResource CommandButton}" Command="{Binding Path=GenerateCreditCard}">
                 Add Credit Card
             </Button>
+
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=GenerateIban}">
+                Generate IBAN
+            </Button>
+
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=GenerateNumber}">
+                Generate Number
+            </Button>
+            
+            <Label VerticalAlignment="Center" Margin="20 0 0 0">Complexity</Label>
+            <ComboBox ItemsSource="{Binding Path=ComplexityLevel}" SelectedItem="{Binding Path=SelectedComplexityLevel, Mode=TwoWay}"></ComboBox>
+
+            <CheckBox Content="Contains Character" IsChecked="{Binding Path=CharacterEnabled,Mode=TwoWay}"/>
+
         </ToolBar>
 
         <Grid Margin="5">

@@ -21,16 +21,19 @@ namespace MemoryTrainer.Environment
             return new Number(creditCard);
         }
 
-        public string CreateIban()
+        public Number CreateIban()
         {
             // DExx xxxx xxxx xxxx xxxx xx
+            var iban = "DExx xxxx xxxx xxxx xxxx xx";
 
-            return "DExx xxxx xxxx xxxx xxxx xx";
+            return new Number(iban);
         }
 
-        public string CreateNumber(int length)
+        public Number CreateNumber(int length, bool containsChars)
         {
-            return "123";
+            var number = "123";
+
+            return new Number(number);
         }
     }
 }

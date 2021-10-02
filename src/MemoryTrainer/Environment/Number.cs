@@ -49,6 +49,57 @@ namespace MemoryTrainer.Environment
             Refresh();
         }
 
+        public void ResetState()
+        {
+            CompareResult = 0;
+            SetReadable(true);
+            Refresh();
+        }
+
+        public void Compare()
+        {
+            // Extract all characters and numbers. Characters are converted to capital letters
+            var original = ExtractContent(Original);
+            var response = ExtractContent(Response);
+
+            // Compare the orginal and the response
+            bool isEqual = original.Equals(response);
+
+            // Set value 1 for Passed and Value 2 for Failed.
+            if (isEqual)
+            {
+                CompareResult = 1;
+            }
+            else
+            {
+                CompareResult = 2;
+            }
+
+            // Refresh the UI
+            Refresh();
+        }
+
+        private string ExtractContent(string input)
+        {
+            var sb = new StringBuilder();
+
+            // Ignore the spaces and others
+            foreach(var curChar in input.ToCharArray())
+            {
+                if (char.IsNumber(curChar))
+                {
+                    sb.Append(curChar);
+                }
+
+                if (char.IsNumber(curChar))
+                {
+                    sb.Append(curChar.ToString().ToUpper());
+                }
+            }
+
+            return sb.ToString();
+        }
+
         #region Properties
 
         public string OriginalDisplay { get; set; }
