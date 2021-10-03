@@ -10,10 +10,20 @@
 
     <UserControl.Resources>
 
+        <Style x:Key="defaultLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
+
+        <Style x:Key="defaultLabelValue" TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="Blue"/>
+        </Style>
+
         <misc:NumberCompareStateConverter x:Key="CompareResultConverter"/>
 
         <DataTemplate x:Key="NumberTemplate">
-            <Grid Height="50">
+            <Grid Height="70" Margin="10 5 2 5">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -25,9 +35,9 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0">Orignal</Label>
-                <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=OriginalDisplay}"></Label>
-                <Label Grid.Row="1" Grid.Column="0">Response</Label>
+                <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource defaultLabel}">Orignal</Label>
+                <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource defaultLabelValue}" Content="{Binding Path=OriginalDisplay}"></Label>
+                <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource defaultLabel}">Response</Label>
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=Response,Mode=TwoWay}"></TextBox>
 
                 <Image Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Source="{Binding Path=CompareResult,Converter={StaticResource CompareResultConverter}}"/>
@@ -38,10 +48,16 @@
     <DockPanel  LastChildFill="True">
 
         <ToolBar Style="{StaticResource DefaultToolbar}" DockPanel.Dock="Top">
-            <Button x:Name="close" Style="{StaticResource SystemCommandButton}" Command="{Binding Path=Close}" >
-                Close
+
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=Start}">
+                Start
             </Button>
-            
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=Resolve}">
+                Resolve
+            </Button>
+
+            <Separator></Separator>
+
             <Button Style="{StaticResource CommandButton}" Command="{Binding Path=GenerateCreditCard}">
                 Add Credit Card
             </Button>
@@ -53,16 +69,28 @@
             <Button Style="{StaticResource CommandButton}" Command="{Binding Path=GenerateNumber}">
                 Generate Number
             </Button>
-            
-            <Label VerticalAlignment="Center" Margin="20 0 0 0">Complexity</Label>
+
+
+
+            <Label VerticalAlignment="Center" Margin="10 0 0 0">Complexity</Label>
             <ComboBox ItemsSource="{Binding Path=ComplexityLevel}" SelectedItem="{Binding Path=SelectedComplexityLevel, Mode=TwoWay}"></ComboBox>
 
             <CheckBox Content="Contains Character" IsChecked="{Binding Path=CharacterEnabled,Mode=TwoWay}"/>
 
+            <Separator></Separator>
+
+            <Button Style="{StaticResource CommandButton}" Command="{Binding Path=RemoveNumber}">
+                Remove
+            </Button>
+            
+            <Button x:Name="close" Style="{StaticResource SystemCommandButton}" Command="{Binding Path=Close}" >
+                Close
+            </Button>
+
         </ToolBar>
 
         <Grid Margin="5">
-            <ListBox ItemsSource="{Binding Path=NumberCollection}" ItemTemplate="{StaticResource ResourceKey=NumberTemplate}">
+            <ListBox ItemsSource="{Binding Path=NumberCollection}" ItemTemplate="{StaticResource ResourceKey=NumberTemplate}" SelectedItem="{Binding Path=SelectedNumber,Mode=TwoWay}">
             </ListBox>
         </Grid>
 
